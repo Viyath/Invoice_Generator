@@ -26,27 +26,41 @@ app.get('/', function(req, res){
 });
 
 app.get('/logIn', function(req, res){
-    //console.log(req.query)
   res.render('logIn');
 });
 
-app.post('/logIn', urlencodedParser, function(req, res){
-    console.log(req.body.user_name);
-    res.render('logIn');
-    var valDB = {name: req.body.user_name,password: req.body.password};
+app.post('/logIn', function(req, res){
     
-    var query = connection.query('INSERT INTO test SET ?', valDB, function (error, results){    
-        connection.query(mysql,function (err, result) {
-            if (error){
-                console.log("Error in the query");
+    //checking the database for authentication.
+    var email=req.body.user_name;
+    var password=req.body.password;
+    
+    connection.query('SELECT * FROM users WHERE email = ?',[email],function (error, results, fields) {
+        //console.log(email);
+        console.log(results);
+        if (!error){
+            if(results.length > 0){
+                console.log(results.length);                
+                console.log(results);
+                if(results[0].email==email){
+                    if(results[0].password==password){
+                        console.log('Successfully Loged in!');
+                        res.send('Successfully Loged in!');
+                    } else{
+                        console.log('Invalid Password');
+                        res.send('Invalid Password');
+                    }
+                }
+                else{
+                    console.log('No Match found');
+                }
+                
+            }else{
+                console.log('Invalid User!');
+                res.send('Invalid User!');
             }
-            else{
-                console.log("Successfull query!");
-            }    
-        });
+        }
     });
-
-    console.log(query.sql);
 });
 
 app.get('/user_registration', urlencodedParser, function(req, res){
@@ -55,7 +69,7 @@ app.get('/user_registration', urlencodedParser, function(req, res){
 
 app.post('/user_registration', urlencodedParser, function(req, res){
     res.render('user_registration');
-    var valUR = {name: req.body.user_name, email: req.body.password, password: req.body.email};
+    var valUR = {name: req.body.user_name, email: req.body.email, password: req.body.password};
     console.log(valUR);
 
     var query = connection.query('INSERT INTO users SET ?', valUR, function (error, results){    
@@ -81,6 +95,5 @@ app.get('/shift_details', function(req, res){
 app.get('/income_details', function(req, res){
     res.render('income_details');
 });
-
 
 app.listen(8080);
