@@ -1,0 +1,17 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <% include partials/nav.ejs %>
+        <h1>Log In Form.</h1>
+        <h2>Please login...</h2>
+        <form id="login" method="POST" action="/LogIn"> 
+            User Name : <br>
+            <input type="text" name="user_name"><br><br>
+            Password : <br>
+            <input type="password" name="password"><br><br>
+            <input type="submit" value="Log in">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<html>
+    <head></head>
+    <body>
+        <% include partials/nav.ejs %>
+        <h1>Registration...</h1>
+        <h2>Please enter details.</h2>
+        <form id="user_registration" method="POST" action="/user_registration">
+        User Name : <br>
+        <input type="text" name="user_name"><br><br>
+        Password : <br>
+        <input type="password" name="password"><br><br>
+        Re enter Password : <br>
+        <input type="password" name="password1"><br><br>
+        E-Mail : <br>
+        <input type="text" name="email"><br><br>
+        <input type="submit" value="Register">
+        </form>
+    </body>
+</html>

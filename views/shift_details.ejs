@@ -1,0 +1,18 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <% include partials/nav.ejs %>
+        <h1>Shift Details</h1>
+        <h2>Please enter Shift details...</h2>
+        <form id=""method="POST" action="/shift_details">
+            Shift ID : <br>
+            <input type="text" name="S_ID"><br><br>
+            Site Name : <br>
+            <input type="text" name="S_Name"><br><br>
+            Hours Rate : <br>
+            <input type="text" name="H_rate"><br><br>
+            <input type="submit" value="submit">
+        </form>
+    </body>
+</html>

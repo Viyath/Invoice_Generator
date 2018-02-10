@@ -1,0 +1,19 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <% include partials/nav.ejs %>
+        
+        <h1>Site Details</h1>
+        <h2>Please enter Site details...</h2>
+        <form id=""method="POST" action="/site_details">
+            Site name : <br>
+            <input type="text" name="s_name"><br><br>
+            Employer name : <br>
+            <input type="text" name="E_name"><br><br>
+            Employer E-Mail : <br>
+            <input type="text" name="E_mail"><br><br>
+            <input type="submit" value="submit">
+        </form>
+    </body>
+</html>
