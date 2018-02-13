@@ -1,0 +1,50 @@
+<html>
+    <head>Employees work details...</head>
+    <h1>Employees Work Sheet</h1>
+    <form id=""method="POST" action="/work_details">
+        Employer's Name : <input type="text" id="e_name"><br>
+        E-Mail : <input type="email" id="e_email"><br>
+        Invoice Date : <input type="date" id="i_date"><br>
+        Site name : <input type="text" id="s_name"><br>
+        Casual pay rate : $<input type="number" id="c_pay"><br>
+        Holiday Pay rate : $<input type="number" id="h_pay"><br><br>
+        <h3>Work Schedule</h3>
+
+        <table>
+            <tr>
+                <th>####</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>        
+            </tr>
+            <tr>
+                <th>Start time :</th>
+                <td><input type="time" id="m_st"></td>
+                <td><input type="time" id="tu_st"></td>
+                <td><input type="time" id="w_st"></td>
+                <td><input type="time" id="th_st"></td>
+                <td><input type="time" id="f_st"></td>
+            </tr>
+            <tr>
+                <th>End time :</th>
+                <td><input type="time" id="m_et"></td>
+                <td><input type="time" id="tu_et"></td>
+                <td><input type="time" id="w_et"></td>
+                <td><input type="time" id="th_et"></td>
+                <td><input type="time" id="f_et"></td>
+            </tr>
+            <tr>
+                <th>Time worked :</th>
+                <td><input type="time" id="m_tw"></td>
+                <td><input type="time" id="tu_tw"></td>
+                <td><input type="time" id="w_tw"></td>
+                <td><input type="time" id="th_tw"></td>
+                <td><input type="time" id="f_tw"></td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</html>

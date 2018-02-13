@@ -96,4 +96,8 @@ app.get('/income_details', function(req, res){
     res.render('income_details');
 });
 
+app.get('/work_details', function(req, res){
+    res.render('work_details');
+});
+
 app.listen(8080);
