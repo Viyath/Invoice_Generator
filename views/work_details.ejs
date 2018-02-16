@@ -1,10 +1,30 @@
 <html>
-    <head>Employees work details...</head>
+    <head><% include partials/nav.ejs %></head>
     <h1>Employees Work Sheet</h1>
     <form id=""method="POST" action="/work_details">
         Employer's Name : <input type="text" id="e_name"><br>
         E-Mail : <input type="email" id="e_email"><br>
-        Invoice Date : <input type="date" id="i_date"><br>
+        Invoices Occurence : 
+            <select id="i_occurence" item-width:150px>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Fortnight-First Week">Fortnightly</option>
+                <option value="Fortnight-Secound Week">Fortnightly</option>
+                <option value="Monthly">Monthly</option>
+            </select>
+            <select>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+            <input type="time" id="i_occurence_time">
+            <input type="date" id="i_occurence_date">
+            <br>
+        Invoice Date : <input type="datetime-local" id="i_date"><br>
         Site name : <input type="text" id="s_name"><br>
         Casual pay rate : $<input type="number" id="c_pay"><br>
         Holiday Pay rate : $<input type="number" id="h_pay"><br><br>
