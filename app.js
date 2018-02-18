@@ -44,7 +44,7 @@ app.post('/logIn', function(req, res){
                 console.log(results);
                 if(results[0].email==email){
                     if(results[0].password==password){
-                        console.log('Successfully Loged in!');
+                        console.log('Successfully Loged in!');                        
                         res.send('Successfully Loged in!');
                     } else{
                         console.log('Invalid Password');
