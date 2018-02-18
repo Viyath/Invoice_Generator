@@ -84,7 +84,40 @@ app.post('/user_registration', urlencodedParser, function(req, res){
     });
 });
 
-app.get('/site_details', function(req, res){
+app.get('/site_details', urlencodedParser, function(req, res){
+    res.render('site_details');
+});
+
+app.post('/site_details', urlencodedParser, function(req, res){    
+    var valEmployerURL = {E_name:req.body.eName, email: req.body.eMail};
+    var valSiteURL = {S_name:req.body.sName, address:req.body.sAddress, FK_E_name:req.body.eName};
+    
+    console.log(valEmployerURL);
+    console.log(valSiteURL);
+
+//inserting data in to the employer
+    var query = connection.query('INSERT INTO employer SET ?', valEmployerURL, function (error, results){    
+        connection.query(mysql,function (err, result) {
+            if (error){
+                console.log("Error while inserting data in to the employer!");
+            }
+            else{
+                console.log("Data inserted in to the employer successfully!");
+            }    
+        });
+    });
+
+//inserting data in to the site
+    var query = connection.query('INSERT INTO site SET ?', valSiteURL, function (error, results){    
+        connection.query(mysql,function (err, result) {
+            if (error){
+                console.log("Error while inserting data in to the site!");
+            }
+            else{
+                console.log("Data inserted in to the site successfully!");
+            }    
+        });
+    });
     res.render('site_details');
 });
 
