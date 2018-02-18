@@ -1,37 +1,6 @@
-
-var express=require("express");
-var bodyParser=require('body-parser');
-var app = express();
-
-app.set('view engine','ejs');
-
-/*
-var authenticateController=require('./controllers/authenticate-controller');
-var registerController=require('./controllers/register-controller');
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
-
-/* route to handle login and registration */
-/*
-app.post('/api/register',registerController.register);
-app.post('/api/authenticate',authenticateController.authenticate);
-*/
-
-app.get('/logIn', function(req, res){
-  res.render('logIn');
-});
-
-app.get('/site_details', function(req, res){
-    res.render('site_details');
-});
-
-app.get('/shift_details', function(req, res){
-    res.render('shift_details');
-});
-
-app.get('/income_details', function(req, res){
-    res.render('income_details');
-});
-
-
-app.listen(8080);
+<html>
+    <head>
+        <title>Index page</title>
+        <% include partials/public_nav.ejs %>
+    </head>
+</html>

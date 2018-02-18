@@ -6,7 +6,8 @@ var app = express();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var connection = require('./config');
 var mysql = require('mysql');
-
+var session = require('express-session');
+var ssnUser;
 app.set('view engine','ejs');
 
 
@@ -15,6 +16,7 @@ app.set('view engine','ejs');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+app.use(session({secret:"relaxit'sjustdemocode",resave:false,saveUninitialized:true}));
 
 /* route to handle login and registration */
 
@@ -22,7 +24,7 @@ app.use(bodyParser.json());
 //app.post('/api/authenticate',authenticateController.authenticate);
 
 app.get('/', function(req, res){
-    res.render('logIn');
+    res.render('index');
 });
 
 app.get('/logIn', function(req, res){
@@ -45,7 +47,11 @@ app.post('/logIn', function(req, res){
                 if(results[0].email==email){
                     if(results[0].password==password){
                         console.log('Successfully Loged in!');                        
-                        res.send('Successfully Loged in!');
+                        ssnUser = req.session;
+                        ssnUser.userID = results[0].U_ID;
+                        ssnUser.userName = results[0].name;
+                        console.log(ssnUser.userID);
+                        res.render('work_details');
                     } else{
                         console.log('Invalid Password');
                         res.send('Invalid Password');
@@ -67,6 +73,15 @@ app.get('/user_registration', urlencodedParser, function(req, res){
     res.render('user_registration');
 });
 
+app.get('/logOut',urlencodedParser,function(req,res){
+    req.session.destroy(function(err) {
+        if(err) {
+          console.log(err);
+        } else {
+          res.redirect('/');
+        }
+      });
+});
 app.post('/user_registration', urlencodedParser, function(req, res){
     res.render('user_registration');
     var valUR = {name: req.body.user_name, email: req.body.email, password: req.body.password};
@@ -79,6 +94,7 @@ app.post('/user_registration', urlencodedParser, function(req, res){
             }
             else{
                 console.log("Successfull query!");
+                res.render('logIn')
             }    
         });
     });
@@ -122,7 +138,13 @@ app.post('/site_details', urlencodedParser, function(req, res){
 });
 
 app.get('/shift_details', function(req, res){
-    res.render('shift_details');
+    if(!req.session.id){
+        return res.status(404).send();  
+    }else{
+        //req.session.user = user;
+        return res.status(200).send();
+        res.render('shift_details');
+    }    
 });
 
 app.get('/income_details', function(req, res){
