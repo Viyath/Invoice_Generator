@@ -34,22 +34,22 @@ app.get('/logIn', function(req, res){
 app.post('/logIn', function(req, res){
     
     //checking the database for authentication.
-    var email=req.body.user_name;
+    var U_email=req.body.user_name;
     var password=req.body.password;
     
-    connection.query('SELECT * FROM users WHERE email = ?',[email],function (error, results, fields) {
-        //console.log(email);
+    connection.query('SELECT * FROM user WHERE U_email = ?',[U_email],function (error, results, fields) {
+        //console.log(U_email);
         console.log(results);
         if (!error){
             if(results.length > 0){
                 console.log(results.length);                
                 console.log(results);
-                if(results[0].email==email){
+                if(results[0].U_email==U_email){
                     if(results[0].password==password){
                         console.log('Successfully Loged in!');                        
                         ssnUser = req.session;
                         ssnUser.userID = results[0].U_ID;
-                        ssnUser.userName = results[0].name;
+                        ssnUser.userU_name = results[0].U_name;
                         console.log(ssnUser.userID);
                         res.render('work_details');
                     } else{
@@ -84,10 +84,10 @@ app.get('/logOut',urlencodedParser,function(req,res){
 });
 app.post('/user_registration', urlencodedParser, function(req, res){
     res.render('user_registration');
-    var valUR = {name: req.body.user_name, email: req.body.email, password: req.body.password};
+    var valUR = {U_name: req.body.user_name, U_email: req.body.email, password: req.body.password};
     console.log(valUR);
 
-    var query = connection.query('INSERT INTO users SET ?', valUR, function (error, results){    
+    var query = connection.query('INSERT INTO user SET ?', valUR, function (error, results){    
         connection.query(mysql,function (err, result) {
             if (error){
                 console.log("Error in the query");
@@ -105,8 +105,8 @@ app.get('/site_details', urlencodedParser, function(req, res){
 });
 
 app.post('/site_details', urlencodedParser, function(req, res){    
-    var valEmployerURL = {E_name:req.body.eName, email: req.body.eMail};
-    var valSiteURL = {S_name:req.body.sName, address:req.body.sAddress, FK_E_name:req.body.eName};
+    var valEmployerURL = {E_U_name:req.body.eU_name, U_email: req.body.U_email};
+    var valSiteURL = {S_U_name:req.body.sU_name, address:req.body.sAddress, FK_E_U_name:req.body.eU_name};
     
     console.log(valEmployerURL);
     console.log(valSiteURL);
