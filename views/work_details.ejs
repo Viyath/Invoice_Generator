@@ -3,15 +3,15 @@
     </head>
     <h1>Employees Work Sheet</h1>
     <form id=""method="POST" action="/work_details">
-        Employer's Name : <input type="text" id="eName"><br>
-        E-Mail : <input type="email" id="eMail"><br>
+        Employer's Name : <input type="text" name="eName"><br>
+        E-Mail : <input type="email" name="eMail"><br>
         Invoices Occurence : 
-            <select id="i_occurence">
+            <select name="i_occurence">
                 <option value="Weekly">Weekly</option>
                 <option value="1st week">1st week</option>
                 <option value="2nd week">2nd week</option>
             </select>
-            <select id="i_day">
+            <select name="i_day">
                 <option value="Monday">Monday</option>
                 <option value="Tuesday">Tuesday</option>
                 <option value="Wednesday">Wednesday</option>
@@ -20,13 +20,13 @@
                 <option value="Saturday">Saturday</option>
                 <option value="Sunday">Sunday</option>
             </select>
-            <input type="time" id="i_time">
+            <input type="time" name="i_time" step="2">
             <br>
-        Site name : <input type="text" id="sName">
-        Site address : <input type="text" id="sAddress"><br>
-        Casual pay rate : $<input type="number" id="payRate">
-        Holiday Pay rate : $<input type="number" id="h_pay"><br>
-        Holiday hours working : <input type="time" id="holidayHours">
+        Site name : <input type="text" name="sName">
+        Site address : <input type="text" name="sAddress"><br>
+        Casual pay rate : $<input type="number" name="payRate">
+        Holiday Pay rate : $<input type="number" name="h_pay"><br>
+        Holiday hours working : <input type="time" name="holidayHours">
         <h3>Work Schedule</h3>
 
         <table>
@@ -40,27 +40,27 @@
             </tr>
             <tr>
                 <th>Start time :</th>
-                <td><input type="time" id="m_st"></td>
-                <td><input type="time" id="tu_st"></td>
-                <td><input type="time" id="w_st"></td>
-                <td><input type="time" id="th_st"></td>
-                <td><input type="time" id="f_st"></td>
+                <td><input type="time" name="m_st"></td>
+                <td><input type="time" name="tu_st"></td>
+                <td><input type="time" name="w_st"></td>
+                <td><input type="time" name="th_st"></td>
+                <td><input type="time" name="f_st"></td>
             </tr>
             <tr>
                 <th>End time :</th>
-                <td><input type="time" id="m_et"></td>
-                <td><input type="time" id="tu_et"></td>
-                <td><input type="time" id="w_et"></td>
-                <td><input type="time" id="th_et"></td>
-                <td><input type="time" id="f_et"></td>
+                <td><input type="time" name="m_et"></td>
+                <td><input type="time" name="tu_et"></td>
+                <td><input type="time" name="w_et"></td>
+                <td><input type="time" name="th_et"></td>
+                <td><input type="time" name="f_et"></td>
             </tr>
             <tr>
                 <th>Time worked :</th>
-                <td><input type="time" id="m_tw"></td>
-                <td><input type="time" id="tu_tw"></td>
-                <td><input type="time" id="w_tw"></td>
-                <td><input type="time" id="th_tw"></td>
-                <td><input type="time" id="f_tw"></td>
+                <td><input type="time" name="m_tw"></td>
+                <td><input type="time" name="tu_tw"></td>
+                <td><input type="time" name="w_tw"></td>
+                <td><input type="time" name="th_tw"></td>
+                <td><input type="time" name="f_tw"></td>
             </tr>
         </table>
         <br>

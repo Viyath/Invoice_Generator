@@ -152,6 +152,26 @@ app.get('/income_details', function(req, res){
 });
 
 app.get('/work_details', function(req, res){
+    res.render('work_detailds');
+});
+app.post('/work_details', function(req, res){
+    console.log(ssnUser.userID);
+    var valEmployerURL = {E_name: req.body.eName, E_email: req.body.eMail, 
+        I_occurence: req.body.i_occurence,I_day: req.body.i_day, I_time: req.body.i_time, 
+        FK_U_ID: ssnUser.userID};
+    console.log(valEmployerURL);
+
+    var query = connection.query('INSERT INTO employer SET ?', valEmployerURL, function (error, results){    
+        connection.query(mysql,function (err, result) {
+            if (error){
+                console.log("Error in the employer query");
+            }
+            else{
+                console.log("Successfull employer query!");
+                res.render('logIn')
+            }    
+        });
+    });
     res.render('work_details');
 });
 
