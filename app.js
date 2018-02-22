@@ -159,7 +159,7 @@ app.post('/work_details', function(req, res){
     var valEmployerURL = {E_name: req.body.eName, E_email: req.body.eMail, 
         I_occurence: req.body.i_occurence,I_day: req.body.i_day, I_time: req.body.i_time, 
         FK_U_ID: ssnUser.userID};
-    console.log(valEmployerURL);
+    console.log('**** Employer details ****', valEmployerURL);
 
     var query = connection.query('INSERT INTO employer SET ?', valEmployerURL, function (error, results){    
         connection.query(mysql,function (err, result) {
@@ -168,7 +168,21 @@ app.post('/work_details', function(req, res){
             }
             else{
                 console.log("Successfull employer query!");
-                res.render('logIn')
+            }    
+        });
+    });
+
+//insert data in to the site table
+    var valSiteURL = {S_name:req.body.sName, S_address:req.body.sAddress, FK_E_name:req.body.eName};
+    console.log('**** Site details ****');
+    console.log(valSiteURL);
+    var query = connection.query('INSERT INTO site SET ?', valSiteURL, function (error, results){    
+        connection.query(mysql,function (err, result) {
+            if (error){
+                console.log("Error while inserting data in to the site!");
+            }
+            else{
+                console.log("Data inserted in to the site successfully!");
             }    
         });
     });
