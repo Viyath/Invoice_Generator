@@ -1,10 +1,14 @@
 <html>
     <head><% include partials/nav.ejs %>
+        <script src= "jquery.js"></script>
+        <script src= "script.js"></script>
     </head>
-    <h1>Employees Work Sheet</h1>
-    <form id=""method="POST" action="/work_details">
-        Employer's Name : <input type="text" name="eName"><br>
-        E-Mail : <input type="email" name="eMail"><br>
+    <body>
+        <h1>Employees Work Sheet</h1>
+
+        <form id="work_details"method="POST" action="/work_details">
+        Employer's Name : <input type="text" id="eName"><br>
+        E-Mail : <input type="email" id="eMail"><br>
         Invoices Occurence : 
             <select name="i_occurence">
                 <option value="Weekly">Weekly</option>
@@ -22,12 +26,18 @@
             </select>
             <input type="time" name="i_time" step="2">
             <br>
-        Site name : <input type="text" name="sName">
-        Site address : <input type="text" name="sAddress"><br>
-        Casual pay rate : $<input type="number" name="payRate">
-        Holiday Pay rate : $<input type="number" name="h_pay"><br>
-        Holiday hours working : <input type="time" name="holidayHours">
-        <h3>Work Schedule</h3>
+        Site name : <input type="text" id="sName">
+        Site address : <input type="text" id="sAddress"><br>
+        <input type="submit" id="add" value="add" onclick="loadDoc()">
+
+        </form>
+            Day : <input type="number" id="payRate"style="width:14ex">
+            Start time : <input type="time" id="start_time">
+            End time : <input type="time" id="end_time">
+            Worked time : <input type="text" id="worked_time">
+            Casual pay rate : $ <input type="number" id="payRate"style="width:14ex">
+            
+            <h3>Work Schedule</h3>
 
         <table>
             <tr>
@@ -37,33 +47,45 @@
                 <th>Wednesday</th>
                 <th>Thursday</th>
                 <th>Friday</th>        
+                <th>Saturday</th>        
+                <th>Sunday</th>        
             </tr>
             <tr>
                 <th>Start time :</th>
-                <td><input type="time" name="m_st"></td>
-                <td><input type="time" name="tu_st"></td>
-                <td><input type="time" name="w_st"></td>
-                <td><input type="time" name="th_st"></td>
-                <td><input type="time" name="f_st"></td>
+                <td><input type="time" id="m_st"></td>
+                <td><input type="time" id="tu_st"></td>
+                <td><input type="time" id="w_st"></td>
+                <td><input type="time" id="th_st"></td>
+                <td><input type="time" id="f_st"></td>
+                <td><input type="time" id="s_st"></td>
+                <td><input type="time" id="su_st"></td>
             </tr>
             <tr>
                 <th>End time :</th>
-                <td><input type="time" name="m_et"></td>
-                <td><input type="time" name="tu_et"></td>
-                <td><input type="time" name="w_et"></td>
-                <td><input type="time" name="th_et"></td>
-                <td><input type="time" name="f_et"></td>
+                <td><input type="time" id="m_et"></td>
+                <td><input type="time" id="tu_et"></td>
+                <td><input type="time" id="w_et"></td>
+                <td><input type="time" id="th_et"></td>
+                <td><input type="time" id="f_et"></td>
+                <td><input type="time" id="s_et"></td>
+                <td><input type="time" id="su_et"></td>
             </tr>
             <tr>
                 <th>Time worked :</th>
-                <td><input type="time" name="m_tw"></td>
-                <td><input type="time" name="tu_tw"></td>
-                <td><input type="time" name="w_tw"></td>
-                <td><input type="time" name="th_tw"></td>
-                <td><input type="time" name="f_tw"></td>
+                <td><input type="number" id="m_tw" style="width:14ex"></td>
+                <td><input type="number" id="tu_tw" style="width:14ex"></td>
+                <td><input type="number" id="w_tw" style="width:14ex"></td>
+                <td><input type="number" id="th_tw" style="width:14ex"></td>
+                <td><input type="number" id="f_tw" style="width:14ex"></td>
+                <td><input type="number" id="s_tw" style="width:14ex"></td>
+                <td><input type="number" id="su_tw" style="width:14ex"></td>
+            </tr>
+            <tr>
+                <th>Pay rate :</th>
             </tr>
         </table>
         <br>
-        <input type="submit" value="Submit">
-    </form>
+    
+
+    </body>
 </html>
