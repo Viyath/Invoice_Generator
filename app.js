@@ -248,4 +248,13 @@ app.post('/add', function(req, res){
     res.render('work_details', {empName:req.body.eName}); 
 });
 
+app.get('/sample-multi-items', function(req, res) {
+    res.render('sample_multi_items');
+});
+
+app.post('/sample-multi-items', function(req, res) {
+    console.log('>>> Server received', req.body);
+    res.render('sample_multi_items');
+});
+
 app.listen(8080);
