@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <input name="username" />
+    <button name="add-username">Add user name</button>
+    <form method="POST" action="/sample-multi-items">
+      <ul class="username-list"></ul>
+      <input type="submit" />
+    </form>
+
+    <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      // XXX: You should avoid putting JavaScript in HTML but this is for demonstration purpose
+      var counter = 0;
+      var usernameAddButton = $('button[name="add-username"]');
+      var usernameField = $('input[name="username"]');
+      var usernameList = $('.username-list');
+
+      usernameAddButton.click(function () {
+        var username = usernameField.val().trim();
+        if (username) {
+          usernameList.append(buildEnteredUsernameElement(username));
+          usernameField.val('');
+        }
+      });
+
+      function buildEnteredUsernameElement(username) {
+        var nameAttribute = 'name="username-' + (counter++) + '"';
+        var valueAttribute = 'value="' + username + '"';    // XXX: Don't do this as it opens up a security problem
+        var inputTag = ['<input', valueAttribute, nameAttribute, '/>'].join(' ');
+        return '<li>' + inputTag + '</li>';
+      }
+    </script>
+  </body>
+</html>
