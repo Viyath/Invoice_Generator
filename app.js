@@ -25,7 +25,8 @@ app.use(session({secret:"relaxit'sjustdemocode",resave:false,saveUninitialized:t
 //app.post('/api/authenticate',authenticateController.authenticate);
 
 app.get('/', function(req, res){
-    res.render('index');
+    //res.render('index');
+    res.render('logIn');
 });
 
 app.get('/logIn', function(req, res){
@@ -79,7 +80,8 @@ app.get('/logOut',urlencodedParser,function(req,res){
         if(err) {
           console.log(err);
         } else {
-          res.redirect('/');
+          //res.redirect('/');
+          res.render('logIn');
         }
       });
 });
@@ -193,37 +195,8 @@ app.post('/work_details', function(req, res){
 //insert data in to the shift details table
     console.log('**** Shift details ****');
     //var valShiftURL ={H_rate:'', start_time:'' ,end_time:'',hrs_work:'',day:'',FK_U_ID:'',FK_S_name:''};
-    var valShiftURL = {H_rate:req.body.payRate, start_time: req.body.m_st ,end_time: req.body.m_et , hrs_work: req.body.m_tw,day: 'Monday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
+    var valShiftURL = {H_rate:req.body.hourlyRate, start_time: req.body.mStrtTime ,end_time: req.body.mEndTime , hrs_work: req.body.mTimeWorked,day: 'Monday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
     console.log(valShiftURL);
-    var hoursWorked;
-    for (i=0; i<7;i++){
-        //valShiftURL ={H_rate:'', start_time:'' ,end_time:'',hrs_work:'',day:'',FK_U_ID:'',FK_S_name:''};
-        if (i===0){
-            valShiftURL = {H_rate:req.body.payRate, start_time: req.body.m_st ,end_time: req.body.m_et , hrs_work: req.body.m_tw,day: 'Monday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-            hoursWorked === req.body.m_tw; 
-            console.log('monday worked',hoursWorked,valShiftURL);
-            if(hoursWorked != undefined & hoursWorked!=0 ){
-                console.log('monday worked',req.body.m_tw);
-            }
-        }if (i===1){
-            valShiftURL = {H_rate:req.body.payRate, start_time: req.body.tu_st ,end_time: req.body.tu_et , hrs_work: req.body.tu_tw,day: 'Tuesday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-        }if (i===2){
-            valShiftURL = {H_rate:req.body.payRate, start_time: req.body.w_st ,end_time: req.body.w_et , hrs_work: req.body.w_tw,day: 'Wednesday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-        }if (i===3){
-            valShiftURL = {H_rate:req.body.payRate, start_time: req.body.th_st ,end_time: req.body.th_et , hrs_work: req.body.th_tw,day: 'Thursday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-        }if (i===4){
-            valShiftURL = {H_rate:req.body.payRate, start_time: req.body.th_st ,end_time: req.body.th_et , hrs_work: req.body.th_tw,day: 'Friday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-        }if (i===5){
-            valShiftURL = {H_rate:req.body.payRate, start_time: req.body.s_st ,end_time: req.body.s_et , hrs_work: req.body.s_tw,day: 'Saturday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-        }if (i===6){
-            valShiftURL = {H_rate:req.body.payRate, start_time: req.body.su_st ,end_time: req.body.su_et , hrs_work: req.body.su_tw,day: 'Sunday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-        }
-        if (valShiftURL.hrs_work != null){
-            console.log('hours worked not null',valShiftURL.hrs_work);
-        }
-    } 
-
-    //var valShiftURL = {H_rate:'sda', start_time:'sda' ,end_time:'sda',hrs_work:'sda',day:'sda'};
 
     res.render('work_details');
 });

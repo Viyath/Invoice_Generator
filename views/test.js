@@ -1,16 +1,3 @@
-<html>
-    <head><% include partials/nav.ejs %></head>
-  <body>
-    <input name="username" />
-    <button name="add-username">Add user name</button>
-    <form method="POST" action="/sample-multi-items">
-      <ul class="username-list"></ul>
-      <input type="submit" />
-    </form>
-    <script
-        src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
 
     <script type="text/javascript">
       var counter = 0;
@@ -18,7 +5,7 @@
       var usernameField = $('input[name="username"]');
       var usernameList = $('.username-list');
 
-      usernameAddButton.click(function () {
+      usernameAddButton.click(function(){
         var username = usernameField.val().trim();
         if (username) {
           usernameList.append(buildEnteredUsernameElement(username));
@@ -32,6 +19,4 @@
         var inputTag = ['<input', valueAttribute, nameAttribute, '/>'].join(' ');
         return '<li>' + inputTag + '</li>';
       }
-    </script> 
-  </body>
-</html>
+    </script>

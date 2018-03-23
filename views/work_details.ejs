@@ -1,12 +1,10 @@
 <html>
     <head><% include partials/nav.ejs %>
-        <script src= "jquery.js"></script>
-        <script src= "script.js"></script>
     </head>
     <body>
         <h1>Employees Work Sheet</h1>
 
-        <form id="work_details"method="POST" action="/work_details">
+        <form id = "workdetails" method="POST" action="/work_details">
         Employer's Name : <input type="text" id="eName"><br>
         E-Mail : <input type="email" id="eMail"><br>
         Invoices Occurence : 
@@ -27,65 +25,113 @@
             <input type="time" name="i_time" step="2">
             <br>
         Site name : <input type="text" id="sName">
-        Site address : <input type="text" id="sAddress"><br>
-        <input type="submit" id="add" value="add" onclick="loadDoc()">
-
-        </form>
-            Day : <input type="number" id="payRate"style="width:14ex">
-            Start time : <input type="time" id="start_time">
-            End time : <input type="time" id="end_time">
-            Worked time : <input type="text" id="worked_time">
-            Casual pay rate : $ <input type="number" id="payRate"style="width:14ex">
+        Site address : <input type="text" id="sAddress"><br><br>
+        Day : <input type="text" id="day" value="Monday" readonly>
+        Start time : <input type="text" id="start_time">
+        End time : <input type="text" id="end_time">    
+        Worked time : <input type="text" id="worked_time">
+        Casual pay rate : $ <input type="number" id="payRate"style="width:14ex">
+        <button id="addshift">Add Shift</button>
+        <h3>Work Schedule</h3>
+    <hr>
+    <table>
+            <tr>
+                <th>Day</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+            </tr>
+            <tr>
+                <td>Monday</td>
+                <td><input type="text" name="monStrtTime"></td>
+                <td><input type="text" name="monEndtTime"></td>
+                <td><input type="text" name="monTimeWorked"></td>
+                <td><input type="text" name="monHourlyRate"></td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td><input type="text" name="tueStrtTime"></td>
+                <td><input type="text" name="tueEndtTime"></td>
+                <td><input type="text" name="tueTimeWorked"></td>
+                <td><input type="text" name="tueHourlyRate"></td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td><input type="text" name="wedStrtTime"></td>
+                <td><input type="text" name="wedEndtTime"></td>
+                <td><input type="text" name="wedTimeWorked"></td>
+                <td><input type="text" name="wedHourlyRate"></td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td><input type="text" name="thuStrtTime"></td>
+                <td><input type="text" name="thuEndtTime"></td>
+                <td><input type="text" name="thuTimeWorked"></td>
+                <td><input type="text" name="thuHourlyRate"></td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td><input type="text" name="friStrtTime"></td>
+                <td><input type="text" name="friEndtTime"></td>
+                <td><input type="text" name="friTimeWorked"></td>
+                <td><input type="text" name="friHourlyRate"></td>
+            </tr>
+            <tr>
+                <td>Saturday</td>
+                <td><input type="text" name="satStrtTime"></td>
+                <td><input type="text" name="satEndtTime"></td>
+                <td><input type="text" name="satTimeWorked"></td>
+                <td><input type="text" name="satHourlyRate"></td>
+            </tr>
+            <tr>
+                <td>Sunday</td>
+                <td><input type="text" name="sunStrtTime"></td>
+                <td><input type="text" name="sunEndtTime"></td>
+                <td><input type="text" name="sunTimeWorked"></td>
+                <td><input type="text" name="sunHourlyRate"></td>
+            </tr>
+    </table>
+    <br>
+        <button name="submit">Submit</button>
+    </form>
+        <script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous">
+        </script>
+        
+        <script>
+            var addshift = $('button[id="addshift"]');
             
-            <h3>Work Schedule</h3>
-
-        <table>
-            <tr>
-                <th>####</th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>        
-                <th>Saturday</th>        
-                <th>Sunday</th>        
-            </tr>
-            <tr>
-                <th>Start time :</th>
-                <td><input type="time" id="m_st"></td>
-                <td><input type="time" id="tu_st"></td>
-                <td><input type="time" id="w_st"></td>
-                <td><input type="time" id="th_st"></td>
-                <td><input type="time" id="f_st"></td>
-                <td><input type="time" id="s_st"></td>
-                <td><input type="time" id="su_st"></td>
-            </tr>
-            <tr>
-                <th>End time :</th>
-                <td><input type="time" id="m_et"></td>
-                <td><input type="time" id="tu_et"></td>
-                <td><input type="time" id="w_et"></td>
-                <td><input type="time" id="th_et"></td>
-                <td><input type="time" id="f_et"></td>
-                <td><input type="time" id="s_et"></td>
-                <td><input type="time" id="su_et"></td>
-            </tr>
-            <tr>
-                <th>Time worked :</th>
-                <td><input type="number" id="m_tw" style="width:14ex"></td>
-                <td><input type="number" id="tu_tw" style="width:14ex"></td>
-                <td><input type="number" id="w_tw" style="width:14ex"></td>
-                <td><input type="number" id="th_tw" style="width:14ex"></td>
-                <td><input type="number" id="f_tw" style="width:14ex"></td>
-                <td><input type="number" id="s_tw" style="width:14ex"></td>
-                <td><input type="number" id="su_tw" style="width:14ex"></td>
-            </tr>
-            <tr>
-                <th>Pay rate :</th>
-            </tr>
-        </table>
-        <br>
-    
-
+            addshift.click(function(){
+                event.preventDefault();
+                var dayOfWeek = document.getElementById('day');
+                switch (dayOfWeek) {                    
+                case "Monday":
+                    $("#day").val("Tuesday");                 
+                    break;
+                case "Tuesday":
+                    $("#day").val("Wednesday");
+                    break;
+                case "Wednesday":
+                    $("#day").val("Thursday");
+                    break;
+                case "Thursday":
+                    $("#day").val("Friday");
+                    break;
+                case "Friday":
+                    $("#day").val("Saturday");
+                    break;
+                case "Saturday":
+                    $("#day").val("Sunday");
+                    break;
+                case "Sunday":
+                    $("#day").val("Monday");
+                    break;    
+                }
+            });
+            
+        </script> 
     </body>
 </html>
