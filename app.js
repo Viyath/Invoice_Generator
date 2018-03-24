@@ -33,6 +33,61 @@ app.get('/logIn', function(req, res){
   res.render('logIn');
 });
 
+app.get('/logOut',urlencodedParser,function(req,res){
+    req.session.destroy(function(err) {
+        if(err) {
+          console.log(err);
+        } else {
+          //res.redirect('/');
+          res.render('logIn');
+        }
+      });
+});
+
+app.get('/user_registration', urlencodedParser, function(req, res){
+    res.render('user_registration');
+});
+
+app.get('/site_details', urlencodedParser, function(req, res){
+    if (isSessionLive(req)){
+        res.render('site_details');
+    }else{
+        res.render('login');
+    }
+});
+
+app.get('/shift_details', function(req, res){
+    if (isSessionLive(req)){
+        res.render('shift_details');
+    }else{
+        res.render('login');
+    }
+});
+
+app.get('/income_details', function(req, res){
+    if (isSessionLive(req)){
+        res.render('income_details');
+    }else{
+        res.render('login');
+    }
+});
+
+app.get('/work_details', function(req, res){
+    if (isSessionLive(req)){
+        res.render('work_details');
+    }else{
+        res.render('login');
+    }
+    
+});
+
+app.get('/sample-multi-items', function(req, res) {
+    res.render('sample_multi_items');
+});
+
+//All the post requests
+
+
 app.post('/logIn', function(req, res){
     
     //checking the database for authentication.
@@ -52,6 +107,7 @@ app.post('/logIn', function(req, res){
                         ssnUser = req.session;
                         ssnUser.userID = results[0].U_ID;
                         ssnUser.userU_name = results[0].U_name;
+                        req.session.userID = results[0].U_ID;
                         console.log(ssnUser.userID);
                         res.render('work_details');
                     } else{
@@ -71,20 +127,6 @@ app.post('/logIn', function(req, res){
     });
 });
 
-app.get('/user_registration', urlencodedParser, function(req, res){
-    res.render('user_registration');
-});
-
-app.get('/logOut',urlencodedParser,function(req,res){
-    req.session.destroy(function(err) {
-        if(err) {
-          console.log(err);
-        } else {
-          //res.redirect('/');
-          res.render('logIn');
-        }
-      });
-});
 app.post('/user_registration', urlencodedParser, function(req, res){
     res.render('user_registration');
     var valUR = {U_name: req.body.user_name, U_email: req.body.email, password: req.body.password};
@@ -101,10 +143,6 @@ app.post('/user_registration', urlencodedParser, function(req, res){
             }    
         });
     });
-});
-
-app.get('/site_details', urlencodedParser, function(req, res){
-    res.render('site_details');
 });
 
 app.post('/site_details', urlencodedParser, function(req, res){    
@@ -140,25 +178,7 @@ app.post('/site_details', urlencodedParser, function(req, res){
     res.render('site_details');
 });
 
-app.get('/shift_details', function(req, res){
-    if(!req.session.id){
-        return res.status(404).send();  
-    }else{
-        //req.session.user = user;
-        return res.status(200).send();
-        res.render('shift_details');
-    }    
-});
-
-app.get('/income_details', function(req, res){
-    res.render('income_details');
-});
-
-app.get('/work_details', function(req, res){
-    res.render('work_detailds');
-});
 app.post('/work_details', function(req, res){
-    
 //inserting data into the employer table
     console.log(ssnUser.userID);
     var valEmployerURL = {E_name: req.body.eName, E_email: req.body.eMail, 
@@ -227,6 +247,29 @@ app.post('/work_details', function(req, res){
     }
     res.render('work_details');
 });
+
+app.post('/add', function(req, res){
+    //outputEmpDetails(getEmployer);
+    res.render('work_details', {empName:req.body.eName}); 
+});
+
+app.post('/sample-multi-items', function(req, res) {
+    console.log('>>> Server received', req.body);
+    res.render('sample_multi_items');
+});
+
+//All the functions
+function isSessionLive(req){
+    req = req;
+    if(req.session.userID){
+        console.log("Session live..");
+        return true;
+    }else{
+        console.log("Session is dead..");
+        return false;
+    }
+}
+
 function addShiftDetails(shiftDetailsArray){
     valShiftURL = shiftDetailsArray
     console.log("======function addShiftDetails======")
@@ -252,28 +295,5 @@ function getEmployer(){
         FK_U_ID: ssnUser.userID};
     return valEmployerURL;
 }
-
-function outputEmpDetails(val){
-    req.body.eName='brad';
-}
-app.get('/add', function(req, res){
-    console.log('add button clicked');
-    res.render('work_details');
-    req.body.eName = valEmployerURL.E_name;
-
-});
-app.post('/add', function(req, res){
-    //outputEmpDetails(getEmployer);
-    res.render('work_details', {empName:req.body.eName}); 
-});
-
-app.get('/sample-multi-items', function(req, res) {
-    res.render('sample_multi_items');
-});
-
-app.post('/sample-multi-items', function(req, res) {
-    console.log('>>> Server received', req.body);
-    res.render('sample_multi_items');
-});
 
 app.listen(8080);
