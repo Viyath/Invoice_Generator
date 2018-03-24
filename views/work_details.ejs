@@ -5,8 +5,8 @@
         <h1>Employees Work Sheet</h1>
 
         <form id = "workdetails" method="POST" action="/work_details">
-        Employer's Name : <input type="text" id="eName"><br>
-        E-Mail : <input type="email" id="eMail"><br>
+        Employer's Name : <input type="text" name="eName"><br>
+        E-Mail : <input type="email" name="eMail"><br>
         Invoices Occurence : 
             <select name="i_occurence">
                 <option value="Weekly">Weekly</option>
@@ -22,15 +22,15 @@
                 <option value="Saturday">Saturday</option>
                 <option value="Sunday">Sunday</option>
             </select>
-            <input type="time" name="i_time" step="2">
+            <input type="text" name="i_time">
             <br>
-        Site name : <input type="text" id="sName">
-        Site address : <input type="text" id="sAddress"><br><br>
-        Day : <input type="text" id="day" value="Monday" readonly>
-        Start time : <input type="text" id="start_time">
-        End time : <input type="text" id="end_time">    
-        Worked time : <input type="text" id="worked_time">
-        Casual pay rate : $ <input type="number" id="payRate"style="width:14ex">
+        Site name : <input type="text" name="sName">
+        Site address : <input type="text" name="sAddress"><br><br>
+        Day : <input type="text" name="day" value="Monday" readonly>
+        Start time : <input type="text" name="start_time">
+        End time : <input type="text" name="end_time">    
+        Worked time : <input type="text" name="worked_time">
+        Casual pay rate : $ <input type="number" name="payRate"style="width:14ex">
         <button id="addshift">Add Shift</button>
         <h3>Work Schedule</h3>
     <hr>

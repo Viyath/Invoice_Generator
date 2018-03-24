@@ -158,7 +158,7 @@ app.get('/work_details', function(req, res){
     res.render('work_detailds');
 });
 app.post('/work_details', function(req, res){
-    /*
+    
 //inserting data into the employer table
     console.log(ssnUser.userID);
     var valEmployerURL = {E_name: req.body.eName, E_email: req.body.eMail, 
@@ -191,15 +191,61 @@ app.post('/work_details', function(req, res){
             }    
         });
     });
-    */
+    
 //insert data in to the shift details table
     console.log('**** Shift details ****');
     //var valShiftURL ={H_rate:'', start_time:'' ,end_time:'',hrs_work:'',day:'',FK_U_ID:'',FK_S_name:''};
-    var valShiftURL = {H_rate:req.body.hourlyRate, start_time: req.body.mStrtTime ,end_time: req.body.mEndTime , hrs_work: req.body.mTimeWorked,day: 'Monday', FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
-    console.log(valShiftURL);
-
+    
+    if ((req.body.monTimeWorked!="") && (req.body.monHourlyRate!="")){
+        var valShiftURL = {day: 'Monday', start_time: req.body.monStrtTime ,end_time: req.body.monEndtTime , hrs_work: req.body.monTimeWorked, H_rate:req.body.monHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName };
+        addShiftDetails(valShiftURL);
+        console.log("Record added to the shift table");    
+    }if ((req.body.tueTimeWorked!="") && (req.body.tueHourlyRate!="")){
+        var valShiftURL = {day: 'Tuesday', start_time: req.body.tueStrtTime ,end_time: req.body.tueEndtTime , hrs_work: req.body.tueTimeWorked, H_rate:req.body.tueHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
+        addShiftDetails(valShiftURL);
+        console.log("Record added to the shift table");
+    }if ((req.body.wedTimeWorked!="") && (req.body.wedHourlyRate!="")){
+        var valShiftURL = {day: 'Wednesday', start_time: req.body.wedStrtTime ,end_time: req.body.wedEndtTime , hrs_work: req.body.wedTimeWorked, H_rate:req.body.wedHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
+        addShiftDetails(valShiftURL);
+        console.log("Record added to the shift table");
+    }if ((req.body.thuTimeWorked!="") && (req.body.thuHourlyRate!="")){
+        var valShiftURL = {day: 'Thursday', start_time: req.body.thuStrtTime ,end_time: req.body.thuEndtTime , hrs_work: req.body.thuTimeWorked, H_rate:req.body.thuHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
+        addShiftDetails(valShiftURL);
+        console.log("Record added to the shift table");
+    }if ((req.body.friTimeWorked!="") && (req.body.friHourlyRate!="")){
+        var valShiftURL = {day: 'Friday', start_time: req.body.friStrtTime ,end_time: req.body.friEndtTime , hrs_work: req.body.friTimeWorked, H_rate:req.body.friHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
+        addShiftDetails(valShiftURL);
+        console.log("Record added to the shift table");
+    }if ((req.body.satTimeWorked!="") && (req.body.satHourlyRate!="")){
+        var valShiftURL = {day: 'Saturday', start_time: req.body.satStrtTime ,end_time: req.body.satEndtTime , hrs_work: req.body.satTimeWorked, H_rate:req.body.satHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
+        addShiftDetails(valShiftURL);
+        console.log("Record added to the shift table");
+    }if ((req.body.sunTimeWorked!="") && (req.body.sunHourlyRate!="")){
+        var valShiftURL = {day: 'Sunday', start_time: req.body.sunStrtTime ,end_time: req.body.sunEndtTime , hrs_work: req.body.sunTimeWorked, H_rate:req.body.sunHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.sName};
+        addShiftDetails(valShiftURL);
+        console.log("Record added to the shift table");
+    }
     res.render('work_details');
 });
+function addShiftDetails(shiftDetailsArray){
+    valShiftURL = shiftDetailsArray
+    console.log("======function addShiftDetails======")
+    console.log(valShiftURL);
+   
+    var query = connection.query('INSERT INTO shift SET ?', valShiftURL, function (error, results){    
+        connection.query(mysql,function (err, result) {
+            if (error){
+                console.log("Error while inserting data in to the shift table!");
+            }
+            else{
+                console.log("Record added to the shift table");
+            }    
+        });
+    })
+    console.log("======function addShiftDetails======")
+
+};
+
 function getEmployer(){
     var valEmployerURL = {E_name: req.body.eName, E_email: req.body.eMail, 
         I_occurence: req.body.i_occurence,I_day: req.body.i_day, I_time: req.body.i_time, 
