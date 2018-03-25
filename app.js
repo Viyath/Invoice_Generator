@@ -78,7 +78,6 @@ app.get('/work_details', function(req, res){
     }else{
         res.render('login');
     }
-    
 });
 
 app.get('/sample-multi-items', function(req, res) {
@@ -86,7 +85,6 @@ app.get('/sample-multi-items', function(req, res) {
 });
 
 //All the post requests
-
 
 app.post('/logIn', function(req, res){
     
@@ -259,6 +257,7 @@ app.post('/sample-multi-items', function(req, res) {
 });
 
 //All the functions
+
 function isSessionLive(req){
     req = req;
     if(req.session.userID){

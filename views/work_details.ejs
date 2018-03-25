@@ -1,100 +1,97 @@
 <html>
-    <head><% include partials/nav.ejs %>
-    </head>
     <body>
-        <h1>Employees Work Sheet</h1>
+        <div class="container">
+            <head><% include partials/nav.ejs %>
+            </head>
+            <h1>Employees Work Sheet</h1>
 
-        <form id = "workdetails" method="POST" action="/work_details">
-        Employer's Name : <input type="text" name="eName"><br>
-        E-Mail : <input type="email" name="eMail"><br>
-        Invoices Occurence : 
-            <select name="i_occurence">
-                <option value="Weekly">Weekly</option>
-                <option value="1st week">1st week</option>
-                <option value="2nd week">2nd week</option>
-            </select>
-            <select name="i_day">
-                <option value="Monday">Monday</option>
-                <option value="Tuesday">Tuesday</option>
-                <option value="Wednesday">Wednesday</option>
-                <option value="Thursday">Thursday</option>
-                <option value="Friday">Friday</option>
-                <option value="Saturday">Saturday</option>
-                <option value="Sunday">Sunday</option>
-            </select>
-            <input type="text" name="i_time">
-            <br>
-        Site name : <input type="text" name="sName">
-        Site address : <input type="text" name="sAddress"><br><br>
-        Day : <input type="text" name="day" value="Monday" readonly>
-        Start time : <input type="text" name="start_time">
-        End time : <input type="text" name="end_time">    
-        Worked time : <input type="text" name="worked_time">
-        Casual pay rate : $ <input type="number" name="payRate"style="width:14ex">
-        <button id="addshift">Add Shift</button>
-        <h3>Work Schedule</h3>
-    <hr>
-    <table>
-            <tr>
-                <th>Day</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Hours Worked</th>
-                <th>Hourly Rate</th>
-            </tr>
-            <tr>
-                <td>Monday</td>
-                <td><input type="text" name="monStrtTime"></td>
-                <td><input type="text" name="monEndtTime"></td>
-                <td><input type="text" name="monTimeWorked"></td>
-                <td><input type="text" name="monHourlyRate"></td>
-            </tr>
-            <tr>
-                <td>Tuesday</td>
-                <td><input type="text" name="tueStrtTime"></td>
-                <td><input type="text" name="tueEndtTime"></td>
-                <td><input type="text" name="tueTimeWorked"></td>
-                <td><input type="text" name="tueHourlyRate"></td>
-            </tr>
-            <tr>
-                <td>Wednesday</td>
-                <td><input type="text" name="wedStrtTime"></td>
-                <td><input type="text" name="wedEndtTime"></td>
-                <td><input type="text" name="wedTimeWorked"></td>
-                <td><input type="text" name="wedHourlyRate"></td>
-            </tr>
-            <tr>
-                <td>Thursday</td>
-                <td><input type="text" name="thuStrtTime"></td>
-                <td><input type="text" name="thuEndtTime"></td>
-                <td><input type="text" name="thuTimeWorked"></td>
-                <td><input type="text" name="thuHourlyRate"></td>
-            </tr>
-            <tr>
-                <td>Friday</td>
-                <td><input type="text" name="friStrtTime"></td>
-                <td><input type="text" name="friEndtTime"></td>
-                <td><input type="text" name="friTimeWorked"></td>
-                <td><input type="text" name="friHourlyRate"></td>
-            </tr>
-            <tr>
-                <td>Saturday</td>
-                <td><input type="text" name="satStrtTime"></td>
-                <td><input type="text" name="satEndtTime"></td>
-                <td><input type="text" name="satTimeWorked"></td>
-                <td><input type="text" name="satHourlyRate"></td>
-            </tr>
-            <tr>
-                <td>Sunday</td>
-                <td><input type="text" name="sunStrtTime"></td>
-                <td><input type="text" name="sunEndtTime"></td>
-                <td><input type="text" name="sunTimeWorked"></td>
-                <td><input type="text" name="sunHourlyRate"></td>
-            </tr>
-    </table>
-    <br>
-        <button name="submit">Submit</button>
-    </form>
+            <form id = "workdetails" method="POST" action="/work_details">
+                Employer's Name : <input type="text" name="eName"><br>
+                E-Mail : <input type="email" name="eMail"><br>
+                Invoices Occurence : 
+                    <select name="i_occurence">
+                        <option value="Weekly">Weekly</option>
+                        <option value="1st week">1st week</option>
+                        <option value="2nd week">2nd week</option>
+                    </select>
+                    <select name="i_day">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <input type="text" name="i_time">
+                    <br>
+                Site name : <input type="text" name="sName">
+                Site address : <input type="text" name="sAddress"><br><br>
+                <h3>Work Schedule</h3>
+                <hr>
+                <table>
+                        <tr>
+                            <th>Day</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Hours Worked</th>
+                            <th>Hourly Rate</th>
+                        </tr>
+                        <tr>
+                            <td>Monday</td>
+                            <td><input type="text" name="monStrtTime"></td>
+                            <td><input type="text" name="monEndtTime"></td>
+                            <td><input type="text" name="monTimeWorked"></td>
+                            <td><input type="text" name="monHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td><input type="text" name="tueStrtTime"></td>
+                            <td><input type="text" name="tueEndtTime"></td>
+                            <td><input type="text" name="tueTimeWorked"></td>
+                            <td><input type="text" name="tueHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td><input type="text" name="wedStrtTime"></td>
+                            <td><input type="text" name="wedEndtTime"></td>
+                            <td><input type="text" name="wedTimeWorked"></td>
+                            <td><input type="text" name="wedHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td><input type="text" name="thuStrtTime"></td>
+                            <td><input type="text" name="thuEndtTime"></td>
+                            <td><input type="text" name="thuTimeWorked"></td>
+                            <td><input type="text" name="thuHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td><input type="text" name="friStrtTime"></td>
+                            <td><input type="text" name="friEndtTime"></td>
+                            <td><input type="text" name="friTimeWorked"></td>
+                            <td><input type="text" name="friHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td>Saturday</td>
+                            <td><input type="text" name="satStrtTime"></td>
+                            <td><input type="text" name="satEndtTime"></td>
+                            <td><input type="text" name="satTimeWorked"></td>
+                            <td><input type="text" name="satHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td>Sunday</td>
+                            <td><input type="text" name="sunStrtTime"></td>
+                            <td><input type="text" name="sunEndtTime"></td>
+                            <td><input type="text" name="sunTimeWorked"></td>
+                            <td><input type="text" name="sunHourlyRate"></td>
+                        </tr>
+                </table>
+                <br>
+                    <button name="submit">Submit</button>
+            </form>
+        </div>
+
         <script
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
