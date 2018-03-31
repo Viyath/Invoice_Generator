@@ -45,3 +45,44 @@
             <th>Pay rate :</th>
         </tr>
     </table>
+
+    /*
+            var addshift = $('button[id="addshift"]');
+            
+            addshift.click(function(){
+                event.preventDefault();
+                var dayOfWeek = document.getElementById('day');
+                switch (dayOfWeek) {                    
+                case "Monday":
+                    $("#day").val("Tuesday");                 
+                    break;
+                case "Tuesday":
+                    $("#day").val("Wednesday");
+                    break;
+                case "Wednesday":
+                    $("#day").val("Thursday");
+                    break;
+                case "Thursday":
+                    $("#day").val("Friday");
+                    break;
+                case "Friday":
+                    $("#day").val("Saturday");
+                    break;
+                case "Saturday":
+                    $("#day").val("Sunday");
+                    break;
+                case "Sunday":
+                    $("#day").val("Monday");
+                    break;    
+                }
+            });     */      
+
+                //x.value = x.value.toUpperCase();
+            /*
+                if ((curruntKeyCode <= 48) && (curruntKeyCode >= 58)){
+                    alert("Fction"+ valueOfField);
+                    valueOfField = Document.getElementById("monStrtTime");
+                    valueOfField.value = valueOfField;
+                }else{
+                }   
+*/

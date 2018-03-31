@@ -32,55 +32,55 @@
                 <table>
                         <tr>
                             <th>Day</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
+                            <th>Start Time<input type="checkbox" name="startTime" value="startTime"></th>
+                            <th>End Time<input type="checkbox" name="startTime" value="endTime"></th>
                             <th>Hours Worked</th>
-                            <th>Hourly Rate</th>
+                            <th>Hourly Rate<input type="checkbox" name="startTime" value="hourlyRate"></th>
                         </tr>
                         <tr>
-                            <td>Monday</td>
-                            <td><input type="text" name="monStrtTime"></td>
+                            <td><input type="text" name="firstDay" value="Monday" disabled></td>
+                            <td><input type="text" name="monStrtTime" id="monStrtTime" onkeyup = "validateMondayStartTime()"></td>
                             <td><input type="text" name="monEndtTime"></td>
                             <td><input type="text" name="monTimeWorked"></td>
                             <td><input type="text" name="monHourlyRate"></td>
                         </tr>
                         <tr>
-                            <td>Tuesday</td>
+                            <td><input type="text" name="SecoundDay" value="Tuesday" disabled></td>
                             <td><input type="text" name="tueStrtTime"></td>
                             <td><input type="text" name="tueEndtTime"></td>
                             <td><input type="text" name="tueTimeWorked"></td>
                             <td><input type="text" name="tueHourlyRate"></td>
                         </tr>
                         <tr>
-                            <td>Wednesday</td>
+                            <td><input type="text" name="ThirdDay" value="Wednesday" disabled></td>
                             <td><input type="text" name="wedStrtTime"></td>
                             <td><input type="text" name="wedEndtTime"></td>
                             <td><input type="text" name="wedTimeWorked"></td>
                             <td><input type="text" name="wedHourlyRate"></td>
                         </tr>
                         <tr>
-                            <td>Thursday</td>
+                            <td><input type="text" name="FourthDay" value="Thursday" disabled></td>
                             <td><input type="text" name="thuStrtTime"></td>
                             <td><input type="text" name="thuEndtTime"></td>
                             <td><input type="text" name="thuTimeWorked"></td>
                             <td><input type="text" name="thuHourlyRate"></td>
                         </tr>
                         <tr>
-                            <td>Friday</td>
+                            <td><input type="text" name="FifthDay" value="Friday" disabled></td>
                             <td><input type="text" name="friStrtTime"></td>
                             <td><input type="text" name="friEndtTime"></td>
                             <td><input type="text" name="friTimeWorked"></td>
                             <td><input type="text" name="friHourlyRate"></td>
                         </tr>
                         <tr>
-                            <td>Saturday</td>
+                            <td><input type="text" name="sixthDay" value="Saturday" disabled></td>
                             <td><input type="text" name="satStrtTime"></td>
                             <td><input type="text" name="satEndtTime"></td>
                             <td><input type="text" name="satTimeWorked"></td>
                             <td><input type="text" name="satHourlyRate"></td>
                         </tr>
                         <tr>
-                            <td>Sunday</td>
+                            <td><input type="text" name="seventhDay" value="Sunday" disabled></td>
                             <td><input type="text" name="sunStrtTime"></td>
                             <td><input type="text" name="sunEndtTime"></td>
                             <td><input type="text" name="sunTimeWorked"></td>
@@ -92,42 +92,64 @@
             </form>
         </div>
 
-        <script
+        <script>
         src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous">
+        crossorigin="anonymous"
         </script>
         
         <script>
-            var addshift = $('button[id="addshift"]');
-            
-            addshift.click(function(){
-                event.preventDefault();
-                var dayOfWeek = document.getElementById('day');
-                switch (dayOfWeek) {                    
-                case "Monday":
-                    $("#day").val("Tuesday");                 
-                    break;
-                case "Tuesday":
-                    $("#day").val("Wednesday");
-                    break;
-                case "Wednesday":
-                    $("#day").val("Thursday");
-                    break;
-                case "Thursday":
-                    $("#day").val("Friday");
-                    break;
-                case "Friday":
-                    $("#day").val("Saturday");
-                    break;
-                case "Saturday":
-                    $("#day").val("Sunday");
-                    break;
-                case "Sunday":
-                    $("#day").val("Monday");
-                    break;    
-                }
-            });
+            function validateMondayStartTime(){
+                let fieldValue = document.getElementById("monStrtTime").value;
+                validateTime(fieldValue);
+            }
+            function validateTime(timeValue){          
+                let dayTime = timeValue;
+                let timeLen = dayTime.length;
+                console.log(timeLen);
+                
+                if(timeLen != 0 || timeLen != undefined){
+                    let validatedTime = "";
+                    let colonPosition = dayTime.search(":");
+                    
+                    for(let i = 0; i !== timeLen; i++){
+                        var x = dayTime.substring(i, i + 1);
+                        console.log(x);
+                        if (i !== 2){
+                            if (!isNumber(x)){
+                                console.log(x +" Is not a number");
+                            }else if(isNumber(x)){
+                                validatedTime = validatedTime + x;
+                            }
+                        }else if (i == 2){
+                            validatedTime = validatedTime + x;
+                        }                                                
+                    }                    
+                    let validatedTimeLen = validatedTime.length;
+                    //console.log(validatedTimeLen + " is the length of the validateTime string");
+                    if( validatedTimeLen == 2){
+                        //console.log(" Put the Colen Now!");
+                        validatedTime = validatedTime + ":";
+                        console.log(validatedTime);                        
+                        document.getElementById("monStrtTime").value = validatedTime;                         
+                    }if( validatedTimeLen > 5){
+                        //alert("Time should be HH:MM only!");
+                        validatedTime = validatedTime.slice(0,5);
+                        document.getElementById("monStrtTime").value = validatedTime;
+                    }else{
+                        document.getElementById("monStrtTime").value = validatedTime;
+                    }
+                    console.log(validatedTime);
+                }                                  
+            }
+            function isNumber(letter){
+                let input = letter;
+                if ((input >= 0) && (input <= 9) ){
+                    return true;
+                }else{
+                    return false;
+                } 
+            }   
             
         </script> 
     </body>
