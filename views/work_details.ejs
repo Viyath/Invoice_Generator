@@ -1,7 +1,8 @@
 <html>
     <body>
+        <head><% include partials/nav.ejs %>
+
         <div class="container">
-            <head><% include partials/nav.ejs %>
             </head>
             <h1>Employees Work Sheet</h1>
 
@@ -32,59 +33,59 @@
                 <table>
                         <tr>
                             <th>Day</th>
-                            <th>Start Time<input type="checkbox" name="startTime" value="startTime"></th>
-                            <th>End Time<input type="checkbox" name="startTime" value="endTime"></th>
+                            <th>Start Time<input type="checkbox" name="startTime" value="startTime" onclick="fillStartTimes()"></th>
+                            <th>End Time<input type="checkbox" name="EndTime" id="EndTime" value="endTime" onclick="fillEndTimes()"></th>
                             <th>Hours Worked</th>
-                            <th>Hourly Rate<input type="checkbox" name="startTime" value="hourlyRate"></th>
+                            <th>Hourly Rate<input type="checkbox" name="hourlyRate" id="hourlyRate" value="hourlyRate" onclick="validateHourlyRate()"></th>
                         </tr>
                         <tr>
                             <td><input type="text" name="firstDay" value="Monday" disabled></td>
-                            <td><input type="text" name="monStrtTime" id="monStrtTime" onkeyup = "validateMondayStartTime()"></td>
-                            <td><input type="text" name="monEndtTime"></td>
-                            <td><input type="text" name="monTimeWorked"></td>
-                            <td><input type="text" name="monHourlyRate"></td>
+                            <td><input type="text" name="monStrtTime" id="monStrtTime" onkeyup="validateMondayStartTime()"></td>
+                            <td><input type="text" name="monEndtTime" id="monEndTime" onkeyup="validateMondayEndTime()"></td>
+                            <td><input type="text" name="monTimeWorked" id="monTimeWorked"></td>
+                            <td><input type="text" name="monHourlyRate" id="monHourlyRate"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="SecoundDay" value="Tuesday" disabled></td>
-                            <td><input type="text" name="tueStrtTime"></td>
-                            <td><input type="text" name="tueEndtTime"></td>
-                            <td><input type="text" name="tueTimeWorked"></td>
-                            <td><input type="text" name="tueHourlyRate"></td>
+                            <td><input type="text" name="tueStrtTime" id="tueStrtTime"></td>
+                            <td><input type="text" name="tueEndtTime" id="tueEndTime"></td>
+                            <td><input type="text" name="tueTimeWorked" id="tueTimeWorked"></td>
+                            <td><input type="text" name="tueHourlyRate" id="tueHourlyRate"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="ThirdDay" value="Wednesday" disabled></td>
-                            <td><input type="text" name="wedStrtTime"></td>
-                            <td><input type="text" name="wedEndtTime"></td>
-                            <td><input type="text" name="wedTimeWorked"></td>
-                            <td><input type="text" name="wedHourlyRate"></td>
+                            <td><input type="text" name="wedStrtTime" id="wedStrtTime"></td>
+                            <td><input type="text" name="wedEndtTime" id="wedEndTime"></td>
+                            <td><input type="text" name="wedTimeWorked" id="wedTimeWorked"></td>
+                            <td><input type="text" name="wedHourlyRate" id="wedHourlyRate"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="FourthDay" value="Thursday" disabled></td>
-                            <td><input type="text" name="thuStrtTime"></td>
-                            <td><input type="text" name="thuEndtTime"></td>
-                            <td><input type="text" name="thuTimeWorked"></td>
-                            <td><input type="text" name="thuHourlyRate"></td>
+                            <td><input type="text" name="thuStrtTime" id="thuStrtTime"></td>
+                            <td><input type="text" name="thuEndtTime" id="thuEndTime"></td>
+                            <td><input type="text" name="thuTimeWorked" id="thuTimeWorked"></td>
+                            <td><input type="text" name="thuHourlyRate" id="thuHourlyRate"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="FifthDay" value="Friday" disabled></td>
-                            <td><input type="text" name="friStrtTime"></td>
-                            <td><input type="text" name="friEndtTime"></td>
-                            <td><input type="text" name="friTimeWorked"></td>
-                            <td><input type="text" name="friHourlyRate"></td>
+                            <td><input type="text" name="friStrtTime" id="friStrtTime"></td>
+                            <td><input type="text" name="friEndtTime" id="friEndTime"></td>
+                            <td><input type="text" name="friTimeWorked" id="friTimeWorked"></td>
+                            <td><input type="text" name="friHourlyRate" id="friHourlyRate"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="sixthDay" value="Saturday" disabled></td>
-                            <td><input type="text" name="satStrtTime"></td>
-                            <td><input type="text" name="satEndtTime"></td>
-                            <td><input type="text" name="satTimeWorked"></td>
-                            <td><input type="text" name="satHourlyRate"></td>
+                            <td><input type="text" name="satStrtTime" id="satStrtTime"></td>
+                            <td><input type="text" name="satEndtTime" id="satEndTime"></td>
+                            <td><input type="text" name="satTimeWorked" id="satTimeWorked"></td>
+                            <td><input type="text" name="satHourlyRate" id="satHourlyRate"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="seventhDay" value="Sunday" disabled></td>
-                            <td><input type="text" name="sunStrtTime"></td>
-                            <td><input type="text" name="sunEndtTime"></td>
-                            <td><input type="text" name="sunTimeWorked"></td>
-                            <td><input type="text" name="sunHourlyRate"></td>
+                            <td><input type="text" name="sunStrtTime" id="sunStrtTime"></td>
+                            <td><input type="text" name="sunEndtTime" id="sunEndTime"></td>
+                            <td><input type="text" name="sunTimeWorked" id="sunTimeWorked"></td>
+                            <td><input type="text" name="sunHourlyRate" id="sunHourlyRate"></td>
                         </tr>
                 </table>
                 <br>
@@ -101,13 +102,19 @@
         <script>
             function validateMondayStartTime(){
                 let fieldValue = document.getElementById("monStrtTime").value;
-                validateTime(fieldValue);
+                validateTime(fieldValue,"monStrtTime");
+                calculateHoursWorked(document.getElementById("monStrtTime").value,document.getElementById("monEndTime").value,"monTimeWorked");
             }
-            function validateTime(timeValue){          
+            function validateMondayEndTime(){
+                let fieldValue = document.getElementById("monEndTime").value;
+                validateTime(fieldValue,"monEndTime");
+                calculateHoursWorked(document.getElementById("monStrtTime").value,document.getElementById("monEndTime").value,"monTimeWorked");    
+            }            
+            function validateTime(timeValue,tagID){          
                 let dayTime = timeValue;
                 let timeLen = dayTime.length;
                 console.log(timeLen);
-                
+                console.log(tagID);
                 if(timeLen != 0 || timeLen != undefined){
                     let validatedTime = "";
                     let colonPosition = dayTime.search(":");
@@ -131,13 +138,13 @@
                         //console.log(" Put the Colen Now!");
                         validatedTime = validatedTime + ":";
                         console.log(validatedTime);                        
-                        document.getElementById("monStrtTime").value = validatedTime;                         
+                        document.getElementById(tagID).value = validatedTime;                         
                     }if( validatedTimeLen > 5){
                         //alert("Time should be HH:MM only!");
                         validatedTime = validatedTime.slice(0,5);
-                        document.getElementById("monStrtTime").value = validatedTime;
+                        document.getElementById(tagID).value = validatedTime;
                     }else{
-                        document.getElementById("monStrtTime").value = validatedTime;
+                        document.getElementById(tagID).value = validatedTime;
                     }
                     console.log(validatedTime);
                 }                                  
@@ -150,7 +157,76 @@
                     return false;
                 } 
             }   
-            
+            function fillStartTimes(){
+                let mondayStartTime = document.getElementById("monStrtTime").value;
+                console.log(mondayStartTime);
+                document.getElementById("tueStrtTime").value = mondayStartTime;
+                document.getElementById("wedStrtTime").value = mondayStartTime;
+                document.getElementById("thuStrtTime").value = mondayStartTime;
+                document.getElementById("friStrtTime").value = mondayStartTime;
+                document.getElementById("satStrtTime").value = mondayStartTime;
+                document.getElementById("sunStrtTime").value = mondayStartTime;
+            }
+            function fillEndTimes(){
+                let mondayEndTime = document.getElementById("monEndTime").value;
+                console.log(mondayEndTime);
+                document.getElementById("tueEndTime").value = mondayEndTime;
+                document.getElementById("wedEndTime").value = mondayEndTime;
+                document.getElementById("thuEndTime").value = mondayEndTime;
+                document.getElementById("friEndTime").value = mondayEndTime;
+                document.getElementById("satEndTime").value = mondayEndTime;
+                document.getElementById("sunEndTime").value = mondayEndTime;
+            }
+            function calculateHoursWorked(start,end,tagID){
+                let hoursWorked;
+                //console.log("Started working at : " + start," Finished working at : " + end);
+                if((start.length == 5) && (end.length == 5)){
+                    let startTime = start.replace(":",".");
+                    let endTime = end.replace(":",".");
+                    if(endTime >= startTime){
+                        hoursWorked = endTime - startTime;
+                        //return hoursWorked;
+                        document.getElementById(tagID).value = hoursWorked;
+                        console.log("You worked : " + hoursWorked + " hours...");
+                    }
+                }else{
+                        document.getElementById(tagID).value = "0";
+                } 
+                /*
+                if((start != "") && (start != undefined) && (end != "") && (end != undefined)){
+                    console.log("Started working at : " + start," Finished working at : " + end);
+                    if(end>=start){
+                        hoursWorked = end - start;
+                        //return hoursWorked;
+                        console.log(hoursWorked);
+                    } 
+                }if((start = "") && (start = undefined) && (end = "") && (end = undefined)){
+                    console.log("One or more fields are empty to calculate hours worked")
+                    if(end<start){
+                        hoursWorked = end - start;
+                        //return hoursWorked;
+                        console.log("End time cannot be less than start time");
+                    }    
+                }
+                */
+            }
+            function fillHourlyRate(){
+                let mondayHourlyRate = document.getElementById("monHourlyRate").value;
+                console.log(mondayHourlyRate);
+                document.getElementById("tueHourlyRate").value = mondayHourlyRate;
+                document.getElementById("wedHourlyRate").value = mondayHourlyRate;
+                document.getElementById("thuHourlyRate").value = mondayHourlyRate;
+                document.getElementById("friHourlyRate").value = mondayHourlyRate;
+                document.getElementById("satHourlyRate").value = mondayHourlyRate;
+                document.getElementById("sunHourlyRate").value = mondayHourlyRate;
+            }
+            function validateHourlyRate(){
+                let elementValue = document.getElementById("hourlyRate");
+                console.log("Hourly rate checked true");
+                if (elementValue.checked == true){
+                    fillHourlyRate();
+                }
+            }
         </script> 
     </body>
 </html>
