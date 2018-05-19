@@ -296,3 +296,4 @@ function getEmployer(){
 }
 
 app.listen(8080);
+console.log("Listing to the port 8080");

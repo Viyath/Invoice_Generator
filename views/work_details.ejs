@@ -7,27 +7,39 @@
             <h1>Employees Work Sheet</h1>
 
             <form id = "workdetails" method="POST" action="/work_details">
-                Employer's Name : <input type="text" name="eName"><br>
-                E-Mail : <input type="email" name="eMail"><br>
-                Invoices Occurence : 
-                    <select name="i_occurence">
-                        <option value="Weekly">Weekly</option>
-                        <option value="1st week">1st week</option>
-                        <option value="2nd week">2nd week</option>
-                    </select>
-                    <select name="i_day">
-                        <option value="Monday">Monday</option>
-                        <option value="Tuesday">Tuesday</option>
-                        <option value="Wednesday">Wednesday</option>
-                        <option value="Thursday">Thursday</option>
-                        <option value="Friday">Friday</option>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
-                    <input type="text" name="i_time">
-                    <br>
-                Site name : <input type="text" name="sName">
-                Site address : <input type="text" name="sAddress"><br><br>
+                <div class="form-group col-xs-4">
+                    <label for="inputsm">Employer's Name </label>
+                    <input class="form-control" type="text" name="eName">
+                    <label for="inputsm">E-Mail</label>
+                    <input class="form-control" type="email" name="eMail"><br>
+                    
+                    <div class="form-group row">
+                        <label for="inputls">Invoices Occurence :</label> 
+                        <select name="i_occurence">
+                                <option value="Weekly">Weekly</option>
+                                <option value="1st week">1st week</option>
+                                <option value="2nd week">2nd week</option>
+                            </select>
+                            <select name="i_day">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                            <div class="form-group" col-xs-4>
+                                <input class="form-control" type="text" name="i_time">
+                            </div>
+                    </div>
+
+                    <label for="inputsm">Site name :</label>
+                    <input class="form-control"type="text" name="sName">
+                    <label for="inputsm">Site address : </label>
+                    <input class="form-control"type="text" name="sAddress">
+                </div>
+                <br>
                 <h3>Work Schedule</h3>
                 <hr>
                 <table>
