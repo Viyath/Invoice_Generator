@@ -10,7 +10,7 @@ var mysql = require('mysql');
 var session = require('express-session');
 var ssnUser;
 app.set('view engine','ejs');
-
+var outputBuffer;
 
 //var authenticateController=require('./controllers/authenticate-controller');
 //var registerController=require('./controllers/register-controller');
@@ -66,7 +66,13 @@ app.get('/shift_details', function(req, res){
 
 app.get('/income_details', function(req, res){
     if (isSessionLive(req)){
-        res.render('income_details');
+        connection.query('SELECT * FROM employer WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+            if(!error){
+                var outputBuffer = results;
+                console.log(outputBuffer);
+                res.render('income_details', {results : outputBuffer});                
+            }
+        });
     }else{
         res.render('login');
     }
@@ -196,7 +202,7 @@ app.post('/work_details', function(req, res){
     });
 
 //insert data in to the site table
-    var valSiteURL = {S_name:req.body.sName, S_address:req.body.sAddress, FK_E_name:req.body.eName};
+    var valSiteURL = {S_name:req.body.sName, S_address:req.body.sAddress, FK_E_name:req.body.eName, FK_U_ID:req.session.userID};
     console.log('**** Site details ****');
     console.log(valSiteURL);
     var query = connection.query('INSERT INTO site SET ?', valSiteURL, function (error, results){    
