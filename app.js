@@ -66,7 +66,7 @@ app.get('/shift_details', function(req, res){
 
 app.get('/income_details', function(req, res){
     if (isSessionLive(req)){
-        connection.query('SELECT * FROM employer WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+        connection.query('SELECT * FROM site WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
             if(!error){
                 var outputBuffer = results;
                 console.log(outputBuffer);
