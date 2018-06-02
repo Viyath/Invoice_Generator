@@ -9,6 +9,10 @@
 ## etc
 - host the service on the cloud.
 
-# System Requirements.
+# System Requirements.(look for UI mokups)
 1. System can generate Invoices based on invoice date.
-2. Users can view previous income records.
+2. User can email invoices to the employer based on employer email and user email.
+3. Users can view previous income records.
+4. User can edit(CRUD) work shift details (there can be only one schedule per site starting from Mon-Sun).
+5. User can edit(CRUD) Employer details.
+6. User can edit Site(CRUD) details.

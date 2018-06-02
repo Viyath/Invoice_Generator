@@ -1,22 +1,33 @@
 <html>
     <head>
+        
     </head>
     <body>
         <% include partials/nav.ejs %>
         <form>
             <div class="container">                    
                 <% results.forEach(function( eachResult){ %>
-                    <div class="jumbotron">
+                    <div class="jumbotron" id="jumbo1">
                         <h3>Site : <%= eachResult.S_name %></h3>
                         <h4>Employer : <%= eachResult.FK_E_Name %></h4>
                         <form class="form-inline">
-                            <label for="date">Date from : </label>
-                            <input type="date" class="form-control">
-                            <button type="submit" class="btn btn-primary">Generate Invoice</button>
+                            <label for="date" onclick="generateInvoice">Date from : </label>
+                            <input type="date" class="form-control" onclick="generateInvoice">
+                            <button type="submit" class="btn btn-primary" onclick="generateInvoice">Generate Invoice</button>
                         </form> 
                     </div>
                 <% }) %>                        
             </div>
         </form>
+        <script>
+            function generateInvoice(){
+                console.log("Hello clicked");
+                var para = document.createElement("p");
+                var node = document.createTextNode("Total Hours worked = ");
+                para.appendChild(node);
+                var element = document.getElementById("container");
+                element.appendChild(para);
+            }
+        </script>
     </body>
-</html>
+</html> 
