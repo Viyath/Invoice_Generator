@@ -18,6 +18,7 @@ var outputBuffer;
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(session({secret:"relaxit'sjustdemocode",resave:false,saveUninitialized:true}));
+app.use(express.static('public'));
 
 /* route to handle login and registration */
 
@@ -50,7 +51,13 @@ app.get('/user_registration', urlencodedParser, function(req, res){
 
 app.get('/site_details', urlencodedParser, function(req, res){
     if (isSessionLive(req)){
-        res.render('site_details');
+        connection.query('SELECT * FROM site WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+            if(!error){
+                var outputBuffer = results;
+                console.log(outputBuffer);
+                res.render('site_details', {results1 : outputBuffer});                
+            }
+        });
     }else{
         res.render('login');
     }
@@ -150,6 +157,7 @@ app.post('/user_registration', urlencodedParser, function(req, res){
 });
 
 app.post('/site_details', urlencodedParser, function(req, res){    
+   /*
     var valEmployerURL = {E_U_name:req.body.eU_name, U_email: req.body.U_email};
     var valSiteURL = {S_U_name:req.body.sU_name, address:req.body.sAddress, FK_E_U_name:req.body.eU_name};
     
@@ -179,7 +187,9 @@ app.post('/site_details', urlencodedParser, function(req, res){
             }    
         });
     });
+    */
     res.render('site_details');
+    
 });
 
 app.post('/work_details', function(req, res){

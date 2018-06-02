@@ -16,3 +16,9 @@
 4. User can edit(CRUD) work shift details (there can be only one schedule per site starting from Mon-Sun).
 5. User can edit(CRUD) Employer details.
 6. User can edit Site(CRUD) details.
+7. System should account for holidays.
+    i. user can enter hours they worked and hourly rate.
+8. System should account for leaves or other senarios where employee has not worked usual hours.
+    i. some of the senarios may be Sick resulting 0 hours of work, short leave results less hours or work,
+    Extra work resulting more number of hours worked.
+     

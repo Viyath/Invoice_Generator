@@ -1,5 +1,5 @@
 $(function(){
-    $('#add').on('click', function() {
+    $('#searchSite').on('click', function() {
         console.log('clicked');
     });
 });
