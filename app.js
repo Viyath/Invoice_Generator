@@ -49,20 +49,38 @@ app.get('/user_registration', urlencodedParser, function(req, res){
     res.render('user_registration');
 });
 
+app.get('/add_site_details', function(req, res){
+    res.render('add_site_details');
+});
+
 app.get('/site_details', urlencodedParser, function(req, res){
     if (isSessionLive(req)){
-        connection.query('SELECT * FROM site WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
-            if(!error){
-                var outputBuffer = results;
-                console.log(outputBuffer);
-                res.render('site_details', {results1 : outputBuffer});                
-            }
+        loadSites(req, function (result) {
+            res.render('site_details', {results1 : result});
         });
     }else{
         res.render('login');
     }
 });
 
+app.get('/sites', function(req, res){
+    console.log("Hi inside site RN");
+    loadSites(req, function (result) {
+        res.send({results1 : result});
+    })
+});
+
+function loadSites(req, outputCallback) {
+    connection.query('SELECT * FROM site WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+        if(!error){
+            outputCallback(results);
+        }
+    });
+}
+
+app.get('/updateSite', function(req, res){
+    
+})
 app.get('/shift_details', function(req, res){
     if (isSessionLive(req)){
         res.render('shift_details');
@@ -267,6 +285,9 @@ app.post('/add', function(req, res){
     res.render('work_details', {empName:req.body.eName}); 
 });
 
+app.post('/add_site_details', function(req, res){
+    res.render('add_site_details');
+});
 app.post('/sample-multi-items', function(req, res) {
     console.log('>>> Server received', req.body);
     res.render('sample_multi_items');
@@ -312,4 +333,4 @@ function getEmployer(){
 }
 
 app.listen(8080);
-console.log("Listing to the port 8080");
+console.log("Listing to the port 8080, go to http://localhost:8080");

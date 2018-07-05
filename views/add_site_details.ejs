@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <% include partials/nav.ejs %>      
+    </head>
+    <body>
+        <div class="container">
+        <form>
+            <div class="form-group">
+                <input type="text" class="form-control" id="searchSite" placeholder="Enter site name...">
+                <br>
+                <button type="submit" class="btn btn-primary" name="add">Add New</button>                    
+            </div>
+            <hr>
+            <div class="jumbotron">
+                <label for="SiteName">Site Name</label>
+                <input type="text" class="form-control" name="site_name">
+                <div class="form-group">
+                    <label for="inputAddress">Site Address</label>
+                    <input type="text" class="form-control" id="inputAddress">
+                </div>
+                <div class="form-group">
+                    <label for="employername">Employer Name</label>
+                    <input type="text" class="form-control" id="employername">
+                </div>
+                <button type="submit" class="btn btn-primary" name="save">Save</button>
+            </div>
+        </form>
+    </div>
+    </body>
+</html>

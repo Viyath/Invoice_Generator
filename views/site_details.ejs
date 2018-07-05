@@ -5,15 +5,17 @@
     </head>
     <body>
         <div class="container">
-        <form>
+        <form id = "mainForm">
                 <div class="form-group">
                     <input type="text" class="form-control" id="searchSite" placeholder="Enter site name...">
+                    <br>
+                    <button type="submit" class="btn btn-primary" name="add">Add New</button>                    
                 </div>
                 <hr>
                 <% results1.forEach(function( eachResult){ %>
                     <div class="jumbotron">
                         <label for="SiteName">Site Name</label>
-                        <input type="text" class="form-control" id="inputAddress" value=<%= eachResult.S_name %>>
+                        <input type="text" class="form-control" name="site_name" value=<%= eachResult.S_name %>>
                         <div class="form-group">
                             <label for="inputAddress">Site Address</label>
                             <input type="text" class="form-control" id="inputAddress" value=<%= eachResult.S_address %>>
@@ -22,7 +24,7 @@
                             <label for="employername">Employer Name</label>
                             <input type="text" class="form-control" id="employername" value=<%= eachResult.FK_E_Name %>>
                         </div>
-                        <button type="submit" class="btn btn-primary">Save  </button>   <button type="submit" class="btn btn-primary">Delete</button>
+                        <button type="submit" class="btn btn-primary" name="save">Save  </button>   <button type="submit" class="btn btn-primary" name="delete">Delete</button>
                     </div>
 
                 <% }) %>  
