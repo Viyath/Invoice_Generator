@@ -26,7 +26,6 @@ app.use(express.static('public'));
 //app.post('/api/authenticate',authenticateController.authenticate);
 
 app.get('/', function(req, res){
-    //res.render('index');
     res.render('logIn');
 });
 
@@ -64,7 +63,6 @@ app.get('/site_details', urlencodedParser, function(req, res){
 });
 
 app.get('/sites', function(req, res){
-    console.log("Hi inside site RN");
     loadSites(req, function (result) {
         res.send({results1 : result});
     })
@@ -138,7 +136,10 @@ app.post('/logIn', function(req, res){
                         ssnUser.userU_name = results[0].U_name;
                         req.session.userID = results[0].U_ID;
                         console.log(ssnUser.userID);
-                        res.render('work_details');
+                        //res.render('work_details');
+                        loadSites(req, function (result) {
+                            res.render('site_details', {results1 : result});
+                        });
                     } else{
                         console.log('Invalid Password');
                         res.send('Invalid Password');
