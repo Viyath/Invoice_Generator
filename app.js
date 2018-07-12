@@ -114,7 +114,14 @@ app.get('/sample-multi-items', function(req, res) {
 });
 
 //All the post requests
-
+app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
+    //var valSiteURL = {S_name:req.body.site_name, S_address:req.body.site_address, FK_E_Name:req.body.employer_name, FK_U_ID:req.session.userID};
+    //console.log(valSiteURL);
+    //var valSiteURL = {S_name: req.body.site_name, S_address: req.body.site_address, FK_E_Name: req.body.employer_name, FK_U_ID: req.session.userID};
+    //var valSiteURL = {S_name: req.body.siteName, siteAddress: req.body.site_address, employerName: req.body.employer_name, FK_U_ID: req.session.userID};
+    let grabSiteDetails = req.body.sNameTextBox;   
+    console.log("site name is : " + grabSiteDetails);
+});
 app.post('/logIn', function(req, res){
     
     //checking the database for authentication.
@@ -176,13 +183,12 @@ app.post('/user_registration', urlencodedParser, function(req, res){
 });
 
 app.post('/site_details', urlencodedParser, function(req, res){    
-   /*
-    var valEmployerURL = {E_U_name:req.body.eU_name, U_email: req.body.U_email};
-    var valSiteURL = {S_U_name:req.body.sU_name, address:req.body.sAddress, FK_E_U_name:req.body.eU_name};
-    
-    console.log(valEmployerURL);
-    console.log(valSiteURL);
 
+    //var valSiteURL = {S_name: req.body.site_name, S_address: req.body.site_address, FK_E_Name: req.body.employer_name, FK_U_ID: req.session.userID};
+    var valSiteURL = {S_name: req.body.siteName, siteAddress: req.body.site_address, employerName: req.body.employer_name, FK_U_ID: req.session.userID};
+    console.log(valSiteURL);
+    //var grabSiteDetails = req.body.
+/*
 //inserting data in to the employer
     var query = connection.query('INSERT INTO employer SET ?', valEmployerURL, function (error, results){    
         connection.query(mysql,function (err, result) {

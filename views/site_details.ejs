@@ -15,7 +15,7 @@
                 <% console.log(results1)
                      jumboID = 0 %>
                 <% results1.forEach(function( eachResult){ %>
-                    <div class="jumbotron" id=<%= jumboID %></div>>
+                    <div class="jumbotron" id=<%= jumboID %></div>
                         <label for="SiteName"Site Name</label>
                         <input type="text" class="form-control" name="site_name" value=<%= eachResult.S_name %>>
                         <div class="form-group">
@@ -24,9 +24,9 @@
                         </div>
                         <div class="form-group">
                             <label for="employername">Employer Name</label>
-                            <input type="text" class="form-control" id="employername" value=<%= eachResult.FK_E_Name %>>
+                            <input type="text" class="form-control" name="employer_name" id="employername" value=<%= eachResult.FK_E_Name %>>
                         </div>
-                        <button type="submit" class="btn btn-primary" name="save">Save  </button>   <button type="submit" class="btn btn-primary" name="delete">Delete</button>
+                        <button type="submit" class="btn btn-primary" name="update">Update  </button>   <button type="submit" class="btn btn-primary" name="delete">Delete</button>
                     </div>
                     <% jumboID = jumboID + 1 %>
                 <% }) %>  
