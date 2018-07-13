@@ -1,21 +1,21 @@
 $(function(){
-        
+
         //$.ajax({
         //    url: '/sites',
         //    success: function(response) {
         //        console.log('clicked', response.results1);
         //        // response.results1.forEach(function( eachResult){
         //        //    console.log(results1.S_name);
-        //        // });  
+        //        // });
         //    }
         //});
-             
+
     $('#searchSite').on('keyup', function() {
         console.log('user is typing...');
         var searchSiteInput = document.getElementById('searchSite').value;
         console.log(searchSiteInput);
         if (searchSiteInput.length == 0){
-            clearSiteDetails();  
+            clearSiteDetails();
             $.ajax({
                 url: '/sites',
                 success: function(response) {
@@ -23,7 +23,7 @@ $(function(){
                         DisplayRecord(eachResult);
                     })
                 }
-            });     
+            });
         }
         if (searchSiteInput.length > 0){
             //clear site details
@@ -42,12 +42,12 @@ $(function(){
                     });
                     // response.results1.forEach(function( eachResult){
                     //     console.log(results1.S_name);
-                    // });  
+                    // });
                 }
-            });  
+            });
         }
     });
-    
+
     $('button[name=update]').on('click',function(event){
         event.preventDefault();
         console.log(event.toElement.parentElement.querySelector('[name=site_name]').value)
@@ -68,7 +68,7 @@ $(function(){
         event.preventDefault();
         clearSiteDetails();
         var formNode = document.getElementById('mainForm')
-        
+
         var addSiteRecordFrom = document.createElement('form')
         addSiteRecordFrom.setAttribute("id","addSiteRecordForm")
         addSiteRecordFrom.setAttribute("method","POST")
@@ -88,7 +88,7 @@ $(function(){
 
         var subBase = document.createElement('div')
         subBase.setAttribute("class", "form-group")
-        
+
         var sAddressLable = document.createElement('lable')
         sAddressLable.innerHTML = "Site Address"
 
@@ -142,14 +142,14 @@ $(function(){
     function addNewRecord(event){
         event.preventDefault();
         var siteName = event.toElement.parentElement.querySelector('[name=site_name1').value
-        var siteAddress = event.toElement.parentElement.querySelector('[name=site_address').value
-        var employerName = event.toElement.parentElement.querySelector('[name=employer_name').value
+        var siteAddress = event.toElement.parentElement.querySelector('[name=site_address]').value
+        var employerName = event.toElement.parentElement.querySelector('[name=employer_name]').value
 
         console.log(siteName,siteAddress,employerName)
         $.ajax({
             url: '/addNewSiteRecord',
             method: 'POST',
-            contetntType: 'application/json',
+            contentType: 'application/json',
             data: JSON.stringify({siteName: siteName, siteAddress: siteAddress, employerName: employerName}),
             success: function(response) {
                 console.log(response);
@@ -169,7 +169,7 @@ $(function(){
         }
     }
     function displayALlSiteRecords(){
-        clearSiteDetails();  
+        clearSiteDetails();
         $.ajax({
             url: '/sites',
             success: function(response) {
@@ -177,14 +177,14 @@ $(function(){
                     DisplayRecord(eachResult);
                 })
             }
-        });  
+        });
     }
     function DisplayRecord(obj){
         var formNode = document.getElementById('mainForm')
-        
+
         var baseClassJumbotron = document.createElement('div')
         baseClassJumbotron.setAttribute("class", "jumbotron")
-        
+
         formNode.appendChild(baseClassJumbotron)
 
         var sNameLable = document.createElement('lable')
@@ -198,7 +198,7 @@ $(function(){
 
         var subBase = document.createElement('div')
         subBase.setAttribute("class", "form-group")
-        
+
         var sAddressLable = document.createElement('lable')
         sAddressLable.innerHTML = "Site Address"
 
@@ -237,7 +237,7 @@ $(function(){
         baseClassJumbotron.appendChild(subBase)
         subBase.appendChild(employerNameLable)
         subBase.appendChild(employerName)
-        baseClassJumbotron.appendChild(updateButton) 
+        baseClassJumbotron.appendChild(updateButton)
         baseClassJumbotron.appendChild(deleteButton)
     }
 });

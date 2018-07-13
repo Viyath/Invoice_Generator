@@ -2,7 +2,7 @@
   "name": "login",
   "version": "1.0.0",
   "description": "login authentication",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "body-parser": "^1.17.1",
     "bootstrap": "^4.0.0",
