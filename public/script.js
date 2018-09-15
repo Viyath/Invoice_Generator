@@ -60,10 +60,12 @@ $(function(){
         });
         /*  */
     });
+
     $('button[name=delete]').on('click',function(event){
         event.preventDefault();
         console.log('Deleted the record ' + event.toElement.parentElement.querySelector('[name=site_name').value )
     });
+    
     $('button[name=add]').on('click',function(event){
         event.preventDefault();
         clearSiteDetails();
@@ -135,10 +137,12 @@ $(function(){
         baseClassJumbotron.appendChild(addRecordButton)
         baseClassJumbotron.appendChild(cancelButton)
     });
+
     $('button[name=addNewSiteRecord]').on('click',function(event){
         event.preventDefault();
         console.log('Adding a new record to the DB')
     });
+
     function addNewRecord(event){
         event.preventDefault();
         var siteName = event.toElement.parentElement.querySelector('[name=site_name1').value
