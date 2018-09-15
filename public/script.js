@@ -65,7 +65,7 @@ $(function(){
         event.preventDefault();
         console.log('Deleted the record ' + event.toElement.parentElement.querySelector('[name=site_name').value )
     });
-    
+
     $('button[name=add]').on('click',function(event){
         event.preventDefault();
         clearSiteDetails();
@@ -159,6 +159,7 @@ $(function(){
                 console.log(response);
             }
         });
+        displayALlSiteRecords();
     }
     function cancel(event){
         console.log("clicked cancel")
