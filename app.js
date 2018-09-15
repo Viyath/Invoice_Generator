@@ -115,12 +115,23 @@ app.get('/sample-multi-items', function(req, res) {
 
 //All the post requests
 app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
-    var valSiteURL = {S_name:req.body.siteName, S_address:req.body.siteAddress, FK_E_Name:req.body.employer_name, FK_U_ID:req.session.userID};
-    //console.log(valSiteURL);
+    var valSiteURL = {S_name:req.body.siteName, S_address:req.body.siteAddress, FK_E_Name:req.body.employerName, FK_U_ID:req.session.userID};
+    console.log(valSiteURL);
     //var valSiteURL = {S_name: req.body.site_name, S_address: req.body.site_address, FK_E_Name: req.body.employer_name, FK_U_ID: req.session.userID};
     //var valSiteURL = {S_name: req.body.siteName, siteAddress: req.body.site_address, employerName: req.body.employer_name, FK_U_ID: req.session.userID};
     let grabSiteDetails = req.body.siteName;   
     console.log("site name is : " + grabSiteDetails);
+
+    var query = connection.query('INSERT INTO site SET ?', valSiteURL, function (error, results){    
+        connection.query(mysql,function (err, result) {
+            if (error){
+                console.log("Error in the query adding new record to site details");
+            }
+            else{
+                console.log("Successfull query!");
+            }    
+        });
+    });
 });
 app.post('/logIn', function(req, res){
     
