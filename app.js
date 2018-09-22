@@ -128,6 +128,23 @@ app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
         });
     });
 });
+app.post('/deleteSiteRecord', urlencodedParser, function(req,res){
+    //var valSiteURL = {S_name:req.body.siteName, S_address:req.body.siteAddress, FK_E_Name:req.body.employerName, FK_U_ID:req.session.userID};
+    let siteName = req.body.siteName;
+    let empName = req.body.employerName;
+    let userID = req.session.userID;
+    console.log("Deleted record : "+siteName+" "+empName+" "+userID);
+    var query = connection.query("DELETE FROM site WHERE S_name= '"+siteName+"' AND FK_E_Name= '"+empName+"' AND FK_U_ID= '"+userID+"'" , function (error, results){    
+        connection.query(mysql,function (err, result) {
+            if (error){
+                console.log("Error in the query adding new record to site details");
+            }
+            else{
+                console.log("deleted site record");
+            }    
+        });
+    });
+});
 app.post('/logIn', function(req, res){
     
     //checking the database for authentication.
@@ -346,4 +363,4 @@ function getEmployer(){
 }
 
 app.listen(8080);
-console.log("Listing to the port 8080, go to http://localhost:8080");
+console.log("Click to visit http://localhost:8080");

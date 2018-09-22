@@ -1,15 +1,5 @@
 $(function(){
 
-        //$.ajax({
-        //    url: '/sites',
-        //    success: function(response) {
-        //        console.log('clicked', response.results1);
-        //        // response.results1.forEach(function( eachResult){
-        //        //    console.log(results1.S_name);
-        //        // });
-        //    }
-        //});
-
     $('#searchSite').on('keyup', function() {
         console.log('user is typing...');
         var searchSiteInput = document.getElementById('searchSite').value;
@@ -63,7 +53,18 @@ $(function(){
 
     $('button[name=delete]').on('click',function(event){
         event.preventDefault();
-        console.log('Deleted the record ' + event.toElement.parentElement.querySelector('[name=site_name').value )
+        var siteAddress = event.toElement.parentElement.querySelector('[name=site_address').value 
+        var siteName = event.toElement.parentElement.querySelector('[name=site_name').value 
+        var employerName = event.toElement.parentElement.querySelector('[name=employer_name').value
+        $.ajax({
+            url: '/deleteSiteRecord',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({siteName: siteName, siteAddress: siteAddress, employerName: employerName}),
+            success: function(response) {
+                console.log(response);
+            }
+        });
     });
 
     $('button[name=add]').on('click',function(event){
@@ -213,7 +214,7 @@ $(function(){
         var employerName = document.createElement('input')
         employerName.setAttribute("type","text")
         employerName.setAttribute("class","form-control")
-        employerName.setAttribute("name","site_address")
+        employerName.setAttribute("name","employer_name")
         employerName.setAttribute("value",obj.FK_E_Name)
 
         var sAddressTextBox = document.createElement('input')
@@ -229,6 +230,7 @@ $(function(){
         updateButton.innerHTML="Update"
 
         var deleteButton = document.createElement('button')
+        deleteButton.setAttribute("name","delete")
         deleteButton.setAttribute("id", "deleteSiteRecord")
         deleteButton.setAttribute("type", "submit")
         deleteButton.setAttribute("class", "btn btn-primary")
