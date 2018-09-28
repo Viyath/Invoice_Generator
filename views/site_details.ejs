@@ -16,7 +16,7 @@
                      jumboID = 0 %>
                 <% results1.forEach(function( eachResult){ %>
                     <div class="jumbotron" id=<%= jumboID %></div>
-                        <label for="SiteName"Site Name</label>
+                        <label for="SiteName">Site Name</label>
                         <input type="text" class="form-control" name="site_name" value=<%= eachResult.S_name %>>
                         <div class="form-group">
                             <label for="inputAddress">Site Address</label>
@@ -24,7 +24,11 @@
                         </div>
                         <div class="form-group">
                             <label for="employername">Employer Name</label>
-                            <input type="text" class="form-control" name="employer_name" id="employername" value=<%= eachResult.FK_E_Name %>>
+                            <select class="form-control"name="employer_name"id="employername">
+                                <% empResults.forEach(function( eachEmpResult){ %>
+                                    <option value=<%= eachEmpResult.E_name %>><%= eachEmpResult.E_name %></option>
+                                <% }) %>    
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary" name="update">Update  </button>   <button type="submit" class="btn btn-primary" name="delete">Delete</button>
                     </div>

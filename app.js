@@ -64,12 +64,24 @@ app.get('/site_details', urlencodedParser, function(req, res){
 
 app.get('/sites', function(req, res){
     loadSites(req, function (result) {
-        res.send({results1 : result});
+        loadEmployerName(req, function(result){
+        //    res.send({empResults : result});
+        })
+        res.send('site_details',{results1 : result, empResults: result});
     })
+    
 });
 
 function loadSites(req, outputCallback) {
     connection.query('SELECT * FROM site WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+        if(!error){
+            outputCallback(results);
+        }
+    });
+}
+
+function loadEmployerName(req, outputCallback) {
+    connection.query('SELECT * FROM employer WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
         if(!error){
             outputCallback(results);
         }
@@ -168,8 +180,18 @@ app.post('/logIn', function(req, res){
                         console.log(ssnUser.userID);
                         //res.render('work_details');
                         loadSites(req, function (result) {
-                            res.render('site_details', {results1 : result});
+                            loadEmployerName(req,function(empResult){
+                                console.log("------Employer details------");
+                                console.log(empResult);
+                                console.log("----------------------------");
+                                res.render('site_details', {results1 : result, empResults: empResult});
+                                //res.send({empResults: result});
+                            });
                         });
+                        //loadEmployerName(req, function(result){
+                          //  res.send({empResults : result});
+                            //console.log(empResults);
+                        //});
                     } else{
                         console.log('Invalid Password');
                         res.send('Invalid Password');
