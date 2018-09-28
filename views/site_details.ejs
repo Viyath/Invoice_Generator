@@ -26,7 +26,11 @@
                             <label for="employername">Employer Name</label>
                             <select class="form-control"name="employer_name"id="employername">
                                 <% empResults.forEach(function( eachEmpResult){ %>
-                                    <option value=<%= eachEmpResult.E_name %>><%= eachEmpResult.E_name %></option>
+                                    <% if(eachEmpResult.E_name===eachResult.FK_E_Name){ %>
+                                        <option value=<%= eachEmpResult.E_name %> selected><%= eachEmpResult.E_name %></option>
+                                    <% } else {%>
+                                        <option value=<%= eachEmpResult.E_name %>><%= eachEmpResult.E_name %></option>
+                                    <% } %>
                                 <% }) %>    
                             </select>
                         </div>
