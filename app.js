@@ -72,33 +72,16 @@ app.get('/site_details', urlencodedParser, function(req, res){
 app.get('/sites', function(req, res){
     
 //    res.send('site_details',{results1 : result, empResults: result});
-
     loadSites(req, function (result) {
         loadEmployerName(req,function(empResult){
             console.log("------Employer details------");
             console.log(empResult);
             console.log("----------------------------");
-            res.send('site_details', {results1 : result, empResults: empResult});
-            //res.send('site_details', {empResults: result});
+            res.send({results1 : result, empResults: empResult});
+            //res.send({empResults: result});
         });
     }); 
 });
-
-function loadSites(req, outputCallback) {
-    connection.query('SELECT * FROM site WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
-        if(!error){
-            outputCallback(results);
-        }
-    });
-}
-
-function loadEmployerName(req, outputCallback) {
-    connection.query('SELECT * FROM employer WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
-        if(!error){
-            outputCallback(results);
-        }
-    });
-}
 
 app.get('/updateSite', function(req, res){
     
@@ -404,12 +387,29 @@ function addShiftDetails(shiftDetailsArray){
 
 };
 
+function loadSites(req, outputCallback) {
+    connection.query('SELECT * FROM site WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+        if(!error){
+            outputCallback(results);
+        }
+    });
+};
+
+function loadEmployerName(req, outputCallback) {
+    connection.query('SELECT * FROM employer WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+        if(!error){
+            outputCallback(results);
+        }
+    });
+};
+/*
 function getEmployer(){
     var valEmployerURL = {E_name: req.body.eName, E_email: req.body.eMail, 
         I_occurence: req.body.i_occurence,I_day: req.body.i_day, I_time: req.body.i_time, 
         FK_U_ID: ssnUser.userID};
     return valEmployerURL;
 }
+*/
 
 app.listen(8080);
 console.log("Click to visit http://localhost:8080");

@@ -68,6 +68,10 @@ $(function(){
     });
 
     $('button[name=add]').on('click',function(event){
+       
+        
+        //need to load employers names in to the field
+
         event.preventDefault();
         clearSiteDetails();
         var formNode = document.getElementById('mainForm')
@@ -98,11 +102,22 @@ $(function(){
         var employerNameLable = document.createElement('lable')
         employerNameLable.innerHTML = "Employer Name"
 
-        var employerName = document.createElement('input')
-        employerName.setAttribute("type","text")
-        employerName.setAttribute("class","form-control")
-        employerName.setAttribute("name","employer_name")
-
+        var employerNameSelectList = document.createElement('select')
+        //employerName.setAttribute("type","text")
+        employerNameSelectList.setAttribute("class","form-control")
+        employerNameSelectList.setAttribute("name","employer_name")
+        $.ajax({
+            url: '/sites',
+            success: function(response) {
+                response.empResults.forEach(function(eachResult){
+                    var empNameOption = document.createElement("option");
+                    empNameOption.value = "";
+                    empNameOption.text = eachResult.E_name;
+                    employerNameSelectList.appendChild(empNameOption);
+                })
+            }
+        });
+        
 
         var sAddressTextBox = document.createElement('input')
         sAddressTextBox.setAttribute("type","text")
@@ -134,7 +149,7 @@ $(function(){
         subBase.appendChild(sAddressTextBox)
         baseClassJumbotron.appendChild(subBase)
         subBase.appendChild(employerNameLable)
-        subBase.appendChild(employerName)
+        subBase.appendChild(employerNameSelectList)
         baseClassJumbotron.appendChild(addRecordButton)
         baseClassJumbotron.appendChild(cancelButton)
     });
