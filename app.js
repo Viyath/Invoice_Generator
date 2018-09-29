@@ -55,7 +55,14 @@ app.get('/add_site_details', function(req, res){
 app.get('/site_details', urlencodedParser, function(req, res){
     if (isSessionLive(req)){
         loadSites(req, function (result) {
-            res.render('site_details', {results1 : result});
+            loadEmployerName(req,function(empResult){
+                console.log("------Employer details------");
+                console.log(empResult);
+                console.log("----------------------------");
+                res.render('site_details', {results1 : result, empResults: empResult});
+                //res.send({empResults: result});
+            });
+            
         });
     }else{
         res.render('login');
@@ -63,12 +70,15 @@ app.get('/site_details', urlencodedParser, function(req, res){
 });
 
 app.get('/sites', function(req, res){
+    
+//    res.send('site_details',{results1 : result, empResults: result});
+
     loadSites(req, function (result) {
         loadEmployerName(req,function(empResult){
             console.log("------Employer details------");
             console.log(empResult);
             console.log("----------------------------");
-            res.render('site_details', {results1 : result, empResults: empResult});
+            res.send('site_details', {results1 : result, empResults: empResult});
             //res.send({empResults: result});
         });
     }); 
