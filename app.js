@@ -64,12 +64,14 @@ app.get('/site_details', urlencodedParser, function(req, res){
 
 app.get('/sites', function(req, res){
     loadSites(req, function (result) {
-        loadEmployerName(req, function(result){
-        //    res.send({empResults : result});
-        })
-        res.send('site_details',{results1 : result, empResults: result});
-    })
-    
+        loadEmployerName(req,function(empResult){
+            console.log("------Employer details------");
+            console.log(empResult);
+            console.log("----------------------------");
+            res.render('site_details', {results1 : result, empResults: empResult});
+            //res.send({empResults: result});
+        });
+    }); 
 });
 
 function loadSites(req, outputCallback) {
