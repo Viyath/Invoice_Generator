@@ -79,7 +79,7 @@ app.get('/sites', function(req, res){
             console.log(empResult);
             console.log("----------------------------");
             res.send('site_details', {results1 : result, empResults: empResult});
-            //res.send({empResults: result});
+            //res.send('site_details', {empResults: result});
         });
     }); 
 });
@@ -356,7 +356,22 @@ app.post('/sample-multi-items', function(req, res) {
     console.log('>>> Server received', req.body);
     res.render('sample_multi_items');
 });
-
+app.post('/display_sites_record', function(req, res){
+    if (isSessionLive(req)){
+        loadSites(req, function (result) {
+            loadEmployerName(req,function(empResult){
+                console.log("------Employer details------");
+                console.log(empResult);
+                console.log("----------------------------");
+                res.render('site_details', {results1 : result, empResults: empResult});
+                //res.send({empResults: result});
+            });
+            
+        });
+    }else{
+        res.render('login');
+    }
+});
 //All the functions
 
 function isSessionLive(req){

@@ -164,8 +164,17 @@ $(function(){
     }
     function cancel(event){
         console.log("clicked cancel")
+        clearSiteDetails();
         event.preventDefault();
-        displayALlSiteRecords();
+        $.ajax({
+            url: '/display_sites_record',
+            method: 'POST',
+            success: function(response) {
+                console.log(response);
+            }
+        });
+        
+        //displayALlSiteRecords();
     }
     function clearSiteDetails(){
         var myNode = document.getElementsByClassName('jumbotron')
