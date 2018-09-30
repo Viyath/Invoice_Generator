@@ -68,10 +68,6 @@ $(function(){
     });
 
     $('button[name=add]').on('click',function(event){
-       
-        
-        //need to load employers names in to the field
-
         event.preventDefault();
         clearSiteDetails();
         var formNode = document.getElementById('mainForm')
@@ -111,7 +107,7 @@ $(function(){
             success: function(response) {
                 response.empResults.forEach(function(eachResult){
                     var empNameOption = document.createElement("option");
-                    empNameOption.value = "";
+                    empNameOption.value = eachResult.E_name;
                     empNameOption.text = eachResult.E_name;
                     employerNameSelectList.appendChild(empNameOption);
                 })
@@ -164,7 +160,7 @@ $(function(){
         var siteName = event.toElement.parentElement.querySelector('[name=site_name1').value
         var siteAddress = event.toElement.parentElement.querySelector('[name=site_address]').value
         var employerName = event.toElement.parentElement.querySelector('[name=employer_name]').value
-
+        console.log("New record is... ")
         console.log(siteName,siteAddress,employerName)
         $.ajax({
             url: '/addNewSiteRecord',

@@ -125,7 +125,7 @@ app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
     var valSiteURL = {S_name:req.body.siteName, S_address:req.body.siteAddress, FK_E_Name:req.body.employerName, FK_U_ID:req.session.userID};
     console.log(valSiteURL);
     var query = connection.query('INSERT INTO site SET ?', valSiteURL, function (error, results){    
-        connection.query(mysql,function (err, result) {
+        connection.query(mysql,function (error, result) {
             if (error){
                 console.log("Error in the query adding new record to site details");
             }
