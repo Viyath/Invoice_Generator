@@ -65,6 +65,7 @@ $(function(){
                 console.log(response);
             }
         });
+        displayALlSiteRecords();
     });
 
     $('button[name=add]').on('click',function(event){
@@ -185,7 +186,7 @@ $(function(){
             }
         });
         
-        //displayALlSiteRecords();
+        displayALlSiteRecords();
     }
     function clearSiteDetails(){
         var myNode = document.getElementsByClassName('jumbotron')
