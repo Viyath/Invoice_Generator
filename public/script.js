@@ -52,6 +52,8 @@ $(function(){
     });
 
     $('button[name=delete]').on('click',function(event){
+        deleteSiteRecord();
+        /*
         event.preventDefault();
         var siteAddress = event.toElement.parentElement.querySelector('[name=site_address').value 
         var siteName = event.toElement.parentElement.querySelector('[name=site_name').value 
@@ -66,6 +68,7 @@ $(function(){
             }
         });
         displayALlSiteRecords();
+        */
     });
 
     $('button[name=add]').on('click',function(event){
@@ -174,6 +177,22 @@ $(function(){
         });
         displayALlSiteRecords();
     }
+    function deleteSiteRecord(){
+        event.preventDefault();
+        var siteAddress = event.toElement.parentElement.querySelector('[name=site_address').value 
+        var siteName = event.toElement.parentElement.querySelector('[name=site_name').value 
+        var employerName = event.toElement.parentElement.querySelector('[name=employer_name').value
+        $.ajax({
+            url: '/deleteSiteRecord',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({siteName: siteName, siteAddress: siteAddress, employerName: employerName}),
+            success: function(response) {
+                console.log(response);
+            }
+        });
+        displayALlSiteRecords();
+    }
     function cancel(event){
         console.log("clicked cancel")
         clearSiteDetails();
@@ -206,6 +225,7 @@ $(function(){
             }
         });
     }
+    
     function DisplayRecord(obj){
         var formNode = document.getElementById('mainForm')
 
@@ -256,6 +276,7 @@ $(function(){
         deleteButton.setAttribute("type", "submit")
         deleteButton.setAttribute("class", "btn btn-primary")
         deleteButton.innerHTML="Delete"
+        deleteButton.addEventListener('click',deleteSiteRecord)
 
         baseClassJumbotron.appendChild(sNameLable)
         baseClassJumbotron.appendChild(sNameTextBox)
