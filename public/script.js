@@ -40,15 +40,7 @@ $(function(){
 
     $('button[name=update]').on('click',function(event){
         event.preventDefault();
-        console.log(event.toElement.parentElement.querySelector('[name=site_name]').value)
-        /*
-        $.ajax({
-            url: '/updateSite',
-            success: function(response) {
-                console.log(response);
-            }
-        });
-        /*  */
+        updateSiteRecord();        
     });
 
     $('button[name=delete]').on('click',function(event){
@@ -176,6 +168,17 @@ $(function(){
             }
         });
         displayALlSiteRecords();
+    }
+    function updateSiteRecord(){
+        console.log(event.toElement.parentElement.querySelector('[name=site_name]').value)
+        /*
+        $.ajax({
+            url: '/updateSiteRecord',
+            success: function(response) {
+                console.log(response);
+            }
+        });
+        /*  */
     }
     function deleteSiteRecord(){
         event.preventDefault();

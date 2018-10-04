@@ -135,6 +135,23 @@ app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
         });
     });
 });
+app.post('/updateSiteRecord',urlencodedParser, function(req,res){
+    let siteName = req.body.siteName;
+    let siteAddress = req.body.site_address;
+    let empName = req.body.employerName;
+    let userID = req.session.userID;
+    console.log("updated record : "+siteName+" "+siteAddress+" "+empName+" "+userID);
+    var query = connection.query("DELETE FROM site WHERE S_name= '"+siteName+"' AND FK_E_Name= '"+empName+"' AND FK_U_ID= '"+userID+"'" , function (error, results){    
+        connection.query(mysql,function (error, result) {
+            if (error){
+                console.log("Error in the query adding new record to site details");
+            }
+            else{
+                console.log("deleted site record");
+            }    
+        });
+    });
+});
 app.post('/deleteSiteRecord', urlencodedParser, function(req,res){
     //var valSiteURL = {S_name:req.body.siteName, S_address:req.body.siteAddress, FK_E_Name:req.body.employerName, FK_U_ID:req.session.userID};
     let siteName = req.body.siteName;
@@ -142,7 +159,7 @@ app.post('/deleteSiteRecord', urlencodedParser, function(req,res){
     let userID = req.session.userID;
     console.log("Deleted record : "+siteName+" "+empName+" "+userID);
     var query = connection.query("DELETE FROM site WHERE S_name= '"+siteName+"' AND FK_E_Name= '"+empName+"' AND FK_U_ID= '"+userID+"'" , function (error, results){    
-        connection.query(mysql,function (err, result) {
+        connection.query(mysql,function (error, result) {
             if (error){
                 console.log("Error in the query adding new record to site details");
             }
@@ -331,7 +348,6 @@ app.post('/add', function(req, res){
     //outputEmpDetails(getEmployer);
     res.render('work_details', {empName:req.body.eName}); 
 });
-
 app.post('/add_site_details', function(req, res){
     res.render('add_site_details');
 });
