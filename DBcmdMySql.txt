@@ -1,0 +1,16 @@
+---------MyInvoice SQL cmd------
+CREATE TABLE employersite (
+	ES_ID int(5) PRIMARY KEY AUTO_INCREMENT,
+	FK_U_ID int(5) NOT null,
+	FOREIGN KEY U_ID(FK_U_ID)
+	REFERENCES user(U_ID)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT,
+    	FK_E_Name varchar(50) NOT null,
+	FOREIGN KEY E_name(FK_E_name)
+	REFERENCES employer(E_name)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT,
+	S_name varchar(50) NOT null,
+	S_address varchar(50)
+)
