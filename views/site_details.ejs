@@ -15,9 +15,10 @@
                 <% console.log(results1)
                      jumboID = 0 %>
                 <% results1.forEach(function( eachResult){ %>
-                    <div class="jumbotron" id=<%= eachResult.ES_ID %></div>
+                    <div class="jumbotron" name="emp_Site_ID" id=<%= eachResult.ES_ID %></div>
+                        <input type="hidden" id="siteID" name="siteID" value=<%= eachResult.ES_ID %>>
                         <label for="SiteName">Site Name</label>
-                        <input type="text" class="form-control" name="site_name" value=<%= eachResult.S_name %>>
+                        <input type="text" class="form-control" name="site_name" id="site_name"value=<%= eachResult.S_name %>>
                         <div class="form-group">
                             <label for="inputAddress">Site Address</label>
                             <input type="text" class="form-control" name="site_address" id="inputAddress" value=<%= eachResult.S_address %>>

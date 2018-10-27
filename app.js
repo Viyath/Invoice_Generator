@@ -138,21 +138,22 @@ app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
     });
 });
 app.post('/updateSiteRecord',urlencodedParser, function(req,res){
-    let siteName = req.body.siteName;
-    let siteAddress = req.body.site_address;
+    let siteName = req.body.siteName
+    let siteAddress = req.body.siteAddress;
     let empName = req.body.employerName;
-    let userID = req.session.userID;
-    console.log("updated record : "+siteName+" "+siteAddress+" "+empName+" "+userID);
-    var query = connection.query("DELETE FROM employersite WHERE S_name= '"+siteName+"' AND FK_E_Name= '"+empName+"' AND FK_U_ID= '"+userID+"'" , function (error, results){    
-        connection.query(mysql,function (error, result) {
-            if (error){
-                console.log("Error in the query adding new record to site details");
+    var empSiteID = req.body.siteID;
+    console.log("updated record : "+siteName+" "+siteAddress+" "+empName+" "+empSiteID);
+    var query = connection.query("UPDATE employersite SET FK_E_Name ='"+empName+"' , S_name ='"+siteName+"' , S_address ='"+siteAddress+"' WHERE ES_ID ='"+empSiteID+"'" , function (err, results){    
+        connection.query(mysql,function (err,result) {
+            if(err){
+                console.log("Error in the query Updating records to site details");
             }
             else{
-                console.log("deleted site record");
+                console.log("Updated site record");
             }    
         });
     });
+    //connection.end();
 });
 app.post('/deleteSiteRecord', urlencodedParser, function(req,res){
     //var valSiteURL = {S_name:req.body.siteName, S_address:req.body.siteAddress, FK_E_Name:req.body.employerName, FK_U_ID:req.session.userID};
@@ -186,18 +187,18 @@ app.post('/logIn', function(req, res){
                 //console.log(results);
                 if(results[0].U_email==U_email){
                     if(results[0].password==password){
-                        console.log('Successfully Loged in!');                        
+                        //console.log('Successfully Loged in!');                        
                         ssnUser = req.session;
                         ssnUser.userID = results[0].U_ID;
                         ssnUser.userU_name = results[0].U_name;
                         req.session.userID = results[0].U_ID;
-                        console.log(ssnUser.userID);
+                        console.log(ssnUser.userID+' Successfully Loged in!');
                         //res.render('work_details');
                         loadSites(req, function (result) {
                             loadEmployerName(req,function(empResult){
-                                console.log("------Employer details------");
-                                console.log(empResult);
-                                console.log("----------------------------");
+                                //console.log("------Employer details------");
+                                //console.log(empResult);
+                                //console.log("----------------------------");
                                 res.render('site_details', {results1 : result, empResults: empResult});
                                 //res.send({empResults: result});
                             });
@@ -415,7 +416,7 @@ function loadSites(req, outputCallback) {
 function getSiteRecords(req, outputCallback) {
     connection.query('SELECT * FROM employersite WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
         if(!error){
-            console.log(results)
+            //console.log(results)
             outputCallback(results);
         }
     });

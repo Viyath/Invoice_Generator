@@ -40,6 +40,7 @@ $(function(){
 
     $('button[name=update]').on('click',function(event){
         event.preventDefault();
+        console.log("update site");
         updateSiteRecord();        
     });
 
@@ -170,15 +171,22 @@ $(function(){
         displayALlSiteRecords();
     }
     function updateSiteRecord(){
+        event.preventDefault();
         console.log(event.toElement.parentElement.querySelector('[name=site_name]').value)
-        /*
+        event.preventDefault();
+        var siteName = event.toElement.parentElement.querySelector('[name=site_name').value
+        var siteAddress = event.toElement.parentElement.querySelector('[name=site_address]').value
+        var employerName = event.toElement.parentElement.querySelector('[name=employer_name]').value
+        var siteID = event.toElement.parentElement.querySelector('[name=siteID]').value
         $.ajax({
             url: '/updateSiteRecord',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({siteID: siteID, siteName: siteName, siteAddress: siteAddress, employerName: employerName}),
             success: function(response) {
                 console.log(response);
             }
         });
-        /*  */
     }
     function deleteSiteRecord(){
         event.preventDefault();
@@ -240,6 +248,12 @@ $(function(){
         var sNameLable = document.createElement('lable')
         sNameLable.innerHTML = "Site Name"
 
+        var sID = document.createElement('input')
+        sID.setAttribute("type","hidden")       
+        sID.setAttribute("name","siteID")
+        sID.setAttribute("id","siteID")
+        sID.setAttribute("value",obj.ES_ID)
+
         var sNameTextBox = document.createElement('input')
         sNameTextBox.setAttribute("type","text")
         sNameTextBox.setAttribute("class","form-control")
@@ -272,6 +286,7 @@ $(function(){
         updateButton.setAttribute("type", "submit")
         updateButton.setAttribute("class", "btn btn-primary")
         updateButton.innerHTML="Update"
+        updateButton.addEventListener('click',updateSiteRecord)
 
         var deleteButton = document.createElement('button')
         deleteButton.setAttribute("name","delete")
@@ -281,6 +296,7 @@ $(function(){
         deleteButton.innerHTML="Delete"
         deleteButton.addEventListener('click',deleteSiteRecord)
 
+        baseClassJumbotron.appendChild(sID)
         baseClassJumbotron.appendChild(sNameLable)
         baseClassJumbotron.appendChild(sNameTextBox)
         baseClassJumbotron.appendChild(subBase)
