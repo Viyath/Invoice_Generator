@@ -269,11 +269,30 @@ $(function(){
         var employerNameLable = document.createElement('lable')
         employerNameLable.innerHTML = "Employer Name"
 
-        var employerName = document.createElement('input')
-        employerName.setAttribute("type","text")
+        var employerName = document.createElement('select')
         employerName.setAttribute("class","form-control")
         employerName.setAttribute("name","employer_name")
-        employerName.setAttribute("value",obj.FK_E_Name)
+        $.ajax({
+            url: '/sites',
+            success: function(response) {
+                response.empResults.forEach(function(eachResult){
+                    if(eachResult.E_name != obj.FK_E_Name){
+                        var empNameOption = document.createElement("option");
+                        empNameOption.value = eachResult.E_name;
+                        empNameOption.text = eachResult.E_name;
+                        employerName.appendChild(empNameOption);
+                    }
+                })
+            }
+        });
+        var empNameOption = document.createElement("option")
+        empNameOption.value = "addNewEmp"
+        empNameOption.text = "Add New Employer..."
+        employerName.appendChild(empNameOption)
+        var empNameOption = document.createElement("option")
+        empNameOption.value = obj.FK_E_Name;
+        empNameOption.text = obj.FK_E_Name;
+        employerName.appendChild(empNameOption)
 
         var sAddressTextBox = document.createElement('input')
         sAddressTextBox.setAttribute("type","text")

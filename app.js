@@ -74,9 +74,9 @@ app.get('/sites', function(req, res){
 //    res.send('site_details',{results1 : result, empResults: result});
     loadSites(req, function (result) {
         loadEmployerName(req,function(empResult){
-            console.log("------Employer details------");
-            console.log(empResult);
-            console.log("----------------------------");
+            //console.log(empResult);
+            //console.log("----------------------------");
+            //console.log("------Employer details------");
             res.send({results1 : result, empResults: empResult});
             //res.send({empResults: result});
         });
