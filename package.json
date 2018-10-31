@@ -4,6 +4,7 @@
   "description": "login authentication",
   "main": "app.js",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.17.1",
     "bootstrap": "^4.0.0",
     "ejs": "^2.5.7",

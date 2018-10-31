@@ -8,6 +8,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var connection = require('./config');
 var mysql = require('mysql');
 var session = require('express-session');
+const bcrypt = require('bcrypt');
 var ssnUser;
 app.set('view engine','ejs');
 var outputBuffer;
@@ -56,9 +57,9 @@ app.get('/site_details', urlencodedParser, function(req, res){
     if (isSessionLive(req)){
         loadSites(req, function (result) {
             loadEmployerName(req,function(empResult){
-                console.log("------Employer details------");
-                console.log(empResult);
-                console.log("----------------------------");
+                //console.log("------Employer details------");
+                //console.log(empResult);
+                //console.log("----------------------------");
                 res.render('site_details', {results1 : result, empResults: empResult});
                 //res.send({empResults: result});
             });
@@ -125,7 +126,7 @@ app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
     //getSiteRecords(req, outputCallback);
     //let newSiteID = createNewSiteID(req);
     var valSiteURL = {S_name:req.body.siteName, S_address:req.body.siteAddress, FK_E_Name:req.body.employerName, FK_U_ID:req.session.userID};
-    console.log(valSiteURL);
+    //console.log(valSiteURL);
     var query = connection.query('INSERT INTO employersite SET ?', valSiteURL, function (error, results){    
         connection.query(mysql,function (error, result) {
             if (error){
@@ -142,7 +143,7 @@ app.post('/updateSiteRecord',urlencodedParser, function(req,res){
     let siteAddress = req.body.siteAddress;
     let empName = req.body.employerName;
     var empSiteID = req.body.siteID;
-    console.log("updated record : "+siteName+" "+siteAddress+" "+empName+" "+empSiteID);
+    //console.log("updated record : "+siteName+" "+siteAddress+" "+empName+" "+empSiteID);
     var query = connection.query("UPDATE employersite SET FK_E_Name ='"+empName+"' , S_name ='"+siteName+"' , S_address ='"+siteAddress+"' WHERE ES_ID ='"+empSiteID+"'" , function (err, results){    
         connection.query(mysql,function (err,result) {
             if(err){
@@ -160,7 +161,7 @@ app.post('/deleteSiteRecord', urlencodedParser, function(req,res){
     let siteName = req.body.siteName;
     let empName = req.body.employerName;
     let userID = req.session.userID;
-    console.log("Deleted record : "+siteName+" "+empName+" "+userID);
+    //console.log("Deleted record : "+siteName+" "+empName+" "+userID);
     var query = connection.query("DELETE FROM employersite WHERE S_name= '"+siteName+"' AND FK_E_Name= '"+empName+"' AND FK_U_ID= '"+userID+"'" , function (error, results){    
         connection.query(mysql,function (error, result) {
             if (error){
@@ -175,42 +176,51 @@ app.post('/deleteSiteRecord', urlencodedParser, function(req,res){
 app.post('/logIn', function(req, res){
     
     //checking the database for authentication.
-    var U_email=req.body.user_name;
-    var password=req.body.password;
+    let U_email=req.body.user_name;
+    let password=req.body.password;
     
     connection.query('SELECT * FROM user WHERE U_email = ?',[U_email],function (error, results, fields) {
         //console.log(U_email);
-        //console.log(results);
+        console.log(results);
         if (!error){
             if(results.length > 0){
                 //console.log(results.length);                
                 //console.log(results);
                 if(results[0].U_email==U_email){
-                    if(results[0].password==password){
-                        //console.log('Successfully Loged in!');                        
-                        ssnUser = req.session;
-                        ssnUser.userID = results[0].U_ID;
-                        ssnUser.userU_name = results[0].U_name;
-                        req.session.userID = results[0].U_ID;
-                        console.log(ssnUser.userID+' Successfully Loged in!');
-                        //res.render('work_details');
-                        loadSites(req, function (result) {
-                            loadEmployerName(req,function(empResult){
-                                //console.log("------Employer details------");
-                                //console.log(empResult);
-                                //console.log("----------------------------");
-                                res.render('site_details', {results1 : result, empResults: empResult});
-                                //res.send({empResults: result});
+                    bcrypt.compare(password, results[0].password, function(err) {
+                        if(!err) {
+                            // Passwords match
+                            ssnUser = req.session;
+                            ssnUser.userID = results[0].U_ID;
+                            ssnUser.userU_name = results[0].U_name;
+                            req.session.userID = results[0].U_ID;
+                            console.log(ssnUser.userID+' Successfully Loged in!');
+                            loadSites(req, function (result) {
+                                loadEmployerName(req,function(empResult){
+                                    //console.log("------Employer details------");
+                                    //console.log(empResult);
+                                    //console.log("----------------------------");
+                                    res.render('site_details', {results1 : result, empResults: empResult});
+                                    //res.send({empResults: result});
+                                });
                             });
-                        });
-                        //loadEmployerName(req, function(result){
-                          //  res.send({empResults : result});
-                            //console.log(empResults);
-                        //});
-                    } else{
-                        console.log('Invalid Password');
-                        res.send('Invalid Password');
-                    }
+                            //loadEmployerName(req, function(result){
+                            //  res.send({empResults : result});
+                                //console.log(empResults);
+                            //});
+                            //console.log('Successfully Loged in!');                        
+                        } else {
+                            // Passwords don't match
+                            console.log('Invalid Password');
+                            // res.send('Invalid Password');
+                        } 
+                    });
+                    // if(results[0].password==password){
+                        
+                    // } else{
+                    //     console.log('Invalid Password');
+                    //     res.send('Invalid Password');
+                    // }
                 }
                 else{
                     console.log('No Match found');
@@ -218,35 +228,39 @@ app.post('/logIn', function(req, res){
                 
             }else{
                 console.log('Invalid User!');
-                res.send('Invalid User!');
+                //res.send('Invalid User!');
             }
         }
     });
 });
 
 app.post('/user_registration', urlencodedParser, function(req, res){
-    res.render('user_registration');
-    var valUR = {U_name: req.body.user_name, U_email: req.body.email, password: req.body.password};
-    console.log(valUR);
-
-    var query = connection.query('INSERT INTO user SET ?', valUR, function (error, results){    
-        connection.query(mysql,function (err, result) {
-            if (error){
-                console.log("Error in the query");
-            }
-            else{
-                console.log("Successfull query!");
-                res.render('logIn')
-            }    
+    //res.render('user_registration');
+    bcrypt.hash(req.body.password, 10, function(err,hash){
+        var valUR = {U_name: req.body.user_name, U_email: req.body.email, password: hash};
+        console.log(valUR);
+        var query = connection.query('INSERT INTO user SET ?', valUR, function (error, results){    
+            connection.query(mysql,function (err, result) {
+                if (error){
+                    console.log("Error in the query");
+                }
+                else{
+                    console.log("Successfull query!");
+                    res.render('logIn')
+                }    
+            });
         });
     });
+/*
+   
+*/
 });
 
 app.post('/site_details', urlencodedParser, function(req, res){    
 
     //var valSiteURL = {S_name: req.body.site_name, S_address: req.body.site_address, FK_E_Name: req.body.employer_name, FK_U_ID: req.session.userID};
     var valSiteURL = {S_name: req.body.siteName, siteAddress: req.body.site_address, employerName: req.body.employer_name, FK_U_ID: req.session.userID};
-    console.log(valSiteURL);
+    //console.log(valSiteURL);
     //var grabSiteDetails = req.body.
 /*
 //inserting data in to the employer
@@ -362,9 +376,9 @@ app.post('/display_sites_record', function(req, res){
     if (isSessionLive(req)){
         loadSites(req, function (result) {
             loadEmployerName(req,function(empResult){
-                console.log("------Employer details------");
-                console.log(empResult);
-                console.log("----------------------------");
+                //console.log("------Employer details------");
+                //console.log(empResult);
+                //console.log("----------------------------");
                 res.render('site_details', {results1 : result, empResults: empResult});
                 //res.send({empResults: result});
             });

@@ -236,7 +236,6 @@ $(function(){
             }
         });
     }
-    
     function DisplayRecord(obj){
         var formNode = document.getElementById('mainForm')
 
