@@ -49,6 +49,10 @@ app.get('/user_registration', urlencodedParser, function(req, res){
     res.render('user_registration');
 });
 
+app.get('/employer_details', function(req, res){
+    res.render('employer_details');
+});
+
 app.get('/add_site_details', function(req, res){
     res.render('add_site_details');
 });
@@ -187,9 +191,10 @@ app.post('/logIn', function(req, res){
                 //console.log(results.length);                
                 //console.log(results);
                 if(results[0].U_email==U_email){
-                    bcrypt.compare(password, results[0].password, function(err) {
-                        if(!err) {
+                    bcrypt.compare(password, results[0].password, function(err, isMatch) {
+                        if(isMatch) {
                             // Passwords match
+                            console.log('correct password')
                             ssnUser = req.session;
                             ssnUser.userID = results[0].U_ID;
                             ssnUser.userU_name = results[0].U_name;
@@ -203,15 +208,10 @@ app.post('/logIn', function(req, res){
                                     res.render('site_details', {results1 : result, empResults: empResult});
                                     //res.send({empResults: result});
                                 });
-                            });
-                            //loadEmployerName(req, function(result){
-                            //  res.send({empResults : result});
-                                //console.log(empResults);
-                            //});
-                            //console.log('Successfully Loged in!');                        
+                            });                                           
                         } else {
                             // Passwords don't match
-                            console.log('Invalid Password');
+                            console.log('Incorrect Password');
                             // res.send('Invalid Password');
                         } 
                     });
