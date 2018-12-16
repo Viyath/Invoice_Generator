@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <% include partials/nav.ejs %>      
+        <script src="/script.js"></script>  
+    </head>
+    <body>
+        <div class="container">
+        <form id = "mainForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="searchSite" placeholder="Enter Employer name to search...">
+                    <br>
+                    <button type="submit" class="btn btn-primary" name="addNewEmployer">Add New</button>                    
+                </div>
+                <hr>
+                <% console.log(empResults)
+                     jumboID = 0 %>
+                <% empResults.forEach(function( eachResult){ %>
+                    <div class="jumbotron" name="empName" id=<%= eachResult.E_name %></div>
+                        <label for="employerName">Employer Name</label>
+                        <input type="text" class="form-control" name="employer_name" id="employer_name"value=<%= eachResult.E_name %>>
+                        <div class="form-group">
+                            <label for="inputAddress">Employer E-mail</label>
+                            <input type="text" class="form-control" name="E_mail" id="E_mail" value=<%= eachResult.E_email %>>
+                        </div>
+                        <div class="form-group">
+                            <label for="Invoice Date">Invoice Date</label>
+                            <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                                <option value=<%= eachResult.I_day %> selected><%= eachResult.I_day %></option>
+                            </select>
+                            <input type="text" class="form-control" name="Invoicetime" id="Invoicetime" value=<%= eachResult.I_time %>>
+                        </div>
+                        <div class="form-group">
+                            <label for="employername">Employer Name</label>
+                            <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
+                                <option value="Weekly">Weekly</option>
+                                <option value="Fortnightly">Fortnightly</option>
+                                <option value=<%= eachResult.I_occurence %> selected><%= eachResult.I_occurence %></option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="updateEmpDetails">Update  </button>   <button type="submit" class="btn btn-primary" name="deleteEmpDetails">Delete</button>
+                    </div>
+                <% }) %>  
+        </form>
+    </div>
+    </body>
+</html>

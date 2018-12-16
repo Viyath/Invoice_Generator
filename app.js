@@ -50,11 +50,18 @@ app.get('/user_registration', urlencodedParser, function(req, res){
 });
 
 app.get('/employer_details', function(req, res){
-    res.render('employer_details');
+    if (isSessionLive(req)){
+        loadEmployerName(req,function(empResult){
+            res.render('employer_details', {empResults: empResult});
+        });
+    }
 });
 
 app.get('/add_site_details', function(req, res){
-    res.render('add_site_details');
+    if (isSessionLive(req)){
+        res.render('add_site_details');
+
+    }
 });
 
 app.get('/site_details', urlencodedParser, function(req, res){
@@ -386,6 +393,13 @@ app.post('/display_sites_record', function(req, res){
         });
     }else{
         res.render('login');
+    }
+});
+app.post('/employer_details', function(req, res){
+    if (isSessionLive(req)){
+        loadEmployerName(req,function(empResult){
+            res.render('employer_details', {results1 : result, empResults: empResult});
+        });
     }
 });
 //All the functions
