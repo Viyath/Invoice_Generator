@@ -152,6 +152,21 @@ $(function(){
         console.log('Adding a new record to the DB')
     });
 
+    /** Work schedule Events  */
+    $('button[name=addNewWorkSchedule]').on('click',function(event){
+        //event.preventDefault();
+        console.log('loading work schedule capture form')
+        $.ajax({
+            url: '/loadWorkScheduleCapture',
+            method: 'GET',
+            success: function(response) {
+                console.log(response);
+            }           
+        });
+        
+    });
+/* All the functions */
+
     function addNewRecord(event){
         event.preventDefault();
         var siteName = event.toElement.parentElement.querySelector('[name=site_name1').value

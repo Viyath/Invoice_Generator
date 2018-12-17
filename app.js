@@ -140,8 +140,23 @@ app.get('/work_details', function(req, res){
 app.get('/sample-multi-items', function(req, res) {
     res.render('sample_multi_items');
 });
-
+app.get('/loadWorkScheduleCapture', function(req,res){
+    if (isSessionLive(req)){
+        console.log('Loading work schedule capture...')
+        res.render('work_schedule_capture',{});
+    }else{
+        res.render('login');
+    }
+});
 //All the post requests
+
+app.post('/loadWorkScheduleCapture', urlencodedParser, function(req,res){
+    if (isSessionLive(req)){
+        res.render('/work_schedule_capture');
+    }else{
+        res.render('login');
+    }
+});
 app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
     //getSiteRecords(req, outputCallback);
     //let newSiteID = createNewSiteID(req);
