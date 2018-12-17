@@ -81,6 +81,15 @@ app.get('/site_details', urlencodedParser, function(req, res){
     }
 });
 
+app.get('/work_schedule',function(req, res){
+    if (isSessionLive(req)){
+        loadSites(req, function(result){
+            res.render('work_schedule', {siteRecords : result})
+        });
+    }else{
+        res.render('login');
+    }
+});
 app.get('/sites', function(req, res){
     
 //    res.send('site_details',{results1 : result, empResults: result});
