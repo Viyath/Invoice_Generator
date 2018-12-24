@@ -161,9 +161,26 @@ $(function(){
             url: '/loadWorkScheduleCapture',
             method: 'POST',
                        
-        });
-        
+        });        
     });
+
+    /** Work_schedule_capture form's Events  */
+    /*
+    $('button[name=insertWorkSchedule]').on('click',function(event){
+        event.preventDefault();
+        console.log('Inserting work schedule to the DB...')
+        $.ajax({
+            url: '/loadWorkScheduleCapture',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({siteName: siteName, siteAddress: siteAddress, employerName: employerName}),
+            success: function(response) {
+                console.log(response);
+            }
+        });        
+    });
+    */
+   
 /* All the functions */
 
     function addNewRecord(event){

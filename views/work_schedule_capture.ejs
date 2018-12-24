@@ -5,13 +5,17 @@
     </head>
     <body>
         <div class="container">
-            <form id = "work_schedule_capture">
-                
+            <form id = "work_schedule_capture" method="POST" action="/insertWorkSchedule">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="input-group">
                             <span class="input-group-addon" id="sizing-addon2">Site Name</span>
-                            <input type="text" class="form-control" name="siteName" id="siteName"value="">
+                            <select class="form-control"name="siteName"id="siteName">
+                                <% siteResults.forEach(function( eachResult){ %>
+                                <option value=<%= eachResult.S_name %> ><%= eachResult.S_name %></option>
+                                <% }) %>
+                                <option>Add New Site...</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -19,7 +23,7 @@
                     <div class="col-lg-6">
                         <div class="input-group">
                             <span class="input-group-addon" id="sizing-addon2">Site Address</span>
-                            <input type="text" class="form-control" name="siteName" id="siteName"value="">
+                            <input type="text" class="form-control" name="siteAddress" id="siteAddress"value="">
                         </div>
                     </div>
                 </div>
@@ -28,6 +32,9 @@
                         <div class="input-group">
                             <span class="input-group-addon" id="sizing-addon2">Employer Name</span>
                             <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
+                                <% employerResults.forEach(function( eachResult){ %>
+                                <option value=<%= eachResult.E_name %> ><%= eachResult.E_name %></option>
+                                <% }) %>
                                 <option>Add Employer...</option>
                             </select>
                         </div>
@@ -122,7 +129,7 @@
                 <div class="row">
                     <br>
                 </div>
-                <button type="submit" class="btn btn-primary" name="viewWorkSchedule">Save</button>
+                <button type="submit" class="btn btn-primary" name="insertWorkSchedule">Save</button>
                 </div>
             </form>
         </div>

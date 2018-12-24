@@ -143,8 +143,14 @@ app.get('/sample-multi-items', function(req, res) {
 });
 app.get('/loadWorkScheduleCapture', function(req,res){
     if (isSessionLive(req)){
-        console.log('Loading work schedule capture...')
-        res.render('work_schedule_capture');
+        loadWorkScheduleCaptureForm(req, res);
+        /*
+        loadEmployerName(req, function(results){
+            loadSites(req,function( siteResults){
+                res.render('work_schedule_capture', {employerResults : results, siteResults: siteResults});
+            });
+        })
+        */
     }else{
         res.render('login');
     }
@@ -160,9 +166,42 @@ app.get('/loadWorkScheduleCapture', function(req,res){
 //All the post requests
 
 //This does not render the work_schedule_capture form. Help! Help!!
-app.post('/loadWorkScheduleCapture', urlencodedParser, function(req,res){
+app.post('/insertWorkSchedule', urlencodedParser, function(req,res){
     if (isSessionLive(req)){
-        res.render('work_schedule_capture');
+        //insert data in to the shift details table
+        console.log('**** Shift details ****');
+        //var valShiftURL ={H_rate:'', start_time:'' ,end_time:'',hrs_work:'',day:'',FK_U_ID:'',FK_S_name:''};
+        
+        if ((req.body.monTimeWorked!="") && (req.body.monHourlyRate!="")){
+            var valShiftURL = {day: 'Monday', start_time: req.body.monStrtTime ,end_time: req.body.monEndtTime , hrs_work: req.body.monTimeWorked, H_rate:req.body.monHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.siteName };
+            addShiftDetails(valShiftURL);
+            console.log("Record added to the shift table");    
+        }if ((req.body.tueTimeWorked!="") && (req.body.tueHourlyRate!="")){
+            var valShiftURL = {day: 'Tuesday', start_time: req.body.tueStrtTime ,end_time: req.body.tueEndtTime , hrs_work: req.body.tueTimeWorked, H_rate:req.body.tueHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.siteName};
+            addShiftDetails(valShiftURL);
+            console.log("Record added to the shift table");
+        }if ((req.body.wedTimeWorked!="") && (req.body.wedHourlyRate!="")){
+            var valShiftURL = {day: 'Wednesday', start_time: req.body.wedStrtTime ,end_time: req.body.wedEndtTime , hrs_work: req.body.wedTimeWorked, H_rate:req.body.wedHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.siteName};
+            addShiftDetails(valShiftURL);
+            console.log("Record added to the shift table");
+        }if ((req.body.thuTimeWorked!="") && (req.body.thuHourlyRate!="")){
+            var valShiftURL = {day: 'Thursday', start_time: req.body.thuStrtTime ,end_time: req.body.thuEndtTime , hrs_work: req.body.thuTimeWorked, H_rate:req.body.thuHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.siteName};
+            addShiftDetails(valShiftURL);
+            console.log("Record added to the shift table");
+        }if ((req.body.friTimeWorked!="") && (req.body.friHourlyRate!="")){
+            var valShiftURL = {day: 'Friday', start_time: req.body.friStrtTime ,end_time: req.body.friEndtTime , hrs_work: req.body.friTimeWorked, H_rate:req.body.friHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.siteName};
+            addShiftDetails(valShiftURL);
+            console.log("Record added to the shift table");
+        }if ((req.body.satTimeWorked!="") && (req.body.satHourlyRate!="")){
+            var valShiftURL = {day: 'Saturday', start_time: req.body.satStrtTime ,end_time: req.body.satEndtTime , hrs_work: req.body.satTimeWorked, H_rate:req.body.satHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.siteName};
+            addShiftDetails(valShiftURL);
+            console.log("Record added to the shift table");
+        }if ((req.body.sunTimeWorked!="") && (req.body.sunHourlyRate!="")){
+            var valShiftURL = {day: 'Sunday', start_time: req.body.sunStrtTime ,end_time: req.body.sunEndtTime , hrs_work: req.body.sunTimeWorked, H_rate:req.body.sunHourlyRate, FK_U_ID: ssnUser.userID,FK_S_name: req.body.siteName};
+            addShiftDetails(valShiftURL);
+            console.log("Record added to the shift table");
+        }
+        loadWorkScheduleCaptureForm(req, res);
     }else{
         res.render('login');
     }
@@ -474,6 +513,7 @@ function addShiftDetails(shiftDetailsArray){
         });
     })
     console.log("======function addShiftDetails======")
+     
 
 };
 
@@ -500,6 +540,14 @@ function loadEmployerName(req, outputCallback) {
         }
     });
 };
+
+function loadWorkScheduleCaptureForm(req,res){
+    loadEmployerName(req, function(results){
+        loadSites(req,function( siteResults){
+            res.render('work_schedule_capture', {employerResults : results, siteResults: siteResults});
+        });
+    })
+}
 function createNewSiteID(req){
     let lastSiteID;
     let siteRecords = getSiteRecords(req); 
