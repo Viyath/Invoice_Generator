@@ -152,7 +152,8 @@ $(function(){
         console.log('Adding a new record to the DB')
     });
 
-    /** Work schedule Events  */
+    /** Work_schedule form's Events  */
+    //i want to load work_schedule_capture_form when the button is clicked but it won't! Help! Help!! check app.js line 162.
     $('button[name=addNewWorkSchedule]').on('click',function(event){
         //event.preventDefault();
         console.log('loading work schedule capture form')
