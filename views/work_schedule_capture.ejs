@@ -5,25 +5,255 @@
     </head>
     <body>
         <div class="container">
-            <form id = "mainForm">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="searchSite" placeholder="Enter Site name to search...">
+            <form id = "work_schedule_capture">
+                
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon2">Site Name</span>
+                            <input type="text" class="form-control" name="siteName" id="siteName"value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon2">Site Address</span>
+                            <input type="text" class="form-control" name="siteName" id="siteName"value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon2">Employer Name</span>
+                            <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
+                                <option>Add Employer...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon2">Employer E-Mail</span>
+                            <input type="email" class="form-control" name="employerEmail" id="employerEmail"value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="sizing-addon2">Send Invoice</span>
+                            <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                            <input type="text" class="form-control" name="Invoicetime" id="Invoicetime" value="00:00:00">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <br>
-                    <button type="submit" class="btn btn-primary" name="addNewWorkSchedule">Add New</button>                    
                 </div>
-                <hr>
-                <div class="jumbotron" name="siteRecord" id="siteRecord"></div>
-                <div class="form-group">
-                    <label for="siteName">Site Name</label>
-                    <input type="text" class="form-control" name="siteName" id="steName"value="">>
+                <table>
+                        <tr>
+                            <th>Day</th>
+                            <th>Start Time<input type="checkbox" name="startTime" value="startTime" onclick="fillStartTimes()"></th>
+                            <th>End Time<input type="checkbox" name="EndTime" id="EndTime" value="endTime" onclick="fillEndTimes()"></th>
+                            <th>Hours Worked</th>
+                            <th>Hourly Rate<input type="checkbox" name="hourlyRate" id="hourlyRate" value="hourlyRate" onclick="validateHourlyRate()"></th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="firstDay" value="Monday" disabled></td>
+                            <td><input type="text" name="monStrtTime" id="monStrtTime" onkeyup="validateMondayStartTime()"></td>
+                            <td><input type="text" name="monEndtTime" id="monEndTime" onkeyup="validateMondayEndTime()"></td>
+                            <td><input type="text" name="monTimeWorked" id="monTimeWorked"></td>
+                            <td><input type="text" name="monHourlyRate" id="monHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="SecoundDay" value="Tuesday" disabled></td>
+                            <td><input type="text" name="tueStrtTime" id="tueStrtTime"></td>
+                            <td><input type="text" name="tueEndtTime" id="tueEndTime"></td>
+                            <td><input type="text" name="tueTimeWorked" id="tueTimeWorked"></td>
+                            <td><input type="text" name="tueHourlyRate" id="tueHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="ThirdDay" value="Wednesday" disabled></td>
+                            <td><input type="text" name="wedStrtTime" id="wedStrtTime"></td>
+                            <td><input type="text" name="wedEndtTime" id="wedEndTime"></td>
+                            <td><input type="text" name="wedTimeWorked" id="wedTimeWorked"></td>
+                            <td><input type="text" name="wedHourlyRate" id="wedHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="FourthDay" value="Thursday" disabled></td>
+                            <td><input type="text" name="thuStrtTime" id="thuStrtTime"></td>
+                            <td><input type="text" name="thuEndtTime" id="thuEndTime"></td>
+                            <td><input type="text" name="thuTimeWorked" id="thuTimeWorked"></td>
+                            <td><input type="text" name="thuHourlyRate" id="thuHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="FifthDay" value="Friday" disabled></td>
+                            <td><input type="text" name="friStrtTime" id="friStrtTime"></td>
+                            <td><input type="text" name="friEndtTime" id="friEndTime"></td>
+                            <td><input type="text" name="friTimeWorked" id="friTimeWorked"></td>
+                            <td><input type="text" name="friHourlyRate" id="friHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="sixthDay" value="Saturday" disabled></td>
+                            <td><input type="text" name="satStrtTime" id="satStrtTime"></td>
+                            <td><input type="text" name="satEndtTime" id="satEndTime"></td>
+                            <td><input type="text" name="satTimeWorked" id="satTimeWorked"></td>
+                            <td><input type="text" name="satHourlyRate" id="satHourlyRate"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="seventhDay" value="Sunday" disabled></td>
+                            <td><input type="text" name="sunStrtTime" id="sunStrtTime"></td>
+                            <td><input type="text" name="sunEndtTime" id="sunEndTime"></td>
+                            <td><input type="text" name="sunTimeWorked" id="sunTimeWorked"></td>
+                            <td><input type="text" name="sunHourlyRate" id="sunHourlyRate"></td>
+                        </tr>
+                </table>
+                <div class="row">
+                    <br>
                 </div>
-                <div class="form-group">
-                    <label for="siteAddress">Site Address</label>
-                    <input type="text" class="form-control" name="siteAddress" id="siteAddress"value="">>
-                </div>
-                    <button type="submit" class="btn btn-primary" name="viewWorkSchedule">View  </button>   <button type="submit" class="btn btn-primary" name="invoice">Invoice</button>   
+                <button type="submit" class="btn btn-primary" name="viewWorkSchedule">Save</button>
                 </div>
             </form>
         </div>
+        <script>
+                function validateMondayStartTime(){
+                    let fieldValue = document.getElementById("monStrtTime").value;
+                    validateTime(fieldValue,"monStrtTime");
+                    calculateHoursWorked(document.getElementById("monStrtTime").value,document.getElementById("monEndTime").value,"monTimeWorked");
+                }
+                function validateMondayEndTime(){
+                    let fieldValue = document.getElementById("monEndTime").value;
+                    validateTime(fieldValue,"monEndTime");
+                    calculateHoursWorked(document.getElementById("monStrtTime").value,document.getElementById("monEndTime").value,"monTimeWorked");    
+                }            
+                function validateTime(timeValue,tagID){          
+                    let dayTime = timeValue;
+                    let timeLen = dayTime.length;
+                    console.log(timeLen);
+                    console.log(tagID);
+                    if(timeLen != 0 || timeLen != undefined){
+                        let validatedTime = "";
+                        let colonPosition = dayTime.search(":");
+                        
+                        for(let i = 0; i !== timeLen; i++){
+                            var x = dayTime.substring(i, i + 1);
+                            console.log(x);
+                            if (i !== 2){
+                                if (!isNumber(x)){
+                                    console.log(x +" Is not a number");
+                                }else if(isNumber(x)){
+                                    validatedTime = validatedTime + x;
+                                }
+                            }else if (i == 2){
+                                validatedTime = validatedTime + x;
+                            }                                                
+                        }                    
+                        let validatedTimeLen = validatedTime.length;
+                        //console.log(validatedTimeLen + " is the length of the validateTime string");
+                        if( validatedTimeLen == 2){
+                            //console.log(" Put the Colen Now!");
+                            validatedTime = validatedTime + ":";
+                            console.log(validatedTime);                        
+                            document.getElementById(tagID).value = validatedTime;                         
+                        }if( validatedTimeLen > 5){
+                            //alert("Time should be HH:MM only!");
+                            validatedTime = validatedTime.slice(0,5);
+                            document.getElementById(tagID).value = validatedTime;
+                        }else{
+                            document.getElementById(tagID).value = validatedTime;
+                        }
+                        console.log(validatedTime);
+                    }                                  
+                }
+                function isNumber(letter){
+                    let input = letter;
+                    if ((input >= 0) && (input <= 9) ){
+                        return true;
+                    }else{
+                        return false;
+                    } 
+                }   
+                function fillStartTimes(){
+                    let mondayStartTime = document.getElementById("monStrtTime").value;
+                    console.log(mondayStartTime);
+                    document.getElementById("tueStrtTime").value = mondayStartTime;
+                    document.getElementById("wedStrtTime").value = mondayStartTime;
+                    document.getElementById("thuStrtTime").value = mondayStartTime;
+                    document.getElementById("friStrtTime").value = mondayStartTime;
+                    document.getElementById("satStrtTime").value = mondayStartTime;
+                    document.getElementById("sunStrtTime").value = mondayStartTime;
+                }
+                function fillEndTimes(){
+                    let mondayEndTime = document.getElementById("monEndTime").value;
+                    console.log(mondayEndTime);
+                    document.getElementById("tueEndTime").value = mondayEndTime;
+                    document.getElementById("wedEndTime").value = mondayEndTime;
+                    document.getElementById("thuEndTime").value = mondayEndTime;
+                    document.getElementById("friEndTime").value = mondayEndTime;
+                    document.getElementById("satEndTime").value = mondayEndTime;
+                    document.getElementById("sunEndTime").value = mondayEndTime;
+                }
+                function calculateHoursWorked(start,end,tagID){
+                    let hoursWorked;
+                    //console.log("Started working at : " + start," Finished working at : " + end);
+                    if((start.length == 5) && (end.length == 5)){
+                        let startTime = start.replace(":",".");
+                        let endTime = end.replace(":",".");
+                        if(endTime >= startTime){
+                            hoursWorked = endTime - startTime;
+                            //return hoursWorked;
+                            document.getElementById(tagID).value = hoursWorked;
+                            console.log("You worked : " + hoursWorked + " hours...");
+                        }
+                    }else{
+                            document.getElementById(tagID).value = "0";
+                    } 
+                    /*
+                    if((start != "") && (start != undefined) && (end != "") && (end != undefined)){
+                        console.log("Started working at : " + start," Finished working at : " + end);
+                        if(end>=start){
+                            hoursWorked = end - start;
+                            //return hoursWorked;
+                            console.log(hoursWorked);
+                        } 
+                    }if((start = "") && (start = undefined) && (end = "") && (end = undefined)){
+                        console.log("One or more fields are empty to calculate hours worked")
+                        if(end<start){
+                            hoursWorked = end - start;
+                            //return hoursWorked;
+                            console.log("End time cannot be less than start time");
+                        }    
+                    }
+                    */
+                }
+                function fillHourlyRate(){
+                    let mondayHourlyRate = document.getElementById("monHourlyRate").value;
+                    console.log(mondayHourlyRate);
+                    document.getElementById("tueHourlyRate").value = mondayHourlyRate;
+                    document.getElementById("wedHourlyRate").value = mondayHourlyRate;
+                    document.getElementById("thuHourlyRate").value = mondayHourlyRate;
+                    document.getElementById("friHourlyRate").value = mondayHourlyRate;
+                    document.getElementById("satHourlyRate").value = mondayHourlyRate;
+                    document.getElementById("sunHourlyRate").value = mondayHourlyRate;
+                }
+                function validateHourlyRate(){
+                    let elementValue = document.getElementById("hourlyRate");
+                    console.log("Hourly rate checked true");
+                    if (elementValue.checked == true){
+                        fillHourlyRate();
+                    }
+                }
+        </script> 
     </body>
 </html>

@@ -90,6 +90,7 @@ app.get('/work_schedule',function(req, res){
         res.render('login');
     }
 });
+
 app.get('/sites', function(req, res){
     
 //    res.send('site_details',{results1 : result, empResults: result});
@@ -143,20 +144,28 @@ app.get('/sample-multi-items', function(req, res) {
 app.get('/loadWorkScheduleCapture', function(req,res){
     if (isSessionLive(req)){
         console.log('Loading work schedule capture...')
-        res.render('work_schedule_capture',{});
+        res.render('work_schedule_capture');
+    }else{
+        res.render('login');
+    }
+});
+app.get('/loadWorkScheduleCapture', function(req,res){
+    if (isSessionLive(req)){
+        console.log('Loading work schedule capture...')
+        res.render('work_schedule_capture');
     }else{
         res.render('login');
     }
 });
 //All the post requests
-
 app.post('/loadWorkScheduleCapture', urlencodedParser, function(req,res){
     if (isSessionLive(req)){
-        res.render('/work_schedule_capture');
+        res.render('work_schedule_capture');
     }else{
         res.render('login');
     }
 });
+
 app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
     //getSiteRecords(req, outputCallback);
     //let newSiteID = createNewSiteID(req);
@@ -230,7 +239,9 @@ app.post('/logIn', function(req, res){
                             ssnUser.userID = results[0].U_ID;
                             ssnUser.userU_name = results[0].U_name;
                             req.session.userID = results[0].U_ID;
-                            console.log(ssnUser.userID+' Successfully Loged in!');
+                            console.log(ssnUser.userU_name+' Successfully Loged in!');
+
+                            /* loading site details
                             loadSites(req, function (result) {
                                 loadEmployerName(req,function(empResult){
                                     //console.log("------Employer details------");
@@ -239,7 +250,13 @@ app.post('/logIn', function(req, res){
                                     res.render('site_details', {results1 : result, empResults: empResult});
                                     //res.send({empResults: result});
                                 });
-                            });                                           
+                            });      
+                            */
+
+                            // Load worr_schedule web page
+                            loadSites(req, function(result){
+                                res.render('work_schedule', {siteRecords : result})
+                            });
                         } else {
                             // Passwords don't match
                             console.log('Incorrect Password');

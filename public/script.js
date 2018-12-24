@@ -158,10 +158,8 @@ $(function(){
         console.log('loading work schedule capture form')
         $.ajax({
             url: '/loadWorkScheduleCapture',
-            method: 'GET',
-            success: function(response) {
-                console.log(response);
-            }           
+            method: 'POST',
+                       
         });
         
     });
