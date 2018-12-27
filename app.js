@@ -137,10 +137,6 @@ app.get('/work_details', function(req, res){
         res.render('login');
     }
 });
-
-app.get('/sample-multi-items', function(req, res) {
-    res.render('sample_multi_items');
-});
 app.get('/loadWorkScheduleCapture', function(req,res){
     if (isSessionLive(req)){
         loadWorkScheduleCaptureForm(req, res);
@@ -165,11 +161,24 @@ app.get('/loadWorkScheduleCapture', function(req,res){
 });
 app.get('/leave', function(req, res){
     if (isSessionLive(req)){
-        res.render('leave');
+        loadSites(req, function(results){
+            res.render('leave', {siteResults: results});
+        });
     }else{
         res.render('login');
     }
 });
+
+app.get('/overtime', function(req, res){
+    if (isSessionLive(req)){
+        loadSites(req, function(results){
+            res.render('overtime', {siteResults: results});
+        });
+    }else{
+        res.render('login');
+    }
+});
+
 //All the post requests
 
 //This does not render the work_schedule_capture form. Help! Help!!
