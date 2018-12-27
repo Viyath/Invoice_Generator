@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <% include partials/nav.ejs %>      
+        <script src="/script.js"></script>  
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class='col-lg-6'>
+                    <div class="input-group">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" name="reason" id="reason">
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker();
+                    });
+                </script>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <label for="exceptionType">Exception Type</label>
+                        <select class="form-control"name="exceptionType"id="exceptionType">
+                            <option value="select">Select...</option>
+                            <option value="leave">leave</option>
+                            <option value="absent">absent</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <label for="Reason">Reason</label>
+                        <input type="text" class="form-control" name="reason" id="reason"value="Sick">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </body>

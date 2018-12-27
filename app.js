@@ -163,6 +163,13 @@ app.get('/loadWorkScheduleCapture', function(req,res){
         res.render('login');
     }
 });
+app.get('/leave', function(req, res){
+    if (isSessionLive(req)){
+        res.render('leave');
+    }else{
+        res.render('login');
+    }
+});
 //All the post requests
 
 //This does not render the work_schedule_capture form. Help! Help!!
