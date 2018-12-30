@@ -153,17 +153,12 @@ $(function(){
     });
 
     /** Work_schedule form's Events  */
-    //i want to load work_schedule_capture_form when the button is clicked but it won't! Help! Help!! check app.js line 162.
     $('button[name=addNewWorkSchedule]').on('click',function(event){
-        //event.preventDefault();
-        console.log('loading work schedule capture form')
-        $.ajax({
-            url: '/loadWorkScheduleCapture',
-            method: 'POST',
-                       
-        });        
+        event.preventDefault();
+        window.location.assign('/loadWorkScheduleCapture');       
     });
 
+    
     /** Work_schedule_capture form's Events  */
     /*
     $('button[name=insertWorkSchedule]').on('click',function(event){
