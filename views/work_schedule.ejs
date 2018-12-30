@@ -1,7 +1,8 @@
 <html>
     <head>
         <% include partials/nav.ejs %>      
-        <script src="/script.js"></script>  
+        <script src="/script.js"></script>
+        <title>Work Schedule Details</title>  
     </head>
     <body>
         <div class="container">
@@ -12,20 +13,25 @@
                     <button type="submit" class="btn btn-primary" name="addNewWorkSchedule">Add New</button>                    
                 </div>
                 <hr>
-                <% console.log(siteRecords)
+                <% console.log(shiftRecords)
                      jumboID = 0 %>
-                <% siteRecords.forEach(function( eachResult){ %>
-                    <div class="jumbotron" name="siteRecord" id=<%= eachResult.ES_ID %></div>
-                        <div class="form-group">
-                            <label for="siteName">Site Name</label>
-                            <input type="text" class="form-control" name="siteName" id="steName"value=<%= eachResult.S_name %>>
+                <% var siteName = "" %>
+                <% shiftRecords.forEach(function( eachResult){ %>
+                    <% if(eachResult.FK_S_name!=siteName){%>
+                        <%siteName=eachResult.FK_S_name%>
+                        <div class="jumbotron" name="siteRecord" id=<%= eachResult.FK_S_name %></div>
+                            <div class="form-group">
+                                <label for="siteName">Site Name</label>
+                                <input type="text" class="form-control" name="siteName" id="steName"value=<%= eachResult.FK_S_name %>>
+                            </div>
+                            <div class="form-group">
+                                <label for="siteAddress">Site Address</label>
+                                <input type="text" class="form-control" name="siteAddress" id="siteAddress"value=<%= eachResult.FK_S_name %>>
+                            </div>
+                            <button type="submit" class="btn btn-primary" name="viewWorkSchedule">View  </button>   <button type="submit" class="btn btn-primary" name="invoice">Invoice</button>
                         </div>
-                        <div class="form-group">
-                            <label for="siteAddress">Site Address</label>
-                            <input type="text" class="form-control" name="siteAddress" id="siteAddress"value=<%= eachResult.S_address %>>
-                        </div>
-                        <button type="submit" class="btn btn-primary" name="viewWorkSchedule">View  </button>   <button type="submit" class="btn btn-primary" name="invoice">Invoice</button>
-                    </div>
+                        
+                    <% }%>
                 <% }) %>  
         </form>
     </div>

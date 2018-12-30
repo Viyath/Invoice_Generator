@@ -83,9 +83,9 @@ app.get('/site_details', urlencodedParser, function(req, res){
 
 app.get('/work_schedule',function(req, res){
     if (isSessionLive(req)){
-        loadSites(req, function(result){
-            res.render('work_schedule', {siteRecords : result})
-        });
+        loadShiftsOfUser(req, function(result){
+            res.render('work_schedule', {shiftRecords : result})        
+        })
     }else{
         res.render('login');
     }
@@ -151,6 +151,7 @@ app.get('/loadWorkScheduleCapture', function(req,res){
         res.render('login');
     }
 });
+/*
 app.get('/loadWorkScheduleCapture', function(req,res){
     if (isSessionLive(req)){
         console.log('Loading work schedule capture...')
@@ -159,6 +160,7 @@ app.get('/loadWorkScheduleCapture', function(req,res){
         res.render('login');
     }
 });
+*/
 app.get('/leave', function(req, res){
     if (isSessionLive(req)){
         loadSites(req, function(results){
@@ -168,7 +170,6 @@ app.get('/leave', function(req, res){
         res.render('login');
     }
 });
-
 app.get('/overtime', function(req, res){
     if (isSessionLive(req)){
         loadSites(req, function(results){
@@ -311,8 +312,8 @@ app.post('/logIn', function(req, res){
                             */
 
                             // Load worr_schedule web page
-                            loadSites(req, function(result){
-                                res.render('work_schedule', {siteRecords : result})
+                            loadShiftsOfUser(req, function(result){
+                                res.render('work_schedule', {shiftRecords : result})
                             });
                         } else {
                             // Passwords don't match
@@ -512,6 +513,33 @@ function isSessionLive(req){
         return false;
     }
 }
+function loadShiftsOfUser(req, outputCallback){
+    connection.query('SELECT * FROM shift WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+        if(!error){
+            outputCallback(results);
+        }
+    });
+};
+
+function distinctSiteOfShifts(shiftRecords){
+    var checkSiteName="";
+    
+    shiftRecords.forEach(function(eachResult){
+        if(checkSiteName!= eachResult.FK_S_name){
+            //add to the list
+        }else{
+
+        }
+    })
+    return distinctShiftRecords;
+}
+function loadShiftsDistinctSiteName(req, outputCallback){
+    connection.query('SELECT DISTINCT FK_S_name FROM shift WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
+        if(!error){
+            outputCallback(results);
+        }
+    });
+};
 
 function addShiftDetails(shiftDetailsArray){
     valShiftURL = shiftDetailsArray
