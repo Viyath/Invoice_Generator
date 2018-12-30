@@ -5,39 +5,41 @@
         <title>Leave</title>
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class='col-lg-6'>
-                    <div class="input-group">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" name="reason" id="reason">
+        <form id = "leave" method="POST" action="/leave">
+            <div class="container">
+                <div class="row">
+                    <div class='col-lg-6'>
+                        <div class="input-group">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" name="leaveDate" id="leaveDate">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <label for="exceptionType">Site Name</label>
-                        <select class="form-control"name="siteName"id="siteName">
-                            <option value="select">Select...</option>
-                            <% siteResults.forEach(function( eachResult){ %>
-                            <option value=<%= eachResult.S_name %></option><%= eachResult.S_name %></option>
-                            <% }) %>
-                        </select>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <label for="exceptionType">Site Name</label>
+                            <select class="form-control"name="siteName"id="siteName">
+                                <option value="select">Select...</option>
+                                <% siteResults.forEach(function( eachResult){ %>
+                                <option value=<%= eachResult.S_name %>> <%= eachResult.S_name %></option>
+                                <% }) %>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>            
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <label for="description">description</label>
-                        <input type="text" class="form-control" name="txtDescription" id="txtDescriptionrs"value="Covering a shift">
+                <br>            
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <label for="description">description</label>
+                            <input type="text" class="form-control" name="txtDescription" id="txtDescriptionrs"value="Sick">
+                        </div>
                     </div>
                 </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-            <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        </form>
     </body>

@@ -5,54 +5,51 @@
         <title>Overtime</title>
     </head>
     <body>
-        <div class="container">
-            <div class="row">
-                <div class='col-lg-6'>
-                    <div class="input-group">
-                        <label for="date">Date</label>
-                        <input type="date" class="form-control" name="reason" id="reason">
+        <form id = "overtime" method="POST" action="/overtime">
+            <div class="container">
+                <div class="row">
+                    <div class='col-lg-6'>
+                        <div class="input-group">
+                            <label for="date">Date</label>
+                            <input type="date" class="form-control" name="workedDate" id="workedDate">
+                        </div>
                     </div>
                 </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker1').datetimepicker();
-                    });
-                </script>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <label for="exceptionType">Site Name</label>
-                        <select class="form-control"name="siteName"id="siteName">
-                            <option value="select">Select...</option>
-                            <% siteResults.forEach(function( eachResult){ %>
-                            <option value=<%= eachResult.S_name %></option><%= eachResult.S_name %></option>
-                            <% }) %>
-                        </select>
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <label for="exceptionType">Site Name</label>
+                            <select class="form-control"name="siteName"id="siteName">
+                                <option value="select">Select...</option>
+                                <% siteResults.forEach(function( eachResult){ %>
+                                <option value=<%= eachResult.S_name %>> <%= eachResult.S_name %></option>
+                                <% }) %>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>            
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <label for="hoursWorked">Hours Worked</label>
-                        <input type="time" class="form-control" name="txthoursWorked" id="txthoursWorked">
+                <br>            
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <label for="hoursWorked">Hours Worked</label>
+                            <input type="text" class="form-control" name="txthoursWorked" id="txthoursWorked" value="03:00">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group">
-                        <label for="description">description</label>
-                        <input type="text" class="form-control" name="txtDescription" id="txtDescriptionrs"value="Sick">
+                <br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <label for="description">description</label>
+                            <input type="text" class="form-control" name="txtDescription" id="txtDescription" value="Holiday">
+                        </div>
                     </div>
                 </div>
+                <br>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-            <br>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        </form>
     </body>

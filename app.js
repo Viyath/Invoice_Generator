@@ -132,7 +132,7 @@ app.get('/income_details', function(req, res){
 
 app.get('/work_details', function(req, res){
     if (isSessionLive(req)){
-        res.render('work_details');
+        //res.render('work_details');
     }else{
         res.render('login');
     }
@@ -223,7 +223,43 @@ app.post('/insertWorkSchedule', urlencodedParser, function(req,res){
         res.render('login');
     }
 });
+app.post('/leave', function(req, res){
+    if (isSessionLive(req)){
+        var valLeaveURL = {FK_U_ID: req.session.userID ,leave_date: req.body.leaveDate , FK_S_name: req.body.siteName, description: req.body.txtDescription};
+        console.log(valLeaveURL);
+        var query = connection.query('INSERT INTO employee_leave SET ?', valLeaveURL, function (error, results){    
+            connection.query(mysql,function (err, result) {
+                if (error){
+                    console.log("Error while inserting data in to the employee leave table!");
+                }
+                else{
+                    console.log("Record added to the employee leave");
+                }    
+            });
+        })
+    }else{
+        res.render('login');
+    }
 
+});
+app.post('/overtime', function(req, res){
+    if (isSessionLive(req)){
+        var overtimeURL = {FK_U_ID: req.session.userID ,worked_date: req.body.workedDate , FK_S_name: req.body.siteName, hours_worked: req.body.txthoursWorked , description: req.body.txtDescription};
+        console.log(overtimeURL);
+        var query = connection.query('INSERT INTO overtime SET ?', overtimeURL, function (error, results){    
+            connection.query(mysql,function (err, result) {
+                if (error){
+                    console.log("Error while inserting data in to the overtime table!");
+                }
+                else{
+                    console.log("Record added to the overtime");
+                }    
+            });
+        })
+    }else{
+        res.render('login');
+    }
+});
 app.post('/addNewSiteRecord', urlencodedParser, function(req,res){
     //getSiteRecords(req, outputCallback);
     //let newSiteID = createNewSiteID(req);
