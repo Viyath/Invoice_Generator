@@ -181,8 +181,26 @@ app.get('/overtime', function(req, res){
 });
 
 //All the post requests
+app.post('/viewWorkSchedule', function(req, res){
+    if(isSessionLive){
+        console.log(req.body.siteName);
+        var siteName=req.body.siteName;
+        //HELP. why does this function gives errors?
+        findShifts(req, siteName, function(shifts){
+            console.log(shifts);
+            //res.render('view_work_schedule',{shifts: shifts});
+        });
+    }else{
+        res.render('login');
+    }
+});
+app.post('/generateInvoice', function(req, res){
+    if(isSessionLive){
 
-//This does not render the work_schedule_capture form. Help! Help!!
+    }else{
+        res.render('login');
+    }
+});
 app.post('/insertWorkSchedule', urlencodedParser, function(req,res){
     if (isSessionLive(req)){
         //insert data in to the shift details table
@@ -549,6 +567,13 @@ function isSessionLive(req){
         return false;
     }
 }
+function findShifts(req, siteName, outputCallback){
+    connection.query('SELECT * FROM shift WHERE FK_U_ID = ? AND FK_S_name= ?',[req.session.userID], [siteName],function (error, results, fields) {
+        if(!error){
+            outputCallback(results);
+        }
+    });
+};
 function loadShiftsOfUser(req, outputCallback){
     connection.query('SELECT * FROM shift WHERE FK_U_ID = ?',[req.session.userID],function (error, results, fields) {
         if(!error){

@@ -157,7 +157,24 @@ $(function(){
         event.preventDefault();
         window.location.assign('/loadWorkScheduleCapture');       
     });
-
+    $('button[name=viewWorkSchedule]').on('click',function(event){
+        event.preventDefault();
+        console.log(event.toElement.parentElement.querySelector('[name=siteName]').value)
+        $.ajax({
+            url: '/viewWorkSchedule',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({siteName: event.toElement.parentElement.querySelector('[name=siteName]').value}),
+            success: function(response) {
+                console.log(response);
+            }
+        });
+        //window.location.assign('/viewWorkSchedule');       
+    });
+    $('button[name=generateInvoice]').on('click',function(event){
+        event.preventDefault();
+        window.location.assign('/generateInvoice');       
+    });
     
     /** Work_schedule_capture form's Events  */
     /*
