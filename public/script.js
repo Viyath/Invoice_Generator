@@ -158,16 +158,13 @@ $(function(){
         window.location.assign('/loadWorkScheduleCapture');       
     });
     $('button[name=viewWorkSchedule]').on('click',function(event){
-        event.preventDefault();
+        //event.preventDefault();
         console.log(event.toElement.parentElement.querySelector('[name=siteName]').value)
         $.ajax({
             url: '/viewWorkSchedule',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({siteName: event.toElement.parentElement.querySelector('[name=siteName]').value}),
-            success: function(response) {
-                console.log(response);
-            }
+            data: JSON.stringify({siteName: event.toElement.parentElement.querySelector('[name=siteName]').value})
         });
         //window.location.assign('/viewWorkSchedule');       
     });
