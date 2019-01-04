@@ -56,7 +56,10 @@ app.get('/employer_details', function(req, res){
         });
     }
 });
-
+app.get('/loadEmployerCaptureForm', function(req,res){
+    console.log('load employer capture')
+    res.render('employer_capture');
+});
 app.get('/add_site_details', function(req, res){
     if (isSessionLive(req)){
         res.render('add_site_details');

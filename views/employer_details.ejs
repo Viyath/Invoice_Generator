@@ -9,11 +9,10 @@
                 <div class="form-group">
                     <input type="text" class="form-control" id="searchSite" placeholder="Enter Employer name to search...">
                     <br>
-                    <button type="submit" class="btn btn-primary" name="addNewEmployer">Add New</button>                    
+                    <button type="submit" class="btn btn-primary" name="addNewEmployer" formaction="/loadEmployerCaptureForm">Add New</button>                    
                 </div>
                 <hr>
-                <% console.log(empResults)
-                     jumboID = 0 %>
+                     <% jumboID = 0 %>
                 <% empResults.forEach(function( eachResult){ %>
                     <div class="jumbotron" name="empName" id=<%= eachResult.E_name %></div>
                         <label for="employerName">Employer Name</label>

@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <% include partials/nav.ejs %>      
+        <script src="/script.js"></script>  
+        <title>Employer data capture</title>
+    </head>
+    <body>
+        <div class="container">
+        <form id = "mainForm">
+                <label for="employerName">Employer Name</label>
+                <input type="text" class="form-control" name="employer_name" id="employer_name">
+                <div class="form-group">
+                    <label for="inputAddress">Employer E-mail</label>
+                    <input type="text" class="form-control" name="E_mail" id="E_mail">
+                </div>
+                <div class="form-group">
+                    <label for="Invoice Date">Invoice Date</label>
+                    <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <input type="text" class="form-control" name="Invoicetime" id="Invoicetime">
+                </div>
+                <div class="form-group">
+                    <label for="employername">Employer Name</label>
+                    <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
+                        <option value="Weekly">Weekly</option>
+                        <option value="Fortnightly">Fortnightly</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" name="insertData">Submit  </button>   <button type="submit" class="btn btn-primary" name="back">Back</button>
+            </div>
+        </form>
+    </div>
+    </body>
+</html>
