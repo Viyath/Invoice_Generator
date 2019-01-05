@@ -184,10 +184,10 @@ app.get('/overtime', function(req, res){
 });
 
 //All the post requests
-app.post('/viewWorkSchedule', function(req, res){
+app.get('/viewWorkSchedule/:siteName', function(req, res){
     if(isSessionLive(req)){
-        console.log(req.body.siteName);
-        var siteName=req.body.siteName;
+        console.log(req.params.siteName);
+        var siteName=req.params.siteName;
         findShifts(req, siteName, function(shiftResults){
             loadEmployerName(req, function(results){
                 loadSites(req,function( siteResults){
