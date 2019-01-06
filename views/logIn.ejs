@@ -1,11 +1,12 @@
 <html>
     <head>
-        <% include partials/public_nav.ejs %>                  
+        <% include partials/public_nav.ejs %>   
+        <title>Log in</title>               
     </head>
     
     <body>
         <div class="container">
-            <form id="login" method="POST" action="/LogIn">
+            <form id="login">
                 <br>                                       
                     <div class="form-group col-xs-3 col-lg-offset-4">
                         <label for="email">Email address:</label>
@@ -14,11 +15,11 @@
                         <label for="pwd">Password:</label>
                         <input type="password" name="password" class="form-control" id="pwd">
                         <br>
-                        <button type="submit" class="btn btn-primary">Log in</button>
+                        <button type="submit" class="btn btn-primary" formaction="/LogIn" formmethod="POST">Log in</button>
                         <br><br>
                         <a href="">Forgot password?</a>
                         <br><br>
-                        <button type="submit" class="btn btn-primary">Sign up</button>
+                        <button type="submit" class="btn btn-primary" formaction="/user_registration" formmethod="GET">Sign up</button>
                     </div>                                            
             </form>
         </div>
