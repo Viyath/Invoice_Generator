@@ -154,16 +154,6 @@ app.get('/loadWorkScheduleCapture', function(req,res){
         res.render('login');
     }
 });
-/*
-app.get('/loadWorkScheduleCapture', function(req,res){
-    if (isSessionLive(req)){
-        console.log('Loading work schedule capture...')
-        res.render('work_schedule_capture');
-    }else{
-        res.render('login');
-    }
-});
-*/
 app.get('/leave', function(req, res){
     if (isSessionLive(req)){
         loadSites(req, function(results){
@@ -182,8 +172,6 @@ app.get('/overtime', function(req, res){
         res.render('login');
     }
 });
-
-//All the post requests
 app.get('/viewWorkSchedule/:siteName', function(req, res){
     if(isSessionLive(req)){
         console.log(req.params.siteName);
@@ -200,6 +188,15 @@ app.get('/viewWorkSchedule/:siteName', function(req, res){
         res.render('login');
     }
 });
+app.get('/generateInvoice', function(req, res){
+    if(isSessionLive){
+
+    }else{
+        res.render('login');
+    }
+});
+//All the post requests
+
 app.post('/generateInvoice', function(req, res){
     if(isSessionLive){
 
@@ -378,7 +375,7 @@ app.post('/logIn', function(req, res){
                         } else {
                             // Passwords don't match
                             console.log('Incorrect Password');
-                            // res.send('Invalid Password');
+                            res.send('Invalid Password');
                         } 
                     });
                     // if(results[0].password==password){
@@ -390,11 +387,12 @@ app.post('/logIn', function(req, res){
                 }
                 else{
                     console.log('No Match found');
+                    res.send('Invalid Password');
                 }
                 
             }else{
                 console.log('Invalid User!');
-                //res.send('Invalid User!');
+                res.send('Invalid User!');
             }
         }
     });

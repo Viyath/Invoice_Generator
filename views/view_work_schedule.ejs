@@ -5,18 +5,17 @@
     </head>
     <body>
         <div class="container">
-            <form id = "work_schedule_capture" method="POST" action="/insertWorkSchedule">
-                <% shiftResults.forEach(function( eachResult){ %>
-                    
-                <% }) %>
-                <%console.log(shiftResults)%>
+            <form id = "work_schedule_capture">
+                
+                <%console.log(shiftResults) %>
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="input-group">
                             <span class="input-group-addon" id="sizing-addon2">Site Name</span>
                             <select class="form-control"name="siteName"id="siteName">
                                 <% siteResults.forEach(function( eachResult){ %>
-                                <option value=<%= eachResult.S_name %> ><%= eachResult.S_name %></option>
+                                <option value=<%= eachResult.S_name %> > <%= eachResult.S_name %></option>
+                                
                                 <% }) %>
                                 <option>Add New Site...</option>
                             </select>
@@ -37,7 +36,7 @@
                             <span class="input-group-addon" id="sizing-addon2">Employer Name</span>
                             <select class="form-control"name="invoiceOccurence"id="invoiceOccurence">
                                 <% employerResults.forEach(function( eachResult){ %>
-                                <option value=<%= eachResult.E_name %> ><%= eachResult.E_name %></option>
+                                <option value=<%= eachResult.E_name %> > <%= eachResult.E_name %></option>
                                 <% }) %>
                                 <option>Add Employer...</option>
                             </select>
@@ -72,69 +71,84 @@
                 <div class="row">
                     <br>
                 </div>
-                <table>
-                        <tr>
-                            <th>Day</th>
-                            <th>Start Time<input type="checkbox" name="startTime" value="startTime" onclick="fillStartTimes()"></th>
-                            <th>End Time<input type="checkbox" name="EndTime" id="EndTime" value="endTime" onclick="fillEndTimes()"></th>
-                            <th>Hours Worked</th>
-                            <th>Hourly Rate<input type="checkbox" name="hourlyRate" id="hourlyRate" value="hourlyRate" onclick="validateHourlyRate()"></th>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="firstDay" value="Monday" disabled></td>
-                            <td><input type="text" name="monStrtTime" id="monStrtTime" onkeyup="validateMondayStartTime()"></td>
-                            <td><input type="text" name="monEndtTime" id="monEndTime" onkeyup="validateMondayEndTime()"></td>
-                            <td><input type="text" name="monTimeWorked" id="monTimeWorked"></td>
-                            <td><input type="text" name="monHourlyRate" id="monHourlyRate"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="SecoundDay" value="Tuesday" disabled></td>
-                            <td><input type="text" name="tueStrtTime" id="tueStrtTime"></td>
-                            <td><input type="text" name="tueEndtTime" id="tueEndTime"></td>
-                            <td><input type="text" name="tueTimeWorked" id="tueTimeWorked"></td>
-                            <td><input type="text" name="tueHourlyRate" id="tueHourlyRate"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="ThirdDay" value="Wednesday" disabled></td>
-                            <td><input type="text" name="wedStrtTime" id="wedStrtTime"></td>
-                            <td><input type="text" name="wedEndtTime" id="wedEndTime"></td>
-                            <td><input type="text" name="wedTimeWorked" id="wedTimeWorked"></td>
-                            <td><input type="text" name="wedHourlyRate" id="wedHourlyRate"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="FourthDay" value="Thursday" disabled></td>
-                            <td><input type="text" name="thuStrtTime" id="thuStrtTime"></td>
-                            <td><input type="text" name="thuEndtTime" id="thuEndTime"></td>
-                            <td><input type="text" name="thuTimeWorked" id="thuTimeWorked"></td>
-                            <td><input type="text" name="thuHourlyRate" id="thuHourlyRate"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="FifthDay" value="Friday" disabled></td>
-                            <td><input type="text" name="friStrtTime" id="friStrtTime"></td>
-                            <td><input type="text" name="friEndtTime" id="friEndTime"></td>
-                            <td><input type="text" name="friTimeWorked" id="friTimeWorked"></td>
-                            <td><input type="text" name="friHourlyRate" id="friHourlyRate"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="sixthDay" value="Saturday" disabled></td>
-                            <td><input type="text" name="satStrtTime" id="satStrtTime"></td>
-                            <td><input type="text" name="satEndtTime" id="satEndTime"></td>
-                            <td><input type="text" name="satTimeWorked" id="satTimeWorked"></td>
-                            <td><input type="text" name="satHourlyRate" id="satHourlyRate"></td>
-                        </tr>
-                        <tr>
-                            <td><input type="text" name="seventhDay" value="Sunday" disabled></td>
-                            <td><input type="text" name="sunStrtTime" id="sunStrtTime"></td>
-                            <td><input type="text" name="sunEndtTime" id="sunEndTime"></td>
-                            <td><input type="text" name="sunTimeWorked" id="sunTimeWorked"></td>
-                            <td><input type="text" name="sunHourlyRate" id="sunHourlyRate"></td>
-                        </tr>
-                </table>
-                <div class="row">
-                    <br>
-                </div>
+                <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Day</th>
+                                <th>Start Time<input type="checkbox" name="startTime" value="startTime" onclick="fillStartTimes()"></th>
+                                <th>End Time<input type="checkbox" name="EndTime" id="EndTime" value="endTime" onclick="fillEndTimes()"></th>
+                                <th>Hours Worked</th>
+                                <th>Hourly Rate<input type="checkbox" name="hourlyRate" id="hourlyRate" value="hourlyRate" onclick="validateHourlyRate()"></th>
+                            </tr>
+                        </thead>
+                        <% shiftResults.forEach(function(eachResult){ %>
+                            <%if(eachResult.day=="Monday"){ %>
+                                <tr>
+                                    <td><input type="text" name="firstDay" value="Monday" disabled></td>
+                                    <td><input type="text" name="monStrtTime" id="monStrtTime" value=<%= eachResult.start_time %> onkeyup="validateMondayStartTime()"></td>
+                                    <td><input type="text" name="monEndtTime" id="monEndTime" value=<%= eachResult.end_time %> onkeyup="validateMondayEndTime()"></td>
+                                    <td><input type="text" name="monTimeWorked" value=<%= eachResult.hrs_work %> id="monTimeWorked"></td>
+                                    <td><input type="text" name="monHourlyRate" value=<%= eachResult.H_rate %> id="monHourlyRate"></td>
+                                </tr>
+                            <% } %>
+                            <%if(eachResult.day=="Tuesday"){ %>
+                                <tr>
+                                    <td><input type="text" name="SecoundDay" value="Tuesday" disabled></td>
+                                    <td><input type="text" name="tueStrtTime" value=<%= eachResult.start_time %> id="tueStrtTime"></td>
+                                    <td><input type="text" name="tueEndtTime" value=<%= eachResult.end_time %> id="tueEndTime"></td>
+                                    <td><input type="text" name="tueTimeWorked" value=<%= eachResult.hrs_work %> id="tueTimeWorked"></td>
+                                    <td><input type="text" name="tueHourlyRate" value=<%= eachResult.H_rate %> id="tueHourlyRate"></td>
+                                </tr>
+                            <% } %>
+                            <%if(eachResult.day=="Wednesday"){ %>
+                                <tr>
+                                    <td><input type="text" name="ThirdDay" value="Wednesday" disabled></td>
+                                    <td><input type="text" name="wedStrtTime" value=<%= eachResult.start_time %> id="wedStrtTime"></td>
+                                    <td><input type="text" name="wedEndtTime" value=<%= eachResult.end_time %> id="wedEndTime"></td>
+                                    <td><input type="text" name="wedTimeWorked" value=<%= eachResult.hrs_work %> id="wedTimeWorked"></td>
+                                    <td><input type="text" name="wedHourlyRate" value=<%= eachResult.H_rate %> id="wedHourlyRate"></td>
+                                </tr>
+                            <% } %>
+                            <%if(eachResult.day=="Thursday"){ %>
+                                <tr>
+                                    <td><input type="text" name="FourthDay" value="Thursday" disabled></td>
+                                    <td><input type="text" name="thuStrtTime" value=<%= eachResult.start_time %> id="thuStrtTime"></td>
+                                    <td><input type="text" name="thuEndtTime" value=<%= eachResult.end_time %> id="thuEndTime"></td>
+                                    <td><input type="text" name="thuTimeWorked" value=<%= eachResult.hrs_work %> id="thuTimeWorked"></td>
+                                    <td><input type="text" name="thuHourlyRate" value=<%= eachResult.H_rate %> id="thuHourlyRate"></td>
+                                </tr>
+                            <% } %>
+                            <%if(eachResult.day=="Friday"){ %>
+                                <tr>
+                                    <td><input type="text" name="FifthDay" value="Friday" disabled></td>
+                                    <td><input type="text" name="friStrtTime" value=<%= eachResult.start_time %> id="friStrtTime"></td>
+                                    <td><input type="text" name="friEndtTime" value=<%= eachResult.end_time %> id="friEndTime"></td>
+                                    <td><input type="text" name="friTimeWorked" value=<%= eachResult.hrs_work %> id="friTimeWorked"></td>
+                                    <td><input type="text" name="friHourlyRate" value=<%= eachResult.H_rate %> id="friHourlyRate"></td>
+                                </tr>
+                            <% } %>
+                            <%if(eachResult.day=="Saturday"){ %>
+                                <tr>
+                                    <td><input type="text" name="sixthDay" value="Saturday" disabled></td>
+                                    <td><input type="text" name="satStrtTime" value=<%= eachResult.start_time %> id="satStrtTime"></td>
+                                    <td><input type="text" name="satEndtTime" value=<%= eachResult.end_time %> id="satEndTime"></td>
+                                    <td><input type="text" name="satTimeWorked" value=<%= eachResult.hrs_work %> id="satTimeWorked"></td>
+                                    <td><input type="text" name="satHourlyRate" value=<%= eachResult.H_rate %> id="satHourlyRate"></td>
+                                </tr>
+                            <% } %>
+                            <%if(eachResult.day=="Sunday"){ %>
+                                <tr>
+                                        <td><input type="text" name="seventhDay" value="Sunday" disabled></td>
+                                        <td><input type="text" name="sunStrtTime" value=<%= eachResult.start_time %> id="sunStrtTime"></td>
+                                        <td><input type="text" name="sunEndtTime" value=<%= eachResult.end_time %> id="sunEndTime"></td>
+                                        <td><input type="text" name="sunTimeWorked" value=<%= eachResult.hrs_work %> id="sunTimeWorked"></td>
+                                        <td><input type="text" name="sunHourlyRate" value=<%= eachResult.H_rate %> id="sunHourlyRate"></td>
+                                </tr>
+                            <% } %>
+                        <% }) %>
+                </table><br>
+                <button type="submit" class="btn btn-primary" name="back" formaction="/work_schedule">Back</button>
                 <button type="submit" class="btn btn-primary" name="insertWorkSchedule">Save</button>
-                </div>
             </form>
         </div>
         <script>
