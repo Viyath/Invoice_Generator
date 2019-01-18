@@ -532,10 +532,6 @@ app.post('/add', function(req, res){
 app.post('/add_site_details', function(req, res){
     res.render('add_site_details');
 });
-app.post('/sample-multi-items', function(req, res) {
-    console.log('>>> Server received', req.body);
-    res.render('sample_multi_items');
-});
 app.post('/display_sites_record', function(req, res){
     if (isSessionLive(req)){
         loadSites(req, function (result) {
