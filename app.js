@@ -8,7 +8,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var connection = require('./config');
 var mysql = require('mysql');
 var session = require('express-session');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 var ssnUser;
 app.set('view engine','ejs');
 var outputBuffer;
