@@ -667,5 +667,6 @@ function createNewSiteID(req){
     return lastSiteID + 1;
 };
 
-app.listen(8080);
+const port = process.env.PORT || 8080;
+app.listen(port);
 console.log("Click to visit http://localhost:8080");
