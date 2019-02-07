@@ -178,7 +178,7 @@ app.get('/viewWorkSchedule/:siteName', function(req, res){
         var siteName=req.params.siteName;
         findShifts(req, siteName, function(shiftResults){
             loadEmployerName(req, function(results){
-                loadSites(req,function( siteResults){
+                loadSites(req,function(siteResults){
                     res.render('view_work_schedule', {shiftResults: shiftResults, employerResults : results, siteResults: siteResults});
                 });
             })
@@ -188,9 +188,19 @@ app.get('/viewWorkSchedule/:siteName', function(req, res){
         res.render('login');
     }
 });
-app.get('/generateInvoice', function(req, res){
+app.get('/generateInvoice/:siteName', function(req, res){
     if(isSessionLive){
-
+        var siteName1=req.params.siteName;
+        console.log(siteName1);
+        getEmployerName(req, siteName1, function(employerName){
+            employerName.forEach(function( eachResult){
+                siteName1 = String(eachResult.FK_E_Name);
+                console.log(siteName1);
+            });
+        });
+        
+        // console.log("employer Name is " + empName);
+        // console.log("employer Name is " + getENameInSite(req, siteName));
     }else{
         res.render('login');
     }
@@ -663,6 +673,16 @@ function createNewSiteID(req){
     return lastSiteID + 1;
 };
 
+function getEmployerName(req, siteName, outputCallback){
+    connection.query('SELECT * FROM employersite WHERE FK_U_ID = ? AND S_name= ?',[req.session.userID, siteName],function (error, results, fields) {
+        if(!error){
+            //const employerName = results.FK_E_Name;
+            outputCallback(results);
+        }else if(error){
+            console.log("error occured.")
+        }
+    });
+}
 const port = process.env.PORT || 8080;
 app.listen(port);
 console.log("Click to visit http://localhost:8080");

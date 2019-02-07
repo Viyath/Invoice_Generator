@@ -165,7 +165,8 @@ $(function(){
     });
     $('button[name=generateInvoice]').on('click',function(event){
         event.preventDefault();
-        window.location.assign('/generateInvoice');       
+        const siteName = event.toElement.parentElement.querySelector('[name=siteName]').value;
+        window.location.assign('/generateInvoice/' + siteName);       
     });
     
     /** Work_schedule_capture form's Events  */

@@ -1,0 +1,308 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 04, 2019 at 06:57 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `my_invoice`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_leave`
+--
+
+CREATE TABLE `employee_leave` (
+  `Leave_ID` int(5) NOT NULL,
+  `FK_U_ID` int(5) NOT NULL,
+  `leave_date` date NOT NULL,
+  `FK_S_name` varchar(50) NOT NULL,
+  `description` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee_leave`
+--
+
+INSERT INTO `employee_leave` (`Leave_ID`, `FK_U_ID`, `leave_date`, `FK_S_name`, `description`) VALUES
+(1, 8, '2018-12-31', 'Malvern', 'sick');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employer`
+--
+
+CREATE TABLE `employer` (
+  `E_name` varchar(50) NOT NULL,
+  `E_email` varchar(50) NOT NULL,
+  `I_occurence` varchar(50) DEFAULT NULL,
+  `I_day` varchar(50) DEFAULT NULL,
+  `I_time` time DEFAULT NULL,
+  `FK_U_ID` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employer`
+--
+
+INSERT INTO `employer` (`E_name`, `E_email`, `I_occurence`, `I_day`, `I_time`, `FK_U_ID`) VALUES
+('brad', 'brad@pivot.au', 'Weekly', 'Monday', '02:01:00', 8),
+('maharaja', 'maha@gmail.com', '1st week', 'Wednesday', '12:00:00', 9),
+('saliya', 'saliya@higeen.com', '2nd week', 'Tuesday', '24:00:00', 8),
+('Zackerberg', 'mark@FB.com', 'Weekly', 'Monday', '08:00:00', 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employersite`
+--
+
+CREATE TABLE `employersite` (
+  `ES_ID` int(5) NOT NULL,
+  `FK_U_ID` int(5) NOT NULL,
+  `FK_E_Name` varchar(50) NOT NULL,
+  `S_name` varchar(50) NOT NULL,
+  `S_address` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employersite`
+--
+
+INSERT INTO `employersite` (`ES_ID`, `FK_U_ID`, `FK_E_Name`, `S_name`, `S_address`) VALUES
+(1, 8, 'saliya', 'ALDI', 'sunshine'),
+(2, 8, 'brad', 'Malvern', 'Malvern'),
+(3, 8, 'brad', 'accacia', 'richmond'),
+(4, 8, 'brad', 'MGV', 'Elizabeth'),
+(5, 8, 'saliya', 'grammerschool', 'carnegie');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `income`
+--
+
+CREATE TABLE `income` (
+  `I_ID` varchar(255) NOT NULL,
+  `U_Name` varchar(255) NOT NULL,
+  `Date` date NOT NULL,
+  `S_ID` varchar(255) NOT NULL,
+  `H_Worked` int(11) DEFAULT NULL,
+  `Income` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `overtime`
+--
+
+CREATE TABLE `overtime` (
+  `Overtime_ID` int(5) NOT NULL,
+  `FK_U_ID` int(5) NOT NULL,
+  `worked_date` date NOT NULL,
+  `FK_S_name` varchar(50) NOT NULL,
+  `hours_worked` varchar(40) NOT NULL,
+  `description` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `overtime`
+--
+
+INSERT INTO `overtime` (`Overtime_ID`, `FK_U_ID`, `worked_date`, `FK_S_name`, `hours_worked`, `description`) VALUES
+(4, 8, '2019-01-01', 'Malvern', '03:00', 'Holiday');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shift`
+--
+
+CREATE TABLE `shift` (
+  `S_ID` int(10) NOT NULL,
+  `day` varchar(50) NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `hrs_work` time NOT NULL,
+  `H_rate` int(11) NOT NULL,
+  `FK_U_ID` int(5) NOT NULL,
+  `FK_S_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `shift`
+--
+
+INSERT INTO `shift` (`S_ID`, `day`, `start_time`, `end_time`, `hrs_work`, `H_rate`, `FK_U_ID`, `FK_S_name`) VALUES
+(1, 'Monday', '07:00:00', '13:00:00', '00:00:06', 20, 8, 'ALDI'),
+(2, 'Tuesday', '07:00:00', '13:00:00', '00:00:06', 20, 8, 'ALDI'),
+(3, 'Wednesday', '07:00:00', '13:00:00', '00:00:06', 20, 8, 'ALDI'),
+(4, 'Thursday', '07:00:00', '13:00:00', '00:00:06', 20, 8, 'ALDI'),
+(5, 'Friday', '07:00:00', '13:00:00', '00:00:06', 20, 8, 'ALDI'),
+(6, 'Saturday', '07:00:00', '13:00:00', '00:00:06', 20, 8, 'ALDI'),
+(7, 'Sunday', '07:00:00', '13:00:00', '00:00:06', 20, 8, 'ALDI'),
+(15, 'Monday', '07:00:00', '13:00:00', '00:00:06', 13, 8, 'Malvern'),
+(16, 'Tuesday', '07:00:00', '13:00:00', '00:00:06', 13, 8, 'Malvern'),
+(17, 'Wednesday', '07:00:00', '13:00:00', '00:00:06', 13, 8, 'Malvern'),
+(18, 'Thursday', '07:00:00', '13:00:00', '00:00:06', 13, 8, 'Malvern'),
+(19, 'Friday', '07:00:00', '13:00:00', '00:00:06', 13, 8, 'Malvern'),
+(20, 'Saturday', '07:00:00', '13:00:00', '00:00:06', 13, 8, 'Malvern'),
+(21, 'Sunday', '07:00:00', '13:00:00', '00:00:06', 13, 8, 'Malvern'),
+(22, 'Monday', '07:00:00', '10:00:00', '00:00:03', 18, 8, 'grammerschool'),
+(23, 'Tuesday', '07:00:00', '10:00:00', '00:00:03', 18, 8, 'grammerschool'),
+(24, 'Wednesday', '07:00:00', '10:00:00', '00:00:03', 18, 8, 'grammerschool'),
+(25, 'Thursday', '07:00:00', '10:00:00', '00:00:03', 18, 8, 'grammerschool'),
+(26, 'Friday', '07:00:00', '10:00:00', '00:00:03', 18, 8, 'grammerschool'),
+(27, 'Saturday', '07:00:00', '10:00:00', '00:00:03', 18, 8, 'grammerschool'),
+(28, 'Sunday', '07:00:00', '10:00:00', '00:00:03', 18, 8, 'grammerschool');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `U_ID` int(5) NOT NULL,
+  `U_name` varchar(50) NOT NULL,
+  `U_email` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`U_ID`, `U_name`, `U_email`, `password`) VALUES
+(8, 'viyath', 'kvkanthony@gmail.com', '$2b$10$VEyPA3zSWLEI5d27spOeTO6DKX0MaguDVInzcxiXPHrKo3edsSmqO'),
+(9, 'ishi', 'ishi@gmail.com', '$2b$10$Zyk6/yVIv3y1NgSJXim0iek8VbtASDjuWsVws2/hUO5kioS00vjYK'),
+(13, 'ryuchi', 'ryu@gmail.com', '$2b$10$anS5jdUttYqlGwOhnw2xx.yojPrEljjCLQXF3MSV7Nkr0Ffoj9LjO'),
+(14, 'andrew@gmail.com', 'andrew@gmail.com', '$2b$10$U1dZuqABKNqWVUSkc9qvZObktX9pEFJFkFlFfdwher/.k/bnYmrkK'),
+(15, 'ishi', 'ishi@gmail.com', '$2b$10$KZFl07ZYQF7YTaZuplPLiONUC.VE2wmdMzgh3X3R5eJ9pxaof0ZJW'),
+(16, 'ishi', 'ishasew67@gmail.com', '$2b$10$s57A.h3M4ktMCdTkDbD2VuKA2revhK80Y8SFTllP0icKOw6att/xK');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `employee_leave`
+--
+ALTER TABLE `employee_leave`
+  ADD PRIMARY KEY (`Leave_ID`);
+
+--
+-- Indexes for table `employer`
+--
+ALTER TABLE `employer`
+  ADD PRIMARY KEY (`E_name`),
+  ADD KEY `FK_U_ID` (`FK_U_ID`);
+
+--
+-- Indexes for table `employersite`
+--
+ALTER TABLE `employersite`
+  ADD PRIMARY KEY (`ES_ID`),
+  ADD KEY `U_ID` (`FK_U_ID`),
+  ADD KEY `E_name` (`FK_E_Name`);
+
+--
+-- Indexes for table `overtime`
+--
+ALTER TABLE `overtime`
+  ADD PRIMARY KEY (`Overtime_ID`);
+
+--
+-- Indexes for table `shift`
+--
+ALTER TABLE `shift`
+  ADD PRIMARY KEY (`S_ID`),
+  ADD KEY `FK_U_ID` (`FK_U_ID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`U_ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `employee_leave`
+--
+ALTER TABLE `employee_leave`
+  MODIFY `Leave_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `employersite`
+--
+ALTER TABLE `employersite`
+  MODIFY `ES_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `overtime`
+--
+ALTER TABLE `overtime`
+  MODIFY `Overtime_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `shift`
+--
+ALTER TABLE `shift`
+  MODIFY `S_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `U_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `employer`
+--
+ALTER TABLE `employer`
+  ADD CONSTRAINT `employer_ibfk_1` FOREIGN KEY (`FK_U_ID`) REFERENCES `user` (`U_ID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `employer_ibfk_2` FOREIGN KEY (`FK_U_ID`) REFERENCES `user` (`U_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `employersite`
+--
+ALTER TABLE `employersite`
+  ADD CONSTRAINT `E_name` FOREIGN KEY (`FK_E_Name`) REFERENCES `employer` (`E_name`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `U_ID` FOREIGN KEY (`FK_U_ID`) REFERENCES `user` (`U_ID`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `shift`
+--
+ALTER TABLE `shift`
+  ADD CONSTRAINT `shift_ibfk_1` FOREIGN KEY (`FK_U_ID`) REFERENCES `user` (`U_ID`),
+  ADD CONSTRAINT `shift_ibfk_3` FOREIGN KEY (`FK_U_ID`) REFERENCES `user` (`U_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
