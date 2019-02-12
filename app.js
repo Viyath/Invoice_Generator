@@ -190,17 +190,27 @@ app.get('/viewWorkSchedule/:siteName', function(req, res){
 });
 app.get('/generateInvoice/:siteName', function(req, res){
     if(isSessionLive){
-        var siteName1=req.params.siteName;
-        console.log(siteName1);
-        getEmployerName(req, siteName1, function(employerName){
-            employerName.forEach(function( eachResult){
-                siteName1 = String(eachResult.FK_E_Name);
-                console.log(siteName1);
+        var siteName=req.params.siteName;
+        var employerName;
+        var invoiceOccurence;
+        var invoiceDate;
+        console.log(siteName);
+        
+        getEmployerName(req, siteName, function(recordSet){
+            recordSet.forEach(function( eachResult){
+                employerName = String(eachResult.FK_E_Name);
             });
         });
         
-        // console.log("employer Name is " + empName);
-        // console.log("employer Name is " + getENameInSite(req, siteName));
+        console.log(employerName);
+        findRecordInEmployer(req, employerName, function(employerRecord){
+            employerRecord.forEach(function( eachResult){
+                invoiceOccurence = String(eachResult.I_occurence);
+                invoiceDate = String(eachResult.I_day);
+                console.log("Send out the invoice on "+invoiceDate+" every "+invoiceOccurence);
+            });
+        });
+        res.send("Send out the invoice to " +employerName+ " on "+invoiceDate+" every "+invoiceOccurence);
     }else{
         res.render('login');
     }
@@ -677,6 +687,34 @@ function getEmployerName(req, siteName, outputCallback){
     connection.query('SELECT * FROM employersite WHERE FK_U_ID = ? AND S_name= ?',[req.session.userID, siteName],function (error, results, fields) {
         if(!error){
             //const employerName = results.FK_E_Name;
+            outputCallback(results);
+        }else if(error){
+            console.log("error occured.")
+        }
+    });
+}
+//trying to return a field data in the table
+// function findEmployerName(req, siteName){
+//     connection.query('SELECT * FROM employersite WHERE FK_U_ID = ? AND S_name= ?',[req.session.userID, siteName],function (error, results, fields) {
+//         var employerName;
+//         if(!error){
+//             //const employerName = results.FK_E_Name;
+//             results.forEach(function( eachResult){
+//                 employerName = String(eachResult.FK_E_Name);
+//                 console.log(employerName);
+//             });
+//             return employerName;
+//         }else if(error){
+//             console.log("error occured.")
+//         }
+//     });
+// }
+
+function findRecordInEmployer(req, employerName, outputCallback){
+    connection.query('SELECT * FROM employer WHERE E_name = ? AND FK_U_ID = ?',[employerName, req.session.userID],function (error, results, fields) {
+        if(!error){
+            //const employerName = results.FK_E_Name;
+            console.log(results);
             outputCallback(results);
         }else if(error){
             console.log("error occured.")
