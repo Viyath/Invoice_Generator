@@ -200,17 +200,16 @@ app.get('/generateInvoice/:siteName', function(req, res){
             recordSet.forEach(function( eachResult){
                 employerName = String(eachResult.FK_E_Name);
             });
-        });
-        
-        console.log(employerName);
-        findRecordInEmployer(req, employerName, function(employerRecord){
-            employerRecord.forEach(function( eachResult){
-                invoiceOccurence = String(eachResult.I_occurence);
-                invoiceDate = String(eachResult.I_day);
-                console.log("Send out the invoice on "+invoiceDate+" every "+invoiceOccurence);
+            console.log(employerName);
+            findRecordInEmployer(req, employerName, function(employerRecord){
+                employerRecord.forEach(function( eachResult){
+                    invoiceOccurence = String(eachResult.I_occurence);
+                    invoiceDate = String(eachResult.I_day);
+                    console.log("Send out the invoice on "+invoiceDate+" every "+invoiceOccurence);
+                    res.send("Send out the invoice to " +employerName+ " on "+invoiceDate+" every "+invoiceOccurence);
+                });
             });
-        });
-        res.send("Send out the invoice to " +employerName+ " on "+invoiceDate+" every "+invoiceOccurence);
+        });        
     }else{
         res.render('login');
     }
